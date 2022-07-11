@@ -1,0 +1,230 @@
+<div class="container-fluid">
+  <!-- <div class="pd-0 ing-dq-rules-bx">
+      <div style="margin-top: 10px;">
+        <h4> Configure DQ Rules</h4>
+        <span class="ing-dq-close" (click)="closeDqRules()" title="Close">close</span>
+      </div>
+  </div>
+  <hr />-->
+      <form class="label-chg" style="border: 2px solid #d9eef9;
+      width: 100%;
+      margin: 10px auto;
+      padding: 0px;">
+        <div fxLayout="row wrap" >
+          <div fxFlex="100" fxFlex.gt-xs="20" class="pr-1" style="border-right:1px solid #ccc;margin:0;padding-top:15px;">
+            <div style="min-height: 375px;">
+              <input type="text" class="form-control inpt-border" style=" width: 80%;margin-bottom: 10px;margin-left: 25px;"
+                placeholder="Search Attribute..." [(ngModel)]="searchTextPort" [ngModelOptions]="{standalone: true}">
+                <!-- Attributes -->
+              <div style="max-height:320px;overflow-x: hidden;">
+             <div *ngFor="let s of sourceAttributes  | filterDataIngestion: searchTextPort : 'assetName';let i = index;"
+                  [ngClass]="{ 'highlight-selected-attr' : s.id === selected_src_for_dq?.id }"
+                  style="cursor: pointer;padding: 8px 0 8px 25px;font-size: .875rem !important;"
+                  (click)="selectedSrcAttrToAddDq(s)" class="hover-port">
+                  <span title="{{s.assetName}}">{{s.assetName}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="selected_src_for_dq == null" fxFlex="100" fxFlex.gt-xs="80"
+            style="padding-left: 2rem;position: relative;">
+            <div fxLayout="row wrap" style="max-height:320px;overflow-x: hidden;">
+              <div fxFlex="100" fxFlex.gt-xs="100">
+                <div style="margin-top: 15px;margin-bottom: 25px;" *ngIf="!showAddNewRule">
+
+                    <!-- <select id="rule_type" placeholder="Select Rule Type" (change)="showRules($event.target.value)"
+                      [ngModel]="selectedRuleType" name="rule_type">
+                      <option *ngFor="let r of ruleTypes" [value]="r.rul_type_nm" ngDefaultControl>
+                        {{r.rul_type_nm | uppercase}}
+                      </option>
+                    </select> -->
+
+                  <button type="button" class="nav-btns subnav-icons" style="float: right;outline:none" (click)="addNewRule()">Add New Rule</button>
+
+                  <input  type="text" class="form-control inpt-border" style=" width: 40%;" placeholder="Search Rule..."
+                      [(ngModel)]="searchDqRule" [ngModelOptions]="{standalone: true}">
+                </div>
+
+                  <div fxLayout="row wrap">
+                    <!-- Rules -->
+                    <div fxFlex="100" fxFlex.gt-xs="100" *ngIf="!showAddNewRule">
+                      <div class="rules">
+                        <div *ngFor="let rul of dqRules_by_type let r = index;">
+                          <h6 ><span style="font-weight: bold">{{rul.name | titlecase }}</span></h6>
+                          <div class="card-main-str-dq custom-checkbox " style="padding-left: 30px;" >
+                            <span  *ngFor="let value of rul.values | filterDataIngestion: searchDqRule : 'rul_nm';let i = index;" >
+                              <input type="checkbox" class="custom-control-input" title="{{value.rul_desc_txt}}"  [(ngModel)]="value.selected" (change)="selectedDqRuleEvent($event,value)"
+                              id="dqrules{{r}}{{i}}" name="dqrules{{r}}{{i}}" [value]="value.rul_id">
+                              <label  class="custom-control-label" style="margin-right:2rem ;" for="dqrules{{r}}{{i}}" >
+                                <span title="{{value.rul_def }}">{{value.rul_nm | titleCasePro}}</span>
+                                <i class="fa fa-info-circle data-hover"  style="font-size:15px;color:gray;margin-left: 5px;" title="{{value.rul_desc_txt}}"></i>
+                              </label>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+            <div style="position: absolute;bottom:10px;" *ngIf="!showAddNewRule">
+              <button  style="margin: 0 10px 0 0" class="btn btn-primary btn-sm" (click)="saveDqRules()">Save
+              </button>
+              <button  class="btn btn-danger btn-sm " (click)="closeDqRules()">Close</button>
+            </div>
+          </div>
+        </div>
+
+    <!-- Values Modal  -->
+    <div class="row">
+      <div class="modal fade"
+           id="modalValues"
+           role="dialog"
+           aria-labelledby="valuesModal"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="width:1250px;">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:#0072c6;color: white;">
+              <h4 class="modal-title">
+                Rule Definition
+              </h4>
+              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+            <div class="modal-body mb-1">
+              <div>
+                <textarea type="text" readonly=true class="form-control" id="rul_def" [ngModel]="selectedRule?.rule_def" name="rul_def" autocomplete="off"></textarea>
+              </div>
+
+              <div class="form-group" style="margin-top: 5px;" *ngIf="selectedRule?.rule_def">
+                <label for="data_source">{{ruleDefValuesLabel}}:</label>
+                <div>
+                <textarea type="text"  class="form-control" id="ruleDefValues" [(ngModel)]="selectedRule.values" name="ruleDefValues" autocomplete="off"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer" class="padding15">
+                <div class="row ">
+                  <div class="col-sm-6">
+                    <button type="button"  (click)="newMethod(current_rule,current_env)" class="btn btn-primary btn-sm pull-right">Save</button>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-danger btn-sm" (click)="closeValuesModal()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+     <!-- New Rule Addition Modal  -->
+     <div class="row">
+      <div class="modal fade"
+           id="modalAddRule"
+           role="dialog"
+           aria-labelledby="myModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="width:1250px;">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:#0072c6;color: white;">
+              <h4 class="modal-title">
+                Add Rule
+              </h4>
+              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+            <div class="modal-body mb-1">
+              <div class="form-group">
+                <div class="row">
+                <div class="col-md-3">
+                  <label for="data_source">Name:</label>
+                  <div>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="newRule.rul_nm" name="name" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="data_source">Select Rule Category:</label>
+                  <select id="rul_cat" placeholder="Select Process Type" class="form-control"
+                  [(ngModel)]="newRule.rul_catg_nm" name="rul_cat">
+                    <option *ngFor="let c of ruleCategory" [value]="c.nm" ngDefaultControl>
+                      {{c.nm | uppercase}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="data_source">Select Rule Type:</label>
+                      <select id="rul_cat" placeholder="Select Rule Type" class="form-control"
+                      [(ngModel)]="newRule.dq_type" name="rul_typ">
+                        <option *ngFor="let r of ruleTypes" [ngValue]="r.nm" ngDefaultControl>
+                          {{r.nm | uppercase}}
+                        </option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="data_source">Select Dialect:</label>
+                  <select id="rul_cat" placeholder="Select Rule Type" class="form-control"
+                  [(ngModel)]="newRule.dialect" name="rul_typ">
+                    <option *ngFor="let r of dialectTypes" [ngValue]="r.nm" ngDefaultControl>
+                      {{r.nm | uppercase}}
+                    </option>
+                  </select>
+                </div>
+                </div>
+
+              </div>
+              <!-- <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+
+                  </div>
+                  <div class="col-md-6">
+
+                  </div>
+                </div>
+              </div> -->
+              <div class="form-group" >
+                <label for="data_source">Rule Definition:</label>
+                <div>
+                  <textarea type="text" class="form-control" id="rul_def" [(ngModel)]="newRule.rul_def" name="rul_def" autocomplete="off"></textarea>
+                </div>
+              </div>
+              <div class="form-group" >
+                <label for="data_source">Rule Description:</label>
+                <div>
+                  <textarea type="text" class="form-control" id="rul_desc" [(ngModel)]="newRule.rul_desc_txt" name="rul_desc_txt" autocomplete="off"></textarea>
+                </div>
+              </div>
+
+              <div class="modal-footer" class="padding15">
+                <div class="row ">
+                  <div class="col-sm-4">
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row ">
+                      <div class="col-sm-4">
+                        <button type="button"  (click)="validateRule()"  class="btn btn-primary btn-sm pull-right">Validate</button>
+                      </div>
+                      <div class="col-sm-3">
+                        <button type="button"  (click)="saveNewRule()" class="btn btn-primary btn-sm ">Save</button>
+                      </div>
+                      <div class="col-sm-5">
+                        <button type="button" class="btn btn-danger btn-sm  " (click)="closeNewRulemodal()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      </form>
+</div>

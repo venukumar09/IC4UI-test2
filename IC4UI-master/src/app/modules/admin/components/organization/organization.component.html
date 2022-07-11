@@ -1,0 +1,163 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#example').DataTable();
+  } );
+</script>
+<div class="row">
+    <div class="col-sm-9 col-8 block">
+        <div class="col-sm-6 col-8 block">
+            <div class="inline-block" [routerLink]="['/admin']" style="font-size:25px;">Admin</div><i  class='fa fa-caret-right'></i><span class="subhead">Organization</span>
+            
+          </div>
+      
+    </div>
+    <div class="col-sm-3 col-4 pull-right">
+        <button type="button" class=" btn btn-primary form-pri-main-btn" data-toggle="modal" data-target="#addNewUser">Add New Organization</button>
+        <div class="modal" id="addNewUser">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title">Add New Organization</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+          
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="usr">Organization Name</label>
+                            <input type="text" [(ngModel)]="OrgName" class="form-control" id="usr" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Organization Description:</label>
+                            <textarea class="form-control"  [(ngModel)]="OrgDesc" rows="4" id="comment" name="text"></textarea>
+                          </div>
+                                              
+                    </div>
+                    
+
+                  </div>
+                </div>
+          
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" (click)="createNewOrg()" class="btn btn-block form-success-btn-modal" >Submit</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 table-row">
+    <table  class="table table-hover box-shadow" style="width:100%;margin-top: 10px;">
+    <thead>
+        <tr>
+            <th>Organization Name</th>
+            <th>Create on</th>
+            <th>Create by</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <tr *ngFor="let orgdtl of orgdetails"class="bottom-border">
+            <td>{{orgdtl.org_nm}}</td>
+            <td style="min-width: 180px;">{{orgdtl.rec_lst_updt_ts}}</td>
+            <td style="min-width: 180px;">{{orgdtl.rec_lst_updt_by_id}}</td>
+            <td><span class="fa fa-pencil-square"data-toggle="modal" data-target="#edit"></span></td>
+        </tr>
+        
+    </tbody>
+</table>
+
+  <div class="modal" id="edit">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h5 class="modal-title">Edit</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="form-group">
+                          <label for="usr">Organization Name</label>
+                          <input type="text" [(ngModel)]="OrgName" class="form-control" id="usr" name="username">
+                      </div>                      
+                      <div class="form-group">
+                          <label for="comment">Organization Description:</label>
+                          <textarea class="form-control" [(ngModel)]="OrgName" rows="4" id="comment" name="text"></textarea>
+                      </div>
+                    </div>
+                 
+
+                </div>
+
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn form-success-btn-modal btn-block" >Submit</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+</div>
+   
+</div>
+
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header text-center">
+      <div class="title col-sm-11">
+        <h4 class="modal-title w-100 font-weight-bold">Edit Organization</h4>
+      </div>
+      <div class="col-sm-1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="color: white" >X</span>
+                  </button>
+      </div>
+    
+  </div>
+  <div class="modal-body mx-3">
+    <div class="md-form mb-5">
+      <!-- <i class="fas fa-user prefix grey-text"></i> -->
+      <label data-error="wrong" data-success="right" for="form3">Organisation name</label>
+      <input type="email" id="form2" class="form-control">
+
+      
+    </div>
+
+    <div class="md-form mb-4">
+      <!-- <i class="fas fa-envelope prefix grey-text"></i> -->
+      <label data-error="wrong" data-success="right" for="form2">Organisation Description</label>
+      <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+    </div>
+    <div class=" justify-content-center">
+            <div class="row">
+                    <div class="btn_col col-sm-10">
+                            <button type="button" class="btn-next">Submit</button>
+                        </div>
+                        <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12"></div>
+    
+          </div>
+  </div>
+  
+</div>
+</div>

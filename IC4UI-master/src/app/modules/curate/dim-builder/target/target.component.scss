@@ -1,0 +1,33 @@
+
+.src-attr .icon {
+  text-align: center;
+}
+
+.src-attr .icon i {
+  font-size: 19px;
+}
+
+.src-attr .icon .true {
+  color: green
+}
+
+.src-attr .icon .false {
+  color: red
+}
+.tgt-title{
+  color :#3367ab !important; 
+  background-color:#f8f9fa;
+}
+.tgt-value{
+  color:#00BFFF;
+  font-weight: bold;
+}
+.tgt-scrollable{
+  height: 400px;
+  overflow: scroll;
+}
+.src-vl{
+  border-left: 1px solid black;
+  height: 400px;
+}
+

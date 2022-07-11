@@ -1,0 +1,5 @@
+<app-header (toggled)="onToggled($event)"></app-header>
+<app-side-bar class="sidebar" [ngClass]="{'sidebar-in' : isToggled}" (toggled)="onToggled($event)"></app-side-bar>
+<div  [ngClass]="{'main-container' : !isToggled}" (toggled)="onToggled($event)">
+<router-outlet></router-outlet>
+</div>

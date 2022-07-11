@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="row row1">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="nav-sub-icons">
+                <svg class="vl" id="dashboard" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 0 27.68 27.68">
+                    <path id="Path_261" data-name="Path 261"
+                        d="M10.668,0H2.018A2.02,2.02,0,0,0,0,2.018v5.19A2.021,2.021,0,0,0,2.018,9.227h8.65a2.021,2.021,0,0,0,2.018-2.018V2.018A2.021,2.021,0,0,0,10.668,0Zm0,0"
+                        fill="#052e5d" />
+                    <path id="Path_262" data-name="Path 262"
+                        d="M10.668,213.332H2.018A2.02,2.02,0,0,0,0,215.35v12.11a2.02,2.02,0,0,0,2.018,2.018h8.65a2.02,2.02,0,0,0,2.018-2.018V215.35A2.021,2.021,0,0,0,10.668,213.332Zm0,0"
+                        transform="translate(0 -201.799)" fill="#052e5d" />
+                    <path id="Path_263" data-name="Path 263"
+                        d="M288,341.332h-8.65a2.021,2.021,0,0,0-2.018,2.018v5.19a2.021,2.021,0,0,0,2.018,2.018H288a2.02,2.02,0,0,0,2.018-2.018v-5.19A2.021,2.021,0,0,0,288,341.332Zm0,0"
+                        transform="translate(-262.339 -322.879)" fill="#052e5d" />
+                    <path id="Path_264" data-name="Path 264"
+                        d="M288,0h-8.65a2.021,2.021,0,0,0-2.018,2.018v12.11a2.021,2.021,0,0,0,2.018,2.018H288a2.021,2.021,0,0,0,2.018-2.018V2.018A2.02,2.02,0,0,0,288,0Zm0,0"
+                        transform="translate(-262.339)" fill="#052e5d" />
+                </svg>
+                <div>
+                    <button class="button1" [routerLink]="['/admin/screenoperations']">Screen Operations</button>
+                    <button class="button active" routerLinkActive="active" [routerLink]="['/admin/screenoperations/addscreen']">Add Screens</button>
+                    <button class="button1" routerLinkActive="active" [routerLink]="['/admin/screenoperations/addoperation']">Add Screen Operations</button>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="scrn-top">
+                <div class="card" style="width:65%; background-color:#E8E8E8;">
+                    <div class="card-body">
+                        <p style="color: #062f5e; font-weight:bold;">Adding screen</p>
+                        <label style="margin-right:10px;">Screen Name</label>
+                        <input type="text" [(ngModel)]="scrn_nm" class="scrn-input">
+                        <button class="add_scrn" (click)="createScreen()">Add</button>
+                    </div>
+                </div>
+                <hr size="40px">
+                <div class="table-responsive-md">
+                    <table class="table table-hover" style="width:65%">
+                        <thead>
+                            <tr>
+                                <th>Screen Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of targetAttributes;" >
+                                <td>{{ t.scrn_nm }}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i class="fa fa-trash-o" style="font-size:18px"></i>
+                                        </div>
+                                        <div class="col-2">
+                                            <i class="fa fa-pencil" style="font-size:18px"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

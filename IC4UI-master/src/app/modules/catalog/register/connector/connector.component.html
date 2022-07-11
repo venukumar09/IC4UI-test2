@@ -1,0 +1,956 @@
+
+<div *ngIf="Pagestart">
+<div class="st">
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="connType">Select Connector type</label>
+          <select class="form-control" id="connType" name="connType" [(ngModel)]="selectedConnType"
+            (change)="connectorTypeChange()">
+            <option value="">Select Connector type</option>
+            <option *ngFor="let s of sources;let i = index;" value="{{s.connector_type}}">
+              {{s.name}}
+            </option>
+          </select>
+
+          <br>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="platform">Select Platform</label>
+          <select class="form-control" id="platform" name="platform" [(ngModel)]="selectedPlatform"
+            (change)="platformChange()">
+            <option value="">Select Platform</option>
+            <option *ngFor="let ptf of platforms" value="{{ptf.db_pltfm_nm}}">
+              {{ptf.db_pltfm_nm == 'ADL' ? 'ADLS' : ptf.db_pltfm_nm}}
+            </option>
+          </select>
+        </div>
+        <br>
+
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+
+          <label for="env">Select Environment</label>
+          <select class="form-control" id="env" name="env" [(ngModel)]="selectedEnv" (change)="environmentChange()">
+            <option value="">Select Environment</option>
+            <option *ngFor="let env of environments" value="{{env.name}}">
+              {{env.name}}
+            </option>
+          </select>
+          <br>
+        </div>
+
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="conn">Select Connection</label>
+          <select class="form-control" id="conn" name="conn" [(ngModel)]="selectedConn" (change)="connectionChange()">
+            <option value="">Select Connection</option>
+            <option *ngFor="let con of connections" value="{{con.conn_id}}">
+              {{con.conn_nm}}
+            </option>
+          </select>
+          <br>
+        </div>
+      </div>
+      <div class="col-sm-2" *ngIf= "selectedConnType == 'File'">
+        <div class="form-group">
+          <label for="connType">Select File type</label>
+          <select class="form-control" id="fileType" name="fileType" [(ngModel)]="selectedFileType"
+            >
+            <option value="">Select File type</option>
+            <option *ngFor="let s of files;let i = index;" value="{{s.file_type_id}}">
+              {{s.file_type_name}}
+            </option>
+          </select>
+
+          <br>
+        </div>
+      </div>
+      <div class="col-sm-2" *ngIf= "selectedFileType == '1'">
+        <div class="form-group">
+          <label >Enter Delimiter</label>
+          <input autocomplete="off" type="text" id="disabledInput" class="form-control"  [(ngModel)]="delimiter">
+
+          <br>
+        </div>
+      </div>
+      <!-- <div class="col-sm-2">
+        <div>
+          <svg height="100" width="100">
+            <circle cx="50" cy="50" r="7" stroke="black" stroke-width="1" fill="black" />
+            Sorry, your browser does not support inline SVG.
+          </svg>
+          <span>Not Evaluated</span>
+        </div>
+        <div>
+          <svg height="100" width="100">
+            <circle cx="50" cy="50" r="7" stroke="black" stroke-width="1" fill="#4f9edd" />
+            Sorry, your browser does not support inline SVG.
+          </svg>
+          <span>No Change</span>
+        </div>
+        <div>
+          <svg height="100" width="100">
+            <circle cx="50" cy="50" r="7" stroke="black" stroke-width="1" fill="#64d23c" />
+            Sorry, your browser does not support inline SVG.
+          </svg>
+          <span>New Changes</span>
+        </div>
+
+
+      </div> -->
+      <!-- <div class="col-sm-2">
+        <div class="form-group">
+          <label for="conn">Select Database</label>
+          <select class="form-control" id="conn" name="db" [(ngModel)]="selectedDB" (change)="databaseChange()">
+            <option *ngFor="let db of databases" value="{{db.db_usr_id}}">
+              {{db.db_nm}}
+            </option>
+          </select>
+          <br>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="row">
+      <div class="coll col-sm-3">
+        <h6  *ngIf="selectedConnType == 'DB'">Databases</h6>
+        <h6  *ngIf="selectedConnType == 'File'">Application</h6>
+      </div>
+      <div class="coll col-sm-3" style="margin-left: 40px;">
+        <h6  *ngIf="selectedConnType == 'DB'">Schemas</h6>
+        <h6 *ngIf="selectedConnType == 'File'">Object / Asset</h6>
+
+      </div>
+
+      <div class="coll col-sm-4" style="margin-left: 10px;">
+        <h6 class="col_tab"  *ngIf="selectedConnType == 'DB'">Tables</h6>
+      </div>
+      <!-- <div class="coll col-sm-2"></div> -->
+    </div>
+
+    <!-- <div class="row" *ngIf="selectedConnType == 'File'">
+      <div class="coll col-sm-3">
+
+        <h6>Application</h6>
+      </div>
+      <div class="coll col-sm-3" style="margin-left: 40px;">
+
+        <h6>Object / Asset</h6>
+      </div>
+
+    </div> -->
+
+
+    <div class="row " *ngIf="selectedConnType == 'DB' || selectedConnType == 'File'">
+
+      <div class="col-sm-3 bus-glo-head-boxes" *ngIf="selectedConnType == 'DB'">
+        <div *ngIf="dbLoader"class="spinner-border text-primary"></div>
+        <div *ngFor="let db of databases" class="form-check dbs">
+          <div>
+            <div class="fontSmall"[ngClass]="{'dbsEle':db.db_usr_id == selectedDB}" [id]="db.db_nm" name="db" (click)="databaseChange(db)">{{db.db_nm | titlecase}}</div>
+             <!-- <input class="hidden form-control"  type="radio"  [id]="db.db_nm" name="db" (click)="databaseChange(db)"><label [for]="db.db_nm" >{{db.db_nm}}</label> -->
+           </div>
+         </div>
+      </div>
+      <div class="bus-glo-head-boxes col-sm-3 "  id="grad1" *ngIf="selectedConnType == 'DB'">
+        <div *ngIf="SchemaLoader" class="spinner-border text-primary"></div>
+        <div *ngIf="!SchemaLoader" >
+          <div *ngFor="let schemadtl of schemadetails" class="form-check">
+            <div *ngIf="selectedDB!=''">
+               <input type="checkbox" class="hidden" [ngModel]="schemadtl.isSelected" [id]="schemadtl.schema_name" value="schemadtl.Schema_name" (click)="schemaSelect(schemadtl)"><label [for]="schemadtl.schema_name">{{selectedDBName | titlecase}}.{{schemadtl.schema_name | titlecase}}</label>
+             </div>
+           </div>
+        </div>
+
+        <!-- <div id="accordion" *ngFor="let schemadtl of schemadetails">
+          <div class="card">
+            <div class="card-header" data-toggle="collapse" [attr.href]="'#'+schemadtl.schema_name">
+              <a class="card-link" >
+                {{schemadtl.schema_name}}
+              </a>
+
+            </div>
+            <div [id]="schemadtl.schema_name" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <div *ngFor="let tbldtl of schemadtl.table_details" class="form-check">
+                  <div>
+                     <input type="checkbox" class="hidden" [id]="schemadtl.schema_name+tbldtl.table_name" [ngModel]="tbldtl.isSelected" value="tbldtl.table_name" (change)="isSelected(schemadtl,tbldtl)"><label [for]="schemadtl.schema_name+tbldtl.table_name">{{tbldtl.table_name}}</label>
+                   </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+
+        </div> -->
+        <!-- <div *ngFor="let schemadtl of schemadetails" class="bus-glo-txt">
+          <div lcass="row">
+          <input  type="checkbox"  autocomplete="off" data-toggle="collapse" class="schemadtls" [ngModel]="schemadtl.masterSelected" aria-expanded="false"  (change)="checkUncheckAll(schemadtl)" value="schemadtl.schema_name" aria-controls="tbldtls">
+            <span data-toggle="collapse" [attr.data-target]="'#'+schemadtl.schema_name">{{schemadtl.schema_name}}</span>
+            <div class="tbldtls collapse" [id]="schemadtl.schema_name">
+                <div *ngFor="let tbldtl of schemadtl.table_details" class="form-check">
+                 <div>
+                    <input type="checkbox" class="hidden" [id]="schemadtl.schema_name+tbldtl.table_name" [ngModel]="tbldtl.isSelected" value="tbldtl.table_name" (change)="isSelected(schemadtl,tbldtl)"><label [for]="schemadtl.schema_name+tbldtl.table_name">{{tbldtl.table_name}}</label>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="bus-glo-head-boxes col-sm-3 "  id="grad1" *ngIf="selectedConnType == 'File'">
+        <div *ngIf="SchemaLoader" class="spinner-border text-primary"></div>
+        <div *ngIf="!SchemaLoader" >
+          <div *ngFor="let schemadtl of schemadetails" class="form-check">
+
+               <input type="checkbox" class="hidden" [ngModel]="schemadtl.isSelected"
+               [id]="schemadtl.schema_name" value="schemadtl.Schema_name"
+               (click)="schemaSelect2(schemadtl)"><label [for]="schemadtl.schema_name">
+                 {{schemadtl.schema_name | titlecase}}</label>
+
+           </div>
+        </div>
+              </div>
+
+
+      <!-- <div class="col-sm-2 circles">
+
+        <div class="spa_circle1" >
+          <span >&#9675;</span>
+        </div>
+        <div class="spa_circle2" >
+          <img (click)="SendingAllDetails()" width=35px height=35px src="./../../../../../assets/images/Group_810.svg">
+
+        </div>
+        <div class="spa_circle2">
+          <img (click)="sndngSlctdDtls()" width=35px height=35px src="./../../../../../assets/images/Group_812.svg">
+
+        </div>
+        <div class="spa_circle2">
+          <img (click)="removingSlctDtls()" width=35px height=35px src="./../../../../../assets/images/Group_809.svg">
+
+        </div>
+        <div class="spa_circle2">
+          <img (click)="removingAllDetails()" width=35px height=35px src="./../../../../../assets/images/Group_811.svg">
+        </div>
+
+
+      </div> -->
+      <div class="bus-glo-head-boxes col-sm-4" style="position: relative;" id="grad1" *ngIf="selectedConnType == 'DB'">
+        <div class="bus-glo-txt">
+          <div *ngIf="tblLoader" class="spinner-border text-primary"></div>
+          <div *ngIf="!tblLoader">
+          <div *ngFor="let value of TableArray">
+            <!-- <input type="checkbox" class="hidden" [id]="value.schema_name+'schdtl'">
+            <label [for]="value.schema_name+'schdtl'"  style="display:inline-block" (click)="selectAll(value.schema_name)">
+              Select All
+            </label> -->
+            <div *ngFor="let tbl of value.table_details" class="form-check">
+              <div class="table_block">
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                <label *ngIf="tbl.obj_color=='black'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block">
+                 <span>{{value.schema_name | titlecase}}</span>.<span  style="color: black;">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span  class="colpopupicon" *ngIf="tbl.obj_color=='black'"><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopup(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+                 <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='blue'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block">
+                  <span>{{value.schema_name | titlecase}}</span>.<span class="SchemaName">{{tbl.table_name | titlecase}}</span>
+                 </label>
+                 <span  class="colpopupicon" *ngIf="tbl.obj_color=='blue'"><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopup(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='orange'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block;">
+                  <span>{{value.schema_name | titlecase}}</span>.<span class="SchemaName" style="color:orange">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span *ngIf="tbl.obj_color=='orange'" class="colpopupicon" ><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopup(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='green'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block;">
+                  <span>{{value.schema_name | titlecase}}</span>.<span class="SchemaName" style="color:#00d138  ">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span *ngIf="tbl.obj_color=='green'" class="colpopupicon" ><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopup(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+                 <!--isSelectedFor [ngModel]="tbl.isSelected"-->
+                </div>
+             </div>
+           </div>
+          </div>
+          <!-- <div id="accordion" *ngFor="let value of selectedValues">
+            <div class="card">
+              <div class="card-header" data-toggle="collapse" [attr.href]="'#'+value.schema_name+'selected'">
+                <a class="card-link" >
+                  {{value.schema_name}}
+                </a>
+              </div>
+              <div [id]="value.schema_name+'selected'" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <div *ngFor="let seltbls of value.table_details" class="form-check">
+                    <div *ngIf="seltbls.isSelected" class="selectedTables">
+                      {{seltbls.table_name}}
+                     </div>
+                   </div>
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+          <!-- <div class="Box_3" *ngFor="let value of selectedValues">
+           <span *ngIf="masterSelected||value.table_details.length!=0">
+            <h6 class="heading" data-toggle="collapse" [attr.data-target]="'#'+value.schema_name+'selected'">{{value.schema_name}}</h6>
+            <div class="inner_box collapse"  [id]="value.schema_name+'selected'">
+              <label class="ho" *ngFor="let seltbls of value.table_details"><span *ngIf="seltbls.isSelected">{{seltbls.table_name}}</span></label>
+            </div>
+
+        </span>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="bus-glo-head-boxes col-sm-4" style="position: relative;" id="grad1" *ngIf="selectedConnType == 'File'">
+        <div class="bus-glo-txt">
+          <div *ngIf="tblLoader" class="spinner-border text-primary"></div>
+          <div *ngIf="!tblLoader">
+          <div *ngFor="let value of TableArray">
+
+            <div *ngFor="let tbl of value.table_details" class="form-check">
+              <div class="table_block">
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                <label *ngIf="tbl.obj_color=='black'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block">
+                 <!-- <span>{{value.schema_name | titlecase}}</span>. -->
+                 <span  style="color: black;">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span  class="colpopupicon" *ngIf="tbl.obj_color=='black'"><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopupfile(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='blue'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block">
+                  <!-- <span>{{value.schema_name | titlecase}}</span>. -->
+                  <span class="SchemaName">{{tbl.table_name | titlecase}}</span>
+                 </label>
+                 <span  class="colpopupicon" *ngIf="tbl.obj_color=='blue'"><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopupfile(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='orange'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block;">
+                  <!-- <span>{{value.schema_name | titlecase}}</span>. -->
+                  <span class="SchemaName" style="color:orange">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span *ngIf="tbl.obj_color=='orange'" class="colpopupicon" ><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopupfile(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+                <input type="checkbox" class="hidden" [id]="value.schema_name+tbl.table_name" [ngModel]="tbl.isSelected" (click)="newTableSelect(value.schema_name,tbl.table_name)" value="tbl.table_name" >
+                 <label *ngIf="tbl.obj_color=='green'" [for]="value.schema_name+tbl.table_name"  style="display:inline-block;">
+                  <!-- <span>{{value.schema_name | titlecase}}</span>. -->
+                  <span class="SchemaName" style="color:#00d138  ">{{tbl.table_name | titlecase}}</span>
+                </label>
+                <span *ngIf="tbl.obj_color=='green'" class="colpopupicon" ><img src="../../../../../assets/images/columns.png" data-toggle="modal" (click)="getcolumndetailspopupfile(tbl,value)" data-target="#colModal" style="margin:0px 0px 0px 5px" width="20px" height="20px"></span>
+
+                </div>
+             </div>
+           </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="align-right col-sm-9">
+    <button type="button" class="btn-next1"(click)="validate()">Validate</button>
+    <button type="button" class="btn-next1" data-toggle="modal" (click)="getcal_and_schdl_names()" data-target="#myModal">Schedule</button>
+    <button type="button" class="btn-next1" (click)="getcolumns()">Register Now</button>
+</div>
+</div>
+</div>
+<div *ngIf="!Pagestart">
+    <div class="row">
+        <div class="col-sm-9 col-8 block">
+        	<div class="inline-block" style="font-size:25px;">New Registration</div>
+        	<i class="fa fa-caret-right inline-block" id="icons-sizing"></i>
+        	<div class=" inline-block" id ="text-icons" style="font-size:23px;margin-left: -5px">Object Details</div>
+        </div>
+        <div class="col-sm-3 col-4 pull-right">
+            <button type="button" class=" btn btn-primary form-pri-main-btn" (click)="backtosources()" >Back</button>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-12">
+        <table id="example" class="table tableviewConn table-hover box-shadow table-striped table-bordered dt-responsive nowrap" cellspacing="0" style="width:100%">
+        <thead>
+            <tr>
+                <th>Schema</th>
+                <th>Table Name</th>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Size</th>
+                <!-- <th>Format</th> -->
+                <th>Is Null</th>
+                <th>Is Primary Key</th>
+            </tr>
+        </thead>
+        <tbody >
+           <!-- <span *ngFor="let schema of columndetails.schemadetails">
+            <span *ngFor="let table of schema.table_details"> -->
+            <tr   *ngFor="let schema of newtemp"class="bottom-border">
+                <td>{{schema.Schema_name}}</td>
+                <td>{{schema.Table_Name}}</td>
+                <td>{{schema.column_name}}</td>
+                <td>{{schema.datatype}}</td>
+                <td>{{schema.datatype_length}}</td>
+                <td>
+                    <label class="container">
+                        <input type="checkbox" disabled [ngModel]="schema.nullable">
+                        <span class="checkmark" ></span>
+                    </label>
+                </td>
+                <td>
+
+                    <label class="container">
+                        <input type="checkbox" autocomplete="off" disabled [ngModel]="schema.isPrimary">
+                        <span class="checkmark" autocomplete="off"></span>
+                    </label>
+                </td>
+            </tr>
+        <!-- </span>
+            </span> -->
+
+        </tbody>
+    </table>
+    </div>
+
+ </div>
+ <div class="row">
+        <div class="col-sm-11"></div>
+        <div class="btn_col col-sm-1">
+                <button type="button" (click)="submitConnection()" class="btn-next">Submit</button>
+        </div>
+ </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Schedule</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header " data-toggle="collapse" href="#collapseOne">
+              <a class="card-link" >
+                MDM Job
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="JobName">Job Name:</label>
+                     <input type="text" class="form-control" id="Job Name" placeholder="Enter Job Name" title="{{mdmjob}}" name="jobNm" [(ngModel)]="mdmjob" disabled>
+                   </div>
+                  </div>
+                  <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="sel1">Calender Name:</label>
+                     <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdClndrNm">
+                       <option *ngFor="let clnm of calenderNames" value="{{clnm.clndr_nm}}">{{clnm.clndr_nm}}</option>
+                     </select>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="sel1">Schedule Name:</label>
+                     <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdSchdlNm">
+                       <option *ngFor="let schnm of scheduleNames" value="{{schnm.sch_nm}}">{{schnm.sch_nm}}</option>
+                     </select>
+                     </div>
+                 </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="jobstrtdate">Job Effective Start Date:</label>
+                     <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate" [(ngModel)]="jbStrtDt">
+                   </div>
+                  </div>
+                  <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="strtdate">Schedule Effective Start Date:</label>
+                     <input type="date" class="form-control" id="strtdate" name="strtdate" [(ngModel)]="schStrtDt">
+                   </div>
+                  </div>
+                  <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="strttime">Schedule Start Time:</label>
+                     <input type="time" class="form-control" id="strttime" name="strttime" [(ngModel)]="schStrttm">
+                   </div>
+                  </div>
+                </div>
+
+              <!-- <div class="row">
+               <div class="custom-control custom-radio">
+                 <input type="radio" class="custom-control-input" id="radioyes" value="Yes" name="example1">
+
+
+               </div>
+               <div class="custom-control custom-radio">
+                 <input type="radio" class="custom-control-input" id="radiono"  value="No"name="example1">
+               </div>
+              </div> -->
+              <div class="row">
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="jobstrtdate">SLA Start Time:</label>
+                   <input type="time" class="form-control" id="SLAStrtTm" name="SLAStrtTm" [(ngModel)]="SLAStrtTm">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strtdate">SLA End Time:</label>
+                   <input type="time" class="form-control" id="SLAEndTm" name="SLAEndTm" [(ngModel)]="SLAEndTm">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strttime">SLA offset Days:</label>
+                   <input type="text" class="form-control" id="offsetdays" name="profoffsetdays" (ngModel)="offsetdays">
+                 </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="sel1">Impact:</label>
+                    <select class="form-control" id="sel1" name="sellist1">
+                      <option>p1</option>
+                      <option>p2</option>
+                      <option>p3</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="email">Supporting Group:</label>
+                    <input type="text" class="form-control" id="email" placeholder="Enter Supporting Group" name="email" [(ngModel)]="supprtGrp">
+                  </div>
+                </div>
+               <!-- <div class="col-md-4">
+                <div class="form-group">
+                  <label for="strttime">Job Effective End Time:</label>
+                  <input type="time" class="form-control" id="strttime" name="strttime">
+                </div>
+               </div> -->
+               <div class="col-md-4">
+                <div class="form-group">
+                  <label for="sel1">Ticketing Type:</label>
+                  <select class="form-control" id="sel1" name="sellist1" (ngModel)="ticketingType">
+                    <option value="jira">Jira</option>
+                    <option value="gathi">Gathi</option>
+
+                  </select>
+                  </div>
+              </div>
+               </div>
+               <div class="row">
+
+
+
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+         <div class="col-md-4">
+          <div class="form-group">
+            <label for="JobName">Job Name:</label>
+            <input type="text" class="form-control" id="Job Name" placeholder="Enter Job Name"title="{{mdmjob}}" name="jobNm" [(ngModel)]="mdmjob" disabled>
+          </div>
+         </div>
+         <div class="col-md-4">
+          <div class="form-group">
+            <label for="sel1">Calender Name:</label>
+            <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdClndrNm">
+              <option *ngFor="let clnm of calenderNames">{{clnm.clndr_nm}}</option>
+            </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sel1">Schedule Name:</label>
+            <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdSchdlNm">
+              <option *ngFor="let schnm of scheduleNames">{{schnm.sch_nm}}</option>
+            </select>
+            </div>
+        </div>
+       </div>
+       <div class="row">
+         <div class="col-md-4">
+          <div class="form-group">
+            <label for="jobstrtdate">Job Effective Start Date:</label>
+            <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate" [(ngModel)]="jbStrtDt">
+          </div>
+         </div>
+         <div class="col-md-4">
+          <div class="form-group">
+            <label for="strtdate">Schedule Effective Start Date:</label>
+            <input type="date" class="form-control" id="strtdate" name="strtdate" [(ngModel)]="schStrtDt">
+          </div>
+         </div>
+         <div class="col-md-4">
+          <div class="form-group">
+            <label for="strttime">Job Effective Start Time:</label>
+            <input type="time" class="form-control" id="strttime" name="strttime">
+          </div>
+         </div>
+       </div>
+
+     <div class="row">
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="radioyes" value="Yes" name="example1">
+
+
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="radiono"  value="No"name="example1">
+      </div>
+     </div>
+
+     <div class="row">
+      <div class="col-md-4">
+       <div class="form-group">
+         <label for="jobstrtdate">Job Effective End Date:</label>
+         <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate">
+       </div>
+      </div>
+      <div class="col-md-4">
+       <div class="form-group">
+         <label for="strtdate">Schedule Effective End Date:</label>
+         <input type="date" class="form-control" id="strtdate" name="strtdate">
+       </div>
+      </div>
+      <div class="col-md-4">
+       <div class="form-group">
+         <label for="strttime">Job Effective End Time:</label>
+         <input type="time" class="form-control" id="strttime" name="strttime">
+       </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sel1">Impact:</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email">Supporting Group:</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter Supporting Group" name="email">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sel1">Ticketing Type:</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            </div>
+        </div>
+      </div> -->
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+            <a class="card-link" >
+              Profiling Job
+            </a>
+          </div>
+          <div id="collapseTwo" class="collapse " data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="JobName">Job Name:</label>
+                   <input type="text" class="form-control" id="Job Name" placeholder="Enter Job Name"title="{{mdmjob}}" name="jobNm" [(ngModel)]="profjob" disabled>
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="sel1">Calender Name:</label>
+                   <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="profslctdClndrNm">
+                     <option *ngFor="let clnm of calenderNames">{{clnm.clndr_nm}}</option>
+                   </select>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="sel1">Schedule Name:</label>
+                   <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="profslctdSchdlNm">
+                     <option *ngFor="let schnm of scheduleNames">{{schnm.sch_nm}}</option>
+                   </select>
+                   </div>
+               </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="jobstrtdate">Job Effective Start Date:</label>
+                   <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate" [(ngModel)]="profjbStrtDt">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strtdate">Schedule Effective Start Date:</label>
+                   <input type="date" class="form-control" id="strtdate" name="strtdate" [(ngModel)]="profschStrtDt">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strttime">Schedule Start Time:</label>
+                   <input type="time" class="form-control" id="strttime" name="profstrttime" (ngModel)="profjob_start_time">
+                 </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="jobstrtdate">SLA Start Time:</label>
+                   <input type="time" class="form-control" id="profSLAStrtTm" name="profSLAStrtTm" [(ngModel)]="profSLAStrtTm">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strtdate">SLA End Time:</label>
+                   <input type="time" class="form-control" id="profSLAEndTm" name="profSLAEndTm" [(ngModel)]="profSLAEndTm">
+                 </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="strttime">SLA offset Days:</label>
+                   <input type="text" class="form-control" id="profoffsetdays" name="profoffsetdays" (ngModel)="profoffsetdays">
+                 </div>
+                </div>
+              </div>
+            <!-- <div class="row">
+             <div class="custom-control custom-radio">
+               <input type="radio" class="custom-control-input" id="radioyes" value="Yes" name="example1">
+
+
+             </div>
+             <div class="custom-control custom-radio">
+               <input type="radio" class="custom-control-input" id="radiono"  value="No"name="example1">
+             </div>
+            </div>
+        -->
+            <div class="row">
+             <!-- <div class="col-md-4">
+              <div class="form-group">
+                <label for="jobstrtdate">Job Effective End Date:</label>
+                <input type="date" class="form-control" id="jobstrtdate" name="profjobstrtdate">
+              </div>
+             </div>
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="strtdate">Schedule Effective End Date:</label>
+                <input type="date" class="form-control" id="strtdate" name="profstrtdate">
+              </div>
+             </div> -->
+             <div class="col-md-4">
+              <div class="form-group">
+                <label for="sel1">Impact:</label>
+                <select class="form-control" id="sel1" name="profsellist1">
+                  <option>p1</option>
+                  <option>p2</option>
+                  <option>p3</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="email">Supporting Group:</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter Supporting Group" name="email" [(ngModel)]="profsupprtGrp">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="sel1">Ticketing Type:</label>
+                <select class="form-control" id="sel1" name="sellist1">
+                  <option>Jira</option>
+                  <option>Gathi</option>
+                </select>
+                </div>
+            </div>
+             </div>
+             <div class="row">
+
+<!--
+               <div class="col-md-4">
+                 <div class="form-group">
+                   <label for="sel1">Ticketing Type:</label>
+                   <select class="form-control" id="sel1" name="sellist1">
+                     <option>Jira</option>
+                     <option>Gathi</option>
+                   </select>
+                   </div>
+               </div> -->
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-update" (click)="ScheduleRegister()">Submit</button>
+        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+</div>
+</div>
+<div class="modal" id="colModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Column Details</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body popupcol">
+        <div *ngIf="colpopuploader"class="spinner-border text-primary"></div>
+        <div *ngIf="!colpopuploader" class="row">
+          <div class="col-sm-12">
+            <table id="example" class="table tableviewConn table-hover  table-striped table-bordered dt-responsive nowrap" cellspacing="0" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Schema</th>
+                    <th>Table Name</th>
+                    <th>Column</th>
+                    <th>Data Type</th>
+                    <th>Size</th>
+                    <!-- <th>Format</th> -->
+                    <th>Is Null</th>
+                    <th>Is Primary Key</th>
+                </tr>
+            </thead>
+            <tbody >
+               <!-- <span *ngFor="let schema of columndetails.schemadetails">
+                <span *ngFor="let table of schema.table_details"> -->
+                <tr   *ngFor="let schema of newtemp"class="bottom-border">
+                    <td>{{schema.Schema_name}}</td>
+                    <td>{{schema.Table_Name}}</td>
+                    <td>{{schema.column_name}}</td>
+                    <td>{{schema.datatype}}</td>
+                    <td>{{schema.datatype_length}}</td>
+                    <td style="text-align:center;" *ngIf="schema.nullable">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
+                        <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                          <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                            <g id="pencil" transform="translate(1474.447 442.449)">
+                              <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                              </g>
+                            </g>
+                          </g>
+                          <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                        </g>
+                      </svg>
+                    </td>
+                    <td style="text-align:center;" *ngIf="!schema.nullable">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
+                      <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                        <g id="pencil" transform="translate(1474.447 442.449)">
+                          <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                            <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                          </g>
+                        </g>
+                        <g id="close" transform="translate(1716.887 452.884)">
+                          <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                        </g>
+                      </g>
+                    </svg>
+                    </td>
+                    <td style="text-align:center;" *ngIf="schema.isPrimary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
+                        <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                          <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                            <g id="pencil" transform="translate(1474.447 442.449)">
+                              <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                              </g>
+                            </g>
+                          </g>
+                          <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                        </g>
+                      </svg>
+                    </td>
+                    <td style="text-align:center;" *ngIf="!schema.isPrimary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
+                      <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                        <g id="pencil" transform="translate(1474.447 442.449)">
+                          <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                            <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                          </g>
+                        </g>
+                        <g id="close" transform="translate(1716.887 452.884)">
+                          <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                        </g>
+                      </g>
+                    </svg>
+                    </td>
+                    <!-- <td>
+
+                        <label class="container">
+                            <input type="checkbox" autocomplete="off" disabled [ngModel]="schema.isPrimary">
+                            <span class="checkmark" autocomplete="off"></span>
+                        </label>
+                    </td> -->
+                </tr>
+            <!-- </span>
+                </span> -->
+
+            </tbody>
+        </table>
+        </div>
+
+     </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-update" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

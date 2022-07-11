@@ -1,0 +1,80 @@
+
+<div style="padding: 0px 15px;" class="container-fluid">
+
+    <div *ngIf="showSources">
+        <div class="row sub-nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <div class="nav-sub-icons" >
+                     <svg class="vl dashboard" id="dashboard" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 27.68 27.68">
+                          <path id="Path_261" data-name="Path 261" d="M10.668,0H2.018A2.02,2.02,0,0,0,0,2.018v5.19A2.021,2.021,0,0,0,2.018,9.227h8.65a2.021,2.021,0,0,0,2.018-2.018V2.018A2.021,2.021,0,0,0,10.668,0Zm0,0" fill="#052e5d"/>
+                          <path id="Path_262" data-name="Path 262" d="M10.668,213.332H2.018A2.02,2.02,0,0,0,0,215.35v12.11a2.02,2.02,0,0,0,2.018,2.018h8.65a2.02,2.02,0,0,0,2.018-2.018V215.35A2.021,2.021,0,0,0,10.668,213.332Zm0,0" transform="translate(0 -201.799)" fill="#052e5d"/>
+                          <path id="Path_263" ata-name="Path 263" d="M288,341.332h-8.65a2.021,2.021,0,0,0-2.018,2.018v5.19a2.021,2.021,0,0,0,2.018,2.018H288a2.02,2.02,0,0,0,2.018-2.018v-5.19A2.021,2.021,0,0,0,288,341.332Zm0,0" transform="translate(-262.339 -322.879)" fill="#052e5d"/>
+                          <path id="Path_264" data-name="Path 264" d="M288,0h-8.65a2.021,2.021,0,0,0-2.018,2.018v12.11a2.021,2.021,0,0,0,2.018,2.018H288a2.021,2.021,0,0,0,2.018-2.018V2.018A2.02,2.02,0,0,0,288,0Zm0,0" transform="translate(-262.339)" fill="#052e5d"/>
+                    </svg>
+                    <div class="vl verlin"></div>
+                    <div>
+                        <button class="button active" style="font-weight: normal  !important;" [routerLink]="'/catalog/connectors'">Connector</button>
+                        <button class="button1 " style="font-weight: normal  !important;"  [routerLink]="'/catalog/register'">Register</button>
+                       <button class="button1" style="font-weight: normal  !important;" [routerLink]="'/catalog/glossary'" >Business Glossary</button>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+        <!-- <div class="row" style="float: right;">
+            <button class="btn btn-primary active text-md-right border rounded" type="button"
+                (click)="view_EditConnections()">View & Edit Connections</button>
+        </div> -->
+
+        <div class="row " style="margin-top: 10px;">
+            <div class="col-5  col-sm-7">
+
+            </div>
+            <div class="col-7  col-sm-5 VEConn">
+                <button  style="float: right;" class="form-pri-btn" (click)="view_EditConnections()" type="button">View & Edit
+                    Connections</button>
+            </div>
+            <div class="col-sm-12">
+                <app-select-sources (dataEvent)="receiveData($event)"></app-select-sources>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+    <div *ngIf="showCreateConn">
+        <!-- <button type="button" (click)="backToSources()" style="float: right;position: relative;top: 10px;" class="btn btn-primary form-pri-btn pull-right form-pri-btn">Back</button> -->
+        <!-- <button (click)="backToSources()" style="float: right;" class="btn btn-primary">
+            Back
+        </button> -->
+        <app-create-connections [selectedDataSource]="selectedSource" [selectedPlatform]="selectedPlatform" (childEvent)="backToSources()">
+        </app-create-connections>
+
+
+    </div>
+    <div *ngIf="showCreateFileConn">
+        <!-- <button type="button" (click)="backToSources()" style="float: right;" class="btn btn-primary pull-right form-pri-btn">Back</button> -->
+        <!-- <button (click)="backToSources()" style="float: right;" class="btn btn-primary">
+            Back
+        </button> -->
+        <app-create-file-connector [selectedDataSource]="selectedSource" 
+        [selectedPlatform]="selectedPlatform" (childEvent)="backToSources()">
+        </app-create-file-connector>
+
+
+    </div>
+
+
+    <div *ngIf="showViewConnections" >
+        <div>
+            <!-- <h4> View & Edit Connections</h4>
+            <button (click)="backToSources()" style="float: right; bottom:35px;" class="btn btn-primary form-pri-btn">
+                Back
+            </button> -->
+            <app-view-edit-connections (childEvent)="backToSources()"></app-view-edit-connections>
+        </div>
+    </div>
+</div>

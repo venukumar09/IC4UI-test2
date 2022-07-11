@@ -1,0 +1,137 @@
+.conn-main-page{
+    position: relative;
+    top: 35px;
+}
+th{
+    background:#f9fbfc;
+}
+.passwordview{
+    border:none;
+    background: #fff;
+    outline:none;
+}
+.tableRow:hover .passwordview{
+    background: #eeeeee;
+    outline: none;
+}
+.form-pri-btn{
+    /*top:10px;*/
+    position: relative;
+    background: #1656a2;
+    border-radius: 40px;
+    height: 31px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    color:white;
+}
+.dataTables_length>label{
+    width: 260px;
+    top: 10px;
+    left: 20px;
+    position: relative;
+}
+.DataTables_Table_2_length{
+    width:77px;
+}
+.table{
+    width: 96%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 2px solid #f6f7f8;
+}
+.form-group-1{
+    margin-bottom: 0px !important;
+}
+.top10{
+    position: relative;
+    top: 10px;
+}
+.ticksvg{
+    width: 23px;
+    margin-right: 3px;
+    bottom:2px;
+    position: relative;
+}
+.closesvg{
+    width: 23px;
+    position: relative;
+    bottom:0px;
+}
+/* td{
+    padding-top: 5px;
+    padding-bottom:5px;
+}
+tr{
+    border-bottom:2px solid #f6f7f8;	
+    padding-top: 5px;
+    padding-bottom: 5px;
+} */
+.pull-right{
+        text-align: right;
+}
+th{
+    color:#052e5d;
+}
+table{
+    position: relative;
+    /* top:35px; */
+    width:90%;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #f6f7f8;
+}
+.heading5{
+    position: relative;
+    top: 3px;
+    padding-left: 10px;
+  }
+.cursor-pointer{
+    cursor:pointer;
+}
+.bread-crumb{
+    color: #1a9fdd;
+    font-weight: 500;
+    font-size: 16px;
+}
+.connector{
+    padding:10px 6px;
+    background:#f8f9fa;
+    margin-bottom:10px;
+  }
+.block{
+    display: block;
+  }
+  .inline-block{
+    display:inline-block;
+  }
+.connector1{
+    font-size: 22px;
+    color: #052e5d;
+}
+.marginryt10{
+    margin-right: 10px;
+}
+.dbbox{
+    
+    height: 150px;
+    /* background: #ccc; */
+    margin:20px;
+}
+  .fa-caret-right{
+    padding: 0px 10px;
+    position: relative;
+    top: 2px;
+    color:#1a9fdd
+  }
+  .center{
+      text-align: center;
+  }
+.table-row{
+    /* text-align: center; */
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,514 @@
+.right-main {
+  padding: 20px;
+}
+
+.search {
+  width: 100%;
+  height: 35px;
+  padding: 2%;
+}
+
+.modal-full {
+  min-width: 70%;
+  margin-left: 80;
+}
+
+.modal-full .modal-content {
+  min-height: 80vh;
+}
+
+.btnprimary {
+  background: #bee3f5;
+}
+
+.grid1 {
+  width: 23%;
+}
+
+.grid2 {
+  width: 75%;
+}
+
+.rowcard {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.right-main1 {
+  width: 100%;
+  border: 2px solid #bee3f5;
+  // height: 100%;
+  margin-top: 10px;
+}
+
+.card-body {
+  padding: 4px 10px;
+}
+
+.card-link-body {
+  /*border-top: 2px solid #bee3f5;*/
+  font-size: small;
+  margin: 0px 46px;
+}
+
+.cardbody {
+  padding: 10px;
+  width: 100%;
+}
+
+#accordion {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.card-header {
+  padding: 4px;
+  background: white;
+  border-color: white;
+  color: #3d72b2;
+  font-weight: 500;
+}
+
+.right-header {
+  height: 50px;
+  background: #bee3f5;
+  color: #4a7cb6;
+  display: block;
+  margin-left: 0;
+}
+
+.rytHdrBtnActive {
+  background: white;
+}
+
+.rytHdrBtn {
+  top: 7px;
+  left: 7px;
+  height: 40px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  padding-top: 7px;
+  text-align: center;
+}
+
+.row_body {
+  padding: 20px;
+  margin-bottom: 10px;
+  // height: 296px;
+  // overflow: auto;
+  height: 100%;
+}
+
+.row_body1 {
+  padding: 20px;
+  margin-bottom: 10px;
+  height: 230px;
+  min-height: 100px;
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+label {
+  color: #4a7cb6;
+}
+
+.right-main {
+  padding: 20px;
+}
+
+.search {
+  width: 100%;
+  height: 35px;
+  padding: 2%;
+}
+
+.grid {
+  width: 100%;
+}
+
+.btnprimary {
+  background: #bee3f5;
+}
+
+.grid1 {
+  width: 23%;
+}
+
+.grid2 {
+  width: 75%;
+}
+
+
+.right-header {
+  height: 50px;
+  background: #bee3f5;
+  color: #4a7cb6;
+  display: block;
+}
+
+.rytHdrBtnActive {
+  background: white;
+}
+
+.rytHdrBtn {
+  top: 7px;
+  left: 7px;
+  height: 40px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  padding-top: 7px;
+  text-align: center;
+}
+
+label {
+  color: #4a7cb6;
+}
+
+.fa-trash-o {
+  position: relative;
+  font-size: 20px;
+  color: #1656a2;
+}
+
+.RW {
+  margin-bottom: 10px;
+}
+
+.oar {
+  padding: 8px;
+  font-weight: 500;
+}
+
+.oar:hover {
+  background: #bee3f5;
+}
+
+.blue {
+  background-color: #ddd !important;
+  border: thin solid #dedede;
+  margin-bottom: 1px;
+}
+
+.btnprimary {
+  background: #bee3f5;
+}
+
+.modal-body {
+  background-color: #f3f3f0;
+}
+
+
+.joiner_conf {
+  padding: 5px;
+}
+
+.joiner_conf .inpt1 {
+  width: 100%;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.joiner_conf .btn {
+  padding: 5px;
+  font-size: 15px;
+  margin-left: -15px;
+}
+
+.joiner_conf .rw1 {
+  width: 23%;
+}
+
+.joiner_conf .inpt2 {
+  width: 100%;
+  font-weight: 400;
+  padding: 5px;
+  height: 100%;
+}
+
+.joiner_conf .lblinpt1 {
+  width: 23%;
+  margin-right: 15px;
+}
+
+.joiner_conf .lblinpt2 {
+  width: 74%;
+  margin-right: 15px;
+}
+
+.joiner_conf .right-main1 .nav-tabs {
+  border-bottom: 1px solid #bee3f5;
+  background-color: #bee3f5;
+}
+
+.joiner_conf .right-main1 {
+  width: 100%;
+  border-top: 4px solid #bee3f5;
+  background-color: white;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.joiner_conf .right-main1 .nav-tabs a {
+  color: #4a7cb6;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.joiner_conf .right-main1 .innav {
+  color: #4a7cb6;
+  font-weight: 600;
+  padding: 20px;
+  height: 310px;
+  overflow: auto;
+}
+
+.joiner_conf .right-main1 .innav .act {
+  background-color: #f3f3f0;
+  font-size: 15px;
+}
+
+.joiner_conf .right-main1 .innav .lbl {
+  color: black;
+  font-weight: 500;
+  padding-left: 30px;
+  padding-top: 6px;
+}
+
+.joiner_conf .right-main1 .innav .ipt {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.joiner_conf .right-main1 .innav .io_join {
+  background: #bee3f5;
+  width: 100%;
+  color: #4a7cb6;
+}
+
+
+.joiner_filter {
+  padding: 5px;
+}
+
+.joiner_filter .inpt1 {
+  width: 100%;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.joiner_filter .btn {
+  padding: 5px;
+  font-size: 15px;
+  width: 70%;
+  margin-left: -15px;
+}
+
+.joiner_filter .rw1 {
+  width: 23%;
+}
+
+.joiner_filter .inpt2 {
+  width: 100%;
+  font-weight: 400;
+  padding: 5px;
+  height: 100%;
+}
+
+.joiner_filter .lblinpt1 {
+  width: 23%;
+}
+
+.joiner_filter .lblinpt2 {
+  width: 74%;
+}
+
+.joiner_filter .right-main1 .nav-tabs {
+  border-bottom: 1px solid #bee3f5;
+  background-color: #bee3f5;
+}
+
+.joiner_filter {
+  width: 100%;
+  border-top: 4px solid #bee3f5;
+  background-color: white;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.joiner_filter .nav-tabs a {
+  color: #4a7cb6;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.joiner_filter .innav {
+  color: #4a7cb6;
+  font-weight: 600;
+  padding: 30px;
+  height: 310px;
+  overflow: auto;
+}
+
+.joiner_filter.innav .act {
+  background-color: #f3f3f0;
+  font-size: 15px;
+}
+
+.joiner_filter .innav .lbl {
+  color: black;
+  font-weight: 500;
+  padding-left: 60px;
+  padding-top: 6px;
+}
+
+.joiner_filter .innav .ipt {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.joiner_filter .innav .io_join {
+  background: #bee3f5;
+  width: 100%;
+  color: #4a7cb6;
+}
+
+.joiner_filter .innav .rw {
+  margin-top: 10px;
+}
+
+.joiner_filter .innav .fa-trash-o {
+  position: relative;
+  font-size: 20px;
+  color: #1656a2;
+}
+
+.subnav-icons {
+  color: black;
+  border: 2px solid #ffd402c4;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  background: #ffd402c4;
+}
+
+.subnav-icons2 {
+  color: black;
+  border: 2px solid black;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  background: white;
+  width: 80px;
+}
+
+
+.subnav-icons1 {
+  color: white;
+  border: 2px solid #1c7be0;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  background: #1c7be0;
+  width: 80px;
+}
+.map-logic .left-pane .attr {
+  padding: 20px;
+  margin-bottom: 10px;
+  height: 230px;
+  min-height: 100px;
+  max-height: 230px;
+  overflow-y: auto;
+}
+.jo-lbl{
+  margin-right: 20px;
+}
+
+input {
+  overflow: visible;
+  height: 100%;
+  width: 100%;
+}
+
+.rw {
+  margin-bottom: 10px;
+}
+
+.rw1 {
+  padding: 10px;
+}
+
+.c7 {
+  margin-top: 15px;
+}
+
+.inpt {
+  width: 100%;
+  height: 100%;
+}
+
+.sel {
+  width: 100%;
+  height: 100%;
+}
+
+.txbox {
+  height: 250px;
+  width: 100%;
+}
+
+.lbl {
+  font-weight: 500;
+}
+
+.highlight-port {
+  color: #0c0979 !important;
+  opacity: 1;
+  font-weight: bold;
+}
+
+.hover-port:hover {
+  background-color: #ccc !important;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #bee3f5;
+  background-color: #bee3f5;
+  padding-top: 3px;
+  padding-left: 3px;
+}
+
+.inports {
+  border: 1px solid #bee3f5;
+}
+.map-desc{
+  padding: 20px;
+}
+.modal-footer{
+  padding: 15px 45px !important;
+}
+.agg-btn{
+  margin-right: 20px;
+  margin-top: 100px;
+  float: right!important;
+}

@@ -1,0 +1,66 @@
+
+<div class="row container-fluid dim-top-nav">
+  <div class="col-5">
+    <div class="row">
+      <div class="col-7">
+        <div class="logo">
+          <img class="img-responsive" src="assets/images/curate_icon.svg">
+          Dim Builder > Jobs
+        </div>
+      </div>
+      <div class="col-5">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3">
+
+  </div>
+  <div class="col-4 nav-btns">
+    <button type="button" class="subnav-icons" style="float: right;outline:none" (click)="addNewJob()">New Job</button>
+
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="example"
+             class="table tableviewDimJobs table-striped table-bordered dt-responsive nowrap"
+             style="width:100%">
+        <thead>
+          <tr>
+            <th>Job Name</th>
+            <th>Job Description</th>
+            <th>Job Created </th>
+            <th>Job Last Modified</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody class="src-attr">
+          <tr class="bottom-border" *ngFor="let j of jobs">
+            <td>{{ j.job_nm}}</td>
+            <td>{{j.job_desc_txt}}</td>
+            <td>{{j.job_crtd_dt}}</td>
+            <td>{{j.rec_lst_updt_ts | date: 'short'}}</td>
+            <td class="icon">
+              <a (click)="editJob(j)" style="cursor:pointer" title="View Job">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

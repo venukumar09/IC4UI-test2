@@ -1,0 +1,214 @@
+.connector{
+    padding:10px 6px;
+    background:#f8f9fa;
+  }
+  .container-fluid{
+    padding-left:0px !important;
+    padding-right: 0px !important;
+  }
+  body{
+    outline: none;
+  }
+  .form-pri-btn{
+    position: relative;
+      background: #1656a2;
+      border-radius: 40px;
+      height: 31px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 30px;
+      padding-right: 30px;
+      border: none;
+  }
+  .block{
+    display: block;
+  }
+  .inline-block{
+    display:inline-block;
+  }
+  .connector{
+    font-size: 22px;
+    color: #052e5d;
+  }
+  .fa-caret-right{
+    padding: 0px 10px;
+    position: relative;
+    top: 2px;
+    color:#1a9fdd
+  }
+  .heading5{
+    position: relative;
+    top: 3px;
+    padding-left: 10px;
+  }
+  .cursor-pointer{
+    cursor:pointer;
+  }
+  .bread-crumb{
+    color: #1a9fdd;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .save-button{
+    top:38px;
+  }
+  hr{
+    border:1px solid rgba(0,0,0,.1);
+  }
+  .add{
+    position: relative;
+    top:27px;
+  }
+  .form-success-btn,.form-success-btn{
+    position: relative;
+      background: #00d138;
+      border-radius: 40px;
+      height: 42px;
+      font-weight: 500;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 50px;
+      padding-right: 50px;
+      border: none;	
+  }
+  .row{
+    position:relative;
+  }
+  
+  .fa-fa-icons-black{
+        position: relative;
+        font-size: 22px;
+        top: 25px;
+        border: 1px solid #7e7e7e;
+        padding: 6px;
+        color: #ccc;
+  }
+  .fa-fa-icons-red{
+      position: relative;
+        font-size: 22px;
+        top: 25px;
+        border: 1px solid red;
+        padding: 6px;
+        color: red;	
+  }
+  .fa-fa-icons-blue{
+        margin: 10px 10px;
+        position: relative;
+        font-size: 22px;
+        top: 25px;
+        background:#1656a2;
+        border: 1px solid #1656a2;
+        padding: 6px;
+        color: white;		
+  }
+  
+  .cntr-btm-blk{
+    position:relative;
+    top:0px;
+    height: 250px;
+      overflow-y: auto;
+      overflow-x: hidden;
+  }
+  label{
+    margin-bottom:8px;
+    margin-top:8px;
+  
+  }
+  hr{
+    position: relative;
+    top: 15px;
+  }
+  .cntr-btm-blk>.row{
+    padding-top: 0px;
+  }
+  button{
+    outline: none;
+  }
+  .alignryt{
+    text-align: right;
+    top:10px;
+    right:13px;
+    margin-bottom: 10px;
+  }
+  .col-sm-10
+  {
+    padding-left: 5px;
+  }
+  /* .fa{
+    position: relative;
+    font-size: 22px;
+    top: 36px;
+    margin:0px 2px;
+  } */
+  .sub-nav-bar{
+    background: #f8f9fa;
+  }
+  .active ,.button1:hover{
+  background-image: linear-gradient(150deg,#1656a2 30%,#1696d8 80.71%);
+  outline: none;
+  border: none;
+  color: white;
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 72px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  }
+  .button{
+  float:left; 
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  /*border-style: solid;*/
+  color: white;
+  }
+  .verlin{
+  position: absolute;
+  top: 5px;
+  left: 50px;
+  background: red;
+  border-right: 1px solid #b3afaf;
+  height: 41px;
+  }
+  .button1{
+  float:left; 
+  border-color: #1a9fdd;
+  padding: 4px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-style: solid;
+  color: #1981b1;
+  background:#f8f9fa
+  }
+  

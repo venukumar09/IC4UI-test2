@@ -1,0 +1,32 @@
+<div class="container-fluid conn-main-page">
+    <div class="row">
+        <div class="col-5  col-sm-7">
+            <h5 *ngIf="sources.length!=0">Select Source</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="conn-list">
+            <div class="conn" *ngFor="let src of ( sources ? sources : [])" (click)="sourceSelected(src)"
+                [ngClass]="{ 'conn-active' :  src.name == selectedSource.name}">
+                <div class="conn-text">{{src.name}}</div>
+                <img style="padding-top: 20px;" src="../../../assets/images/{{src.img_path}}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 *ngIf="platforms.length!=0" >Select Platform</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="conn-list">
+            
+            <div class="conn" *ngFor="let ptf of platforms" (click)="platformSelected(ptf)"
+                [ngClass]="{ 'conn-active' :  ptf.db_pltfm_nm == hovered_platform}">
+                <img class="pltfrm-img" [ngClass]="{'pltfrm-img-snf': ptf.db_pltfm_nm === 'SnowFlake' }"src="assets/images/{{ptf.img_path}}" alt="img"
+                    (mouseleave)="hoveredPlatform('')" (mouseover)="hoveredPlatform(ptf.db_pltfm_nm)">
+            </div>
+        </div>
+    </div>
+</div>

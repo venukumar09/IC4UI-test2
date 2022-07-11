@@ -1,0 +1,58 @@
+.dim_sch .right-body{
+    margin: 10px;
+}
+
+.dim_sch .right-body .innn{
+    padding: 5px;
+    padding-left: 25px;
+}
+
+.dim_sch .right-body .innn .inpt {
+    width: 100%;
+    margin-top: 10px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.dim_sch .right-body .innn   label {
+
+    display: inline-block;
+    margin-top: 0%;
+    margin-bottom: 0;
+}
+.dim_sch .btn-block .save-btn {
+    color: #00d138;
+    border: 2px solid #00d138;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 2px 15px;
+    position: relative;
+    top: 2px;
+    font-size: 15px;
+    /*background: #1c7be0;
+       */
+    width: 80px;
+  }
+  
+  .dim_sch .btn-block .cancel-btn {
+    color: #f44336;
+    border: 2px solid #f44336;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 2px 15px;
+    position: relative;
+    top: 2px;
+    font-size: 15px;
+    /*background: #f44336;
+       */
+    width: 80px;
+  }
+
+.dim-sch-queries {
+  flex: 0 0 100%;
+  max-width: 100%;
+  background: #e9ecef;
+  max-height: 250px;
+  overflow: auto;
+}

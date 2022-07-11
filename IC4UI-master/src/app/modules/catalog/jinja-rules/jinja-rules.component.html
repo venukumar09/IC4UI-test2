@@ -1,0 +1,519 @@
+<div class="row catalog_subnav">
+    <div class="col-2">
+        <div class="catalogLogo">
+            <svg class="mainLogo" xmlns="http://www.w3.org/2000/svg" width="21.473" height="21.473"
+                viewBox="0 0 21.473 21.473">
+                <g id="Group_321" data-name="Group 321" transform="translate(-65.264 -222.104)">
+                    <g id="dashboard" transform="translate(65.264 222.104)">
+                        <path id="Path_261" data-name="Path 261"
+                            d="M8.276,0H1.566A1.567,1.567,0,0,0,0,1.566V5.592A1.567,1.567,0,0,0,1.566,7.158h6.71A1.567,1.567,0,0,0,9.842,5.592V1.566A1.567,1.567,0,0,0,8.276,0Zm0,0"
+                            fill="#1656a2" />
+                        <path id="Path_262" data-name="Path 262"
+                            d="M8.276,213.332H1.566A1.567,1.567,0,0,0,0,214.9v9.394a1.567,1.567,0,0,0,1.566,1.566h6.71a1.567,1.567,0,0,0,1.566-1.566V214.9A1.567,1.567,0,0,0,8.276,213.332Zm0,0"
+                            transform="translate(0 -204.385)" fill="#1656a2" />
+                        <path id="Path_263" data-name="Path 263"
+                            d="M285.608,341.332H278.9a1.567,1.567,0,0,0-1.566,1.566v4.026a1.567,1.567,0,0,0,1.566,1.566h6.71a1.567,1.567,0,0,0,1.566-1.566V342.9A1.567,1.567,0,0,0,285.608,341.332Zm0,0"
+                            transform="translate(-265.701 -327.017)" fill="#1656a2" />
+                        <path id="Path_264" data-name="Path 264"
+                            d="M285.608,0H278.9a1.567,1.567,0,0,0-1.566,1.566V10.96a1.567,1.567,0,0,0,1.566,1.566h6.71a1.567,1.567,0,0,0,1.566-1.566V1.566A1.567,1.567,0,0,0,285.608,0Zm0,0"
+                            transform="translate(-265.701)" fill="#1656a2" />
+                    </g>
+                </g>
+            </svg>
+            DQ Rules
+            <!-- <button style="float:right;" (click)="test();" class="btn btn-primary">Back</button> -->
+
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div >
+        <div id="stepper1" class="bs-stepper" >
+            <div class="bs-stepper-header">
+                <div class="step" data-target="#l-1">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label">Source</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#l-2">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label">DQ Rules</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#l-3">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label">Schedule Job</span>
+                    </button>
+                </div>
+            </div>
+            <div class="bs-stepper-content" style="margin-bottom: 3rem;">
+              <form >
+                    <div id="l-1" class="content">
+                        <div class="row headerOptns">
+                            <div class="row card-main">
+                                <div class="col-md-5 top10ryt10">
+                                    <table class="table-left">
+                                        <tbody>
+                                            <tr class="bordernone">
+                                                <td *ngIf="tableDetails?.assetType == 'Table'" class="font-weight-head">Database</td>
+                                                <td *ngIf="tableDetails?.assetType == 'File'" class="font-weight-head">Data Source</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.dbName }}</td>
+                                            </tr>
+                                            <tr class="bordernone" *ngIf="tableDetails?.assetType == 'Table'">
+                                                <td class="font-weight-head">Data Schema</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.schema }}</td>
+                                            </tr>
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">Asset Type</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.assetType | titlecase }}</td>
+                                            </tr>
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">LOB</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.lobData}}</td>
+                                            </tr>
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">Application</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.applicationName}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-5 top10ryt10">
+                                    <table class="table-left">
+                                        <tbody>
+                                            <tr class="bordernone">
+
+                                                <td class="font-weight-head">Data Platform</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">
+                                                    {{tableDetails?.dataPlatform == null ? '...' : tableDetails?.dataPlatform }}
+                                                </td>
+                                            </tr>
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">Name</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">{{tableDetails?.assetName }}</td>
+                                            </tr>
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">Row Count</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">
+                                                    {{tableDetails?.size === null ? 'N/A' : tableDetails?.size }}
+                                                </td>
+                                            </tr>
+
+                                            <tr class="bordernone">
+                                                <td class="font-weight-head">SLA/SLO</td>
+                                                <td class="font-weight500">:</td>
+                                                <td class="font-weight500">
+                                                    5 AM EST
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-12">
+                                    <div class="description">
+                                        <div class="desc-title">Description:</div>
+                                        <div href="#" class="desc-text" data-toggle="tooltip" data-placement="right"
+                                            title="{{tableDetails?.description === null ? '...' : tableDetails?.description}}">
+                                            {{tableDetails?.description === null ? '...' : tableDetails?.description}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row card-main">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="font-weight-head" for="data_source">Select Execution Engine:</label>
+                                    <div>
+                                        <select id="rule_type" placeholder="Select Process Type" class="form-control"
+                                            (change)="processTypeChange($event.target.value)" name="pcs_type" [(ngModel)]="processType">
+                                            <option *ngFor="let p of processTypes" [value]="p" ngDefaultControl>
+                                                {{p}}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="data_source">File Type:</label>
+                                    <div>
+                                        <input type="text" class="form-control" id="srcFileType" [(ngModel)]="srcFileType"
+                                            name="srcFileType">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_source">File Path:</label>
+                                    <div>
+                                        <input type="text" class="form-control" id="file_path" [(ngModel)]="srcFilePath"
+                                            name="file_path">
+                                    </div>
+                                </div>
+
+                            </div> -->
+
+                        </div>
+
+                        <button style="float:right;" (click)="goToRules();" class="btn btn-primary btn-sm">Next</button>
+                    </div>
+                    <div id="l-2" class="content">
+                        <div  class="row table-row " [hidden]="configDqRules">
+                            <table class="table tableviewColms table-striped table-bordered dt-responsive nowrap" style="width:100% !important">
+                                <thead >
+                                    <tr >
+                                        <th  >Name</th>
+                                        <th  style="width: 150px !important;" >Data Type</th>
+                                        <th   style="text-align:center;">Is Null</th>
+                                        <th   style="text-align:center;">Is PK</th>
+                                        <th   style="text-align:center;">Is FK</th>
+                                        <th   style="text-align:center;">Rules Applied</th>
+                                        <th   style="text-align:center;">Edit Rules</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of columnDetails">
+                                        <td style="padding-left: 10px;" >{{data.assetName}}</td>
+                                        <td>{{data.dataType | titlecase}}
+                                            <span *ngIf="data.dataTypeLength !== '' && data.dataTypeLength !== null">
+                                                ({{data.dataTypeLength}})
+                                            </span>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isNull=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isNull=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isPK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isPK=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isFK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isFK=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <span *ngFor="let r of data.rules; ">
+                                                 <a (click)="showRulevalues(r)" style="color: #2c59a4;cursor: pointer;">{{r.rul_nm | titleCasePro}}</a>
+                                                <span *ngIf="data.rules.length > 1">,</span>
+                                            </span>
+                                        </td>
+                                        <!-- <td style="text-align:center;">
+                                            <svg title="Edit Rules" style="cursor:pointer;" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" (click)="dqRulesEdit(data)">
+                                                <g id="pencil" transform="translate(-0.001)">
+                                                    <g id="Group_243" data-name="Group 243" transform="translate(0.001)">
+                                                        <path id="Path_243" data-name="Path 243"
+                                                            d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Zm7.131,10.795-1.425,1.425-2.9-2.9-1.1,1.1,2.9,2.9-7.113,7.113-2.9-2.9-1.1,1.1,2.9,2.9-.709.709-.014-.013a.561.561,0,0,1-.358.257l-2.7.6a.562.562,0,0,1-.671-.672l.6-2.7a.563.563,0,0,1,.258-.358l-.014-.014L19.231,7.894a.43.43,0,0,1,.608,0l2.292,2.292A.43.43,0,0,1,22.131,10.795Z"
+                                                            transform="translate(-0.001)" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+                                        <td class="icon" style="text-align:center;">
+                                            <a (click)="dqRulesEdit(data)" style="cursor:pointer" title="Edit Rules">
+                                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                          </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="configDqRules">
+                            <app-cde-dq-rules class="asset-dq-rules" [source]="dqSource" [sourceAttributes]="columnDetails"
+                            (dqEdit)="showDqRules($event)" (finalRules)="finalRules($event)"></app-cde-dq-rules>
+                        </div>
+                        <div *ngIf="!configDqRules">
+                            <button style="float:right;margin-left: 10px;" (click)="goToScheduleJob();" class="btn btn-primary btn-sm">Next</button>
+                            <button style="float:right;" (click)="goBack(0);" class="btn btn-primary btn-sm">Back</button>
+                        </div>
+                    </div>
+                    <div id="l-3" class="content">
+                        <div class="modal-body mb-1">
+                            <div class="form-group">
+                                <div class="row" style="padding-bottom: 25px;">
+                                    <div class="col-md-6">
+                                        <label for="data_source">Cohort:
+                                            <i class="fa fa-info-circle data-hover" style="font-size:15px;color:gray;margin-left: 5px;"
+                                            title="Control input data set(global filter)"></i>
+                                        </label>
+                                        <div>
+                                            <input type="text" class="form-control" id="Cohort" [(ngModel)]="job.Cohort" name="Cohort"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: 11px !important">
+                                    <div  class="col-md-3 custom-checkbox">
+                                        <input   type="checkbox" class="custom-control-input" title="job_trigger" [(ngModel)]="job.RunJobNow"
+                                             id="job_trigger" name="job_trigger">
+                                        <label class="custom-control-label" style="margin-right:2rem;" for="job_trigger">
+                                            Run Job Now
+                                            <i class="fa fa-info-circle data-hover" style="font-size:15px;color:gray;margin-left: 5px;"
+                                                title="Run job immediately after job submit. "></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 25px">
+
+                                    <div class="col-md-3">
+                                        <label for="data_source">Job Name:</label>
+                                        <div>
+                                            <input type="text" class="form-control" id="name" [(ngModel)]="job.JobName" name="name"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="!job.RunJobNow" class="col-md-3">
+                                        <label for="data_source">Seconds:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.seconds" name="name"
+                                        autocomplete="off">
+
+                                    </div>
+                                    <div *ngIf="!job.RunJobNow" class="col-md-3">
+                                        <label for="data_source">Minutes:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.minutes" name="name"
+                                        autocomplete="off">
+
+                                    </div>
+                                    <div *ngIf="!job.RunJobNow" class="col-md-3">
+                                        <label for="data_source">Hours:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.hours" name="name"
+                                        autocomplete="off">
+
+                                    </div>
+
+                                </div>
+                                <div *ngIf="!job.RunJobNow" class="row" style="margin-top: 15px">
+                                    <div class="col-md-3">
+                                        <label for="data_source">Day Of Month:</label>
+                                        <div>
+                                            <input type="text" class="form-control" id="name" [(ngModel)]="cron.dayOfMonth" name="name"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="data_source">Month:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.month" name="name"
+                                        autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="data_source">Day Of Week:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.dayOfWeek" name="name"
+                                        autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="data_source">Year:</label>
+                                        <input type="text" class="form-control" id="name" [(ngModel)]="cron.year" name="name"
+                                        autocomplete="off">
+                                    </div>
+
+                                </div>
+                                <div class="row"  style="margin-top: 15px">
+                                    <div class="col-md-12">
+                                        <label for="data_source">Job Description:</label>
+                                        <div>
+                                            <textarea type="text" class="form-control" id="rul_desc" [(ngModel)]="job.JobDesc" name="rul_desc_txt"
+                                                autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" class="padding15">
+                                <button style="float:right;margin-left: 10px;" class="btn btn-success btn-sm pull-right"
+                                    (click)="submitJob();">Submit</button>
+                                <button style="float:right;" (click)="goBack(2);" class="btn btn-primary btn-sm">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Values Modal  -->
+<div class="row">
+    <div class="modal fade"
+         id="modalValues"
+         role="dialog"
+         aria-labelledby="valuesModal"
+         aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" style="width:1250px;">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#0072c6;color: white;">
+            <h4 class="modal-title">
+              Rule: {{selectedRule?.rul_nm | uppercase}}
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body mb-1">
+            <label for="rul_def">Rule Definition:</label>
+            <div>
+              <textarea type="text" readonly=true class="form-control" id="rul_def" [ngModel]="selectedRule?.rule_def" name="rul_def" autocomplete="off"></textarea>
+            </div>
+
+            <div class="form-group" style="margin-top: 5px;" *ngIf="selectedRule?.rule_def">
+              <label for="data_source">{{selectedRule.ruleDefValuesLabel}}:</label>
+              <div>
+              <textarea type="text" readonly=true class="form-control" id="ruleDefValues" [(ngModel)]="selectedRule.values" name="ruleDefValues" autocomplete="off"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 5px;" *ngIf="selectedRule?.rule_def">
+                <label for="data_source">Resolved Value:</label>
+                <div>
+                <textarea type="text" readonly=true class="form-control" id="resolvedValue" [(ngModel)]="selectedRule.resolvedValue" name="resolvedValue" autocomplete="off"></textarea>
+                </div>
+              </div>
+            <div class="modal-footer" class="padding15">
+              <!-- <div class="row ">
+                <div class="col-sm-6">
+                  <button type="button"  (click)="newMethod(current_rule,current_env)" class="btn btn-primary btn-sm pull-right">Save</button>
+                </div>
+
+                <div class="col-sm-6">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="closeValuesModal()">Cancel</button>
+                </div>
+              </div> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

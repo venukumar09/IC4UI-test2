@@ -1,0 +1,13 @@
+<div>
+    <div class="header">
+        <h5 mat-dialog-title>Enter Job Name</h5>
+        <span mat-dialog-close>x</span>
+    </div>
+    <hr/>
+    <div class="content">
+        <input type="text" class="inpt" placeholder="Enter Name" [(ngModel)]="data.name" />
+    </div>
+    <div class="btnblock">
+        <button [mat-dialog-close]="data">Submit</button>
+    </div>
+</div>

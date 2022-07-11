@@ -1,0 +1,120 @@
+
+<div class="container-fluid">
+   <div class='row connector'>
+      <div class="col-9 col-sm-10 ">
+         <h5 class="heading5">
+            <span class="inline-block cursor-pointer connector" (click)="backtosources()">Connector</span>
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+            <span class="bread-crumb inline-block cursor-pointer">New File Connection</span>
+         </h5>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-2">
+         <label>Connection Name</label>
+         <input type="text" autocomplete="off" class="form-control" id="conn_nm" name="connname" [(ngModel)]="connection.name">
+      </div>
+      <!-- <div class="col-sm-2">
+         <label>Select LOB</label>
+         <select class="form-control" (change)="getApplications()" [(ngModel)]="connection.lob">
+           
+            <option *ngFor="let lob of lobnames" value="{{lob.ln_of_bsn_id}}">{{lob.ln_of_bsn_nm}}</option>
+         </select>
+      </div>
+      <div class="col-sm-2">
+         <label>Select Application</label>
+         <select class="form-control" [(ngModel)]="connection.application">
+      
+            <option *ngFor="let app of applications" value="{{app.apn_nm}}">{{app.apn_nm}}</option>
+         </select>
+      </div> -->
+      
+      <div class="col-sm-2">
+         <label>Select Environment</label>
+         <select class="form-control" [(ngModel)]="connection.env">
+            <!-- <option>Select Environment</option> -->
+            <option *ngFor="let env of environments" value="{{env.name}}">{{env.name}}</option>
+         </select>
+      </div>
+      <!-- <div class="col-sm-2">
+         <label>Host</label>
+         <input type="text" autocomplete="off"class="form-control" id="host" name="host" [(ngModel)]="connection.host">
+      </div>
+      <div class="col-sm-1">
+         <label>Port</label>
+         <input type="text" autocomplete="off" class="form-control" id="port" name="port" [(ngModel)]="connection.port">
+      </div> -->
+   </div>
+   <hr />
+   <div class="row">
+      <div class="col-sm-9"></div>
+      <div class="col-sm-3 alignryt">
+         <!-- <button type="button"  class=" btn btn-primary form-pri-btn" (click)="showDatasourceModal()">Add File Connection</button> -->
+      </div>
+   </div>
+   <!-- <div class="modal fade" id="newDataSourceModal">
+      
+   </div> -->
+   <div class="cntr-btm-blk">
+      <div class="row" *ngIf="dataSources.length==0">
+         <div class="col-6 col-sm-3">
+            <label>Host</label>
+            <input autocomplete="off" type="text" class="form-control" 
+               [(ngModel)]="newDataSource.dataBaseName">
+         </div>
+         <div class="col-6 col-sm-3">
+            <label>Username</label>
+            <input autocomplete="off" type="text" class="form-control" [(ngModel)]="newDataSource.userName">
+         </div>
+         <div class="col-6 col-sm-3">
+            <label>Password</label>
+            <input autocomplete="off" type="password" class="form-control" name="password" [(ngModel)]="newDataSource.password">
+         </div>
+         <div class="col-6 col-sm-3">
+            <!-- <i class="fa fa-trash-o fa-fa-icons-red" aria-hidden="true" (click)="deleteDataSource(field)"></i>
+            <i class="fa fa-chain-broken fa-fa-icons-blue" (click)="testConnection(field)"></i> -->
+            <!-- editDataSource(field,i) -->
+            <!-- <button class="btn-primary form-pri-btn save-button" (click)="addDataSource()">Save</button> -->
+         </div>
+      </div>
+      <div *ngIf="dataSources.length>0">
+      <div class="row"  *ngFor="let field of dataSources;">
+         <!-- <div class="col-6 col-sm-3">
+            <label>Database</label>
+            <input (blur)="similarDBCheck()" autocomplete="off" type="text" class="form-control"  name="{{field.dataBaseName}}"
+               [(ngModel)]="field.dataBaseName">
+         </div> -->
+         <div class="col-6 col-sm-3">
+            <label>Bucket Name</label>
+            <input autocomplete="off" type="text" id="disabledInput" class="form-control"  [(ngModel)]="field.dataBaseName">
+         </div>
+         <div class="col-6 col-sm-3">
+            <label>S3 Access Key</label>
+            <input autocomplete="off" type="text" id="disabledInput" class="form-control"  [(ngModel)]="field.userName">
+         </div>
+         <div class="col-6 col-sm-3">
+            <label>S3 Security Key</label>
+            <input autocomplete="off" type="text" id="disabledInput" class="form-control"  [(ngModel)]="field.password">
+         </div>
+         <!-- <div class="col-6 col-sm-3">
+            <label>Password</label>
+            <input autocomplete="off" type="password"  class="form-control" [(ngModel)]="field.password">
+         </div> -->
+         <div class="col-6 col-sm-3">
+            <!-- <i class="fa fa-trash-o fa-fa-icons-red" aria-hidden="true" (click)="deleteDataSource(field)"></i>
+            <i class="fa fa-plug fa-fa-icons-blue" data-toggle="tooltip" data-placement="bottom" title="Test Connection" (click)="testConnection(field)"></i>
+            -->
+         </div> 
+      </div>
+   </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3" *ngIf="dataSources.length > 0">
+         <button type="button" class=" btn btn-primary pull-right form-success-btn add"
+            (click)="insertNewConnection()">Submit</button>
+      </div>
+   </div>
+</div>

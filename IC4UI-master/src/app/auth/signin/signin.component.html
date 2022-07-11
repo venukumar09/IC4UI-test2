@@ -1,0 +1,27 @@
+<div class="main-sign-in">
+  <div class="row">
+			
+    <div class="col-12 col-lg-5 col-sm-7 login-block-main">
+        <form class="login-block" [formGroup]="signinForm" (ngSubmit)="signin()">
+            <div class="logo-login">
+              <img style="width:175px;width:175px;bottom: 18px;position: relative;" src="../../../assets/images/IC4Logo.png">
+            </div>
+            <div class="form-group" autocomplete="autocomplete">
+              <label for="usr">User Name:</label>
+              <input type="text"  class="form-control input-text" name="userid"
+              [formControl]="signinForm.controls['userid']"  required>
+              <!-- <small 
+              *ngIf="signinForm.controls['userid'].hasError('required') && signinForm.controls['userid'].touched" 
+              class="form-error-msg"> Username is required </small> -->
+            </div>
+            <div class="form-group"autocomplete="autocomplete">
+              <label for="pwd">Password:</label>
+              <input  type="password" [formControl]="signinForm.controls['password']"  class="form-control input-text" name="password"  required>
+              <span class="forgot-password">Forgot Your Password?</span>
+            </div>
+            <button type="submit" [disabled]="signinForm.invalid" class="btn btn-block btn-primary form-success-btn">Login</button>
+            <div class="not-account">Don't have an account?</div> 
+          </form>	
+    </div>
+  </div>  
+</div>

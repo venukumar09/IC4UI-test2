@@ -1,0 +1,151 @@
+.header{
+    background-color: #169ddd;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+}
+.navbar{
+    padding: 0;
+    margin: 0;
+}
+.header ul li{
+    margin-right : 10px;
+}
+.header-icon{
+    // background-color: #00008b;
+    padding: 17px;
+    width: 8%;
+    text-align: center;
+}
+.header-icon img{
+    height: 36px;
+}
+.header li a img{
+    width: 22px;
+}
+.notify{
+    width: 15px !important;
+}
+.userName{
+		color: white;
+		font-weight: 400;
+	}
+	
+	@media screen and (max-width: 550px) {
+	  .userName{
+		position: relative;
+		/*left:30px;*/
+		display: none;
+		}
+		.help,.user,.notification,.userName{
+			position: relative;
+			margin-right: 15px !important;
+		}
+		.searchbar{
+			width:60%;
+		}
+		.searchicon{
+			right:49% !important;
+		}
+	}
+	.help,.user,.notification,.userName{
+		position: relative;
+		margin-right: 30px;
+	}
+	.nav-icons{
+		position: absolute;
+		right:0px;
+	}
+	.searchicon{
+		position: fixed;
+    	right: 49%;
+    	width: 16px;
+    }
+    nav{
+        width:100%;
+        height: 70px;
+        position:fixed; 
+        background: #169ddd;
+        z-index: 11;
+    }
+    .datasug{
+        padding: 5px;
+        cursor:pointer;
+    }
+    .datasug:active,.datasug:hover{
+        background: #eee;
+    }
+    .loading{
+        padding: 5px 10px;
+    }
+    .logout{
+        width:70px;
+        float:right;
+        background: white;
+        z-index:15;
+        position: relative;
+        padding: 5px 10px;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        right: 60px;
+        top: 50px;
+        display: none;
+    }
+    .user:hover .logout{
+        display: block;
+    }
+    .logout:hover{
+        background:#eee;
+        cursor: pointer;
+    }
+    // .user:hover{
+    //     .logout{
+    //         display: block;
+    //     }
+    // }
+
+    .suggestions{
+        position: fixed;
+        width: 503px;
+        max-height: 200px;
+        left: 266px;
+        top: 56px;
+        z-index: 11;
+        background: white;
+        border:1px solid #169ddd;
+        overflow: auto;
+    }
+    ::-webkit-scrollbar {
+        width: 9px;
+        // border-radius:20px ;
+      }
+      /* Track */
+::-webkit-scrollbar-track {
+    background: white;
+    border: 1px solid #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background:#ccc; 
+  }
+    .nav-icons{
+        /*float: right;*/
+        text-align: right;
+    }
+    .searchbar{
+	    height: 30px;
+        width: 36%;
+        left:215px;
+	    border: none;
+	    border-radius: 2px;
+	    text-decoration: none;
+	    position: relative;
+    	padding: 15px;
+	}

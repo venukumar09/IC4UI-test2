@@ -1,0 +1,174 @@
+
+	<div class="container-fluid">
+        <div class="sub">
+          Details
+          <span class="vl1 c"> Columns</span>
+          <span class="vl1 c "> Annotate</span>
+          <span class="vl1 c "> Preview Data</span>
+        </div>
+        <div class="row headerOptns">
+                <div class="row card-main">
+                    <div class="col-md-10">
+                        <h4 class="heading5">Customer</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="button1" data-toggle="modal"  data-target="#myModal">Edit</button>
+            </div>
+                    <div class="col-md-5 top10ryt10">
+                        <table class="table-left">
+                                    <tbody>
+                                    <tr class="bordernone">
+    
+                                        <td class="font-weight-head">Data Source</td>
+                                        <td class="font-weight500">:</td>
+                                        <td class="font-weight500">{{tableDetails.dsnName }}</td>
+                                    </tr>
+                                    <tr class="bordernone">
+                                        <td class="font-weight-head">Data Schema</td>
+                                        <td class="font-weight500">:</td>
+                                        <td class="font-weight500">{{tableDetails.schema }}</td>
+                                    </tr>
+                                    <tr class="bordernone">
+                                        <td class="font-weight-head">Asset Type</td>
+                                        <td class="font-weight500">:</td>
+                                        <td class="font-weight500">{{tableDetails.assetType | titlecase }}</td>
+                                    </tr>
+                                    <tr class="bordernone">
+                                        <td class="font-weight-head">LOB</td>
+                                        <td class="font-weight500">:</td>
+                                        <td class="font-weight500">{{tableDetails.lobData}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                    </div>
+                <div class="col-md-5 top10ryt10">
+                    <table class="table-left">
+                                <tbody>
+                                <tr class="bordernone">
+    
+                                    <td class="font-weight-head">Data Platform</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails.dataPlatform == null ? '...' : tableDetails.dataPlatform }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Name</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails.assetName }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Row Count</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails.size === null ? 'N/A' : tableDetails.size }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Application</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails.applicationName}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-12">
+                    <div class="description">
+                            <div class="desc-title">Description:</div>
+                            <div href="#" class="desc-text" data-toggle="tooltip" data-placement="right" title="{{tableDetails.description === null ? '...' : tableDetails.description}}">{{tableDetails.description === null ? '...' : tableDetails.description}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row dqmainRow">
+                  <img class="dqMain" src="../../../../../assets/images/dqmain.PNG">
+                </div>
+            </div>
+            </div>
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Edit</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="data_source">Data Source:</label>
+                    <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.dsnName" name="datasource">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="data_source">Data Platform:</label>
+                    <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.dataPlatform" name="dataplatform">
+                  </div>
+                </div>
+                </div>
+    
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="data_schema">DB Schema:</label>
+                      <input type="text" class="form-control" id="data_schema" [(ngModel)]="editabletableDetails.schema" name="dbschema">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="dbname">Name:</label>
+                      <input type="text" class="form-control" id="dbname"  [(ngModel)]="editabletableDetails.assetName" name="dbname">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="data_source">Asset Type:</label>
+                        <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.assetType" name="AssetType">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="data_source">Row Count:</label>
+                        <input type="text" class="form-control" id="data_platform"[(ngModel)]="editabletableDetails.size"  name="RowCount">
+                      </div>
+                    </div>
+                    </div>
+    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="data_source">LOB</label>
+                          <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.lobData" name="LOB">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="data_source">Application:</label>
+                          <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.applicationName"  name="Application">
+                        </div>
+                      </div>
+                      </div>
+    
+                      <div class="row">
+                        <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="comment">Description:</label>
+                          <textarea class="form-control" rows="5" [(ngModel)]="editabletableDetails.description" id="comment" name="text"></textarea>
+                        </div>
+                      </div>
+                      </div>
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-sm btn-update" (click)="updateConnection()">Update</button>
+                <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+              </div>
+              
+            </div>
+          </div>
+          </div>
+    

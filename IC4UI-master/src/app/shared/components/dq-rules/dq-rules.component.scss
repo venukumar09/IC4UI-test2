@@ -1,0 +1,30 @@
+h4{
+    display: inline-block;
+}
+
+
+.ing-dq-rules-bx {
+    padding: 0 !important;
+}
+.custom-checkbox .custom-control-label::before{
+    border-radius: 0px;
+    border:#adb5bd solid 1px;
+    }
+.ing-dq-close{
+    position: absolute;
+    right:20px;
+    color:red;
+    cursor: pointer;
+    float: right;
+}
+
+.highlight-selected-attr{
+    color:#0c0979 !important;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.full-width{
+    width: 100% !important;
+}
+

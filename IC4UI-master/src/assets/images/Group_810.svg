@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+  <g id="Group_810" data-name="Group 810" transform="translate(-20513 -18522)">
+    <g id="Group_803" data-name="Group 803">
+      <g id="Ellipse_109" data-name="Ellipse 109" transform="translate(20513 18522)" fill="#fff" stroke="#b1bec7" stroke-width="2">
+        <circle cx="23" cy="23" r="23" stroke="none"/>
+        <circle cx="23" cy="23" r="22" fill="none"/>
+      </g>
+      <g id="Group_800" data-name="Group 800" transform="translate(19386 17658)">
+        <g id="keyboard-right-arrow-button" transform="translate(1098.2 879)">
+          <g id="chevron-right" transform="translate(58.65)">
+            <path id="Path_353" data-name="Path 353" d="M60.407,0,58.65,1.757l5.773,5.773L58.65,13.3l1.757,1.757,7.529-7.529Z" transform="translate(-58.65)" fill="#1656a2"/>
+          </g>
+        </g>
+        <rect id="Rectangle_544" data-name="Rectangle 544" width="16" height="3" transform="translate(1137 880)" fill="#1656a2"/>
+        <rect id="Rectangle_545" data-name="Rectangle 545" width="16" height="3" transform="translate(1137 885)" fill="#1656a2"/>
+        <rect id="Rectangle_546" data-name="Rectangle 546" width="16" height="3" transform="translate(1137 890)" fill="#1656a2"/>
+      </g>
+    </g>
+  </g>
+</svg>

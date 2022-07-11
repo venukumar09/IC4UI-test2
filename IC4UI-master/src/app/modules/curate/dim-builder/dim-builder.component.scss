@@ -1,0 +1,772 @@
+// .dim {
+//   foreignObject{
+//     width: 10.0627261761rem !important;
+//     padding-top: 2.8rem !important;
+//     height: 10.618818rem !important;
+//     text-align: center;
+//   }
+
+//   foreignObject img{
+//     height: 5rem !important;
+//     margin-bottom: 0.3rem !important;
+//   }
+
+// }
+
+/* inner buttons */
+
+.validate-btn {
+  color: #1c7be0;
+  border: 2px solid #1c7be0;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  /*background: #ffd402c4;
+     */
+  width: 80px;
+}
+
+.save-btn {
+  color: #00d138;
+  border: 2px solid #00d138;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  /*background: #1c7be0;
+     */
+  width: 80px;
+}
+
+.cancel-btn {
+  color: #f44336;
+  border: 2px solid #f44336;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  /*background: #f44336;
+     */
+  width: 80px;
+}
+
+.btn-map-login button {
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 15px;
+  width: 80px;
+  background: white;
+}
+
+.btn-map-login .clear {
+  color: black;
+  border: 2px solid black;
+  margin-right: 13px;
+  margin-left: 272px;
+  // float: right;
+}
+
+.btn-map-login .save {
+  color: #1c7be0;
+  border: 2px solid #1c7be0;
+  margin-right: 13px;
+  // float: right;
+}
+
+
+.btn-map-login .validate {
+  color: #ffd402c4;
+  border: 2px solid #ffd402c4;
+  margin-right: 13px;
+  // float: right;
+}
+
+.dim-top-nav .logo img {
+  margin: 0 10px 0 0;
+  position: relative;
+  bottom: 3px;
+  width: 24px;
+}
+
+.dim-top-nav .icon {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.dim-top-nav .save-btn {
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 12px;
+  font-size: 13px;
+  margin-left: 5px;
+  cursor: pointer;
+  background: white;
+  float: right;
+}
+
+.dim-top-nav .subnav-icons {
+  color: #169DDD;
+  border: 2px solid #169DDD;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 13px;
+  margin-left: 5px;
+  cursor: pointer;
+  background: white;
+}
+
+.dim-top-nav  .subnavActivebtn {
+  color: white;
+  background: #1656A2;
+}
+
+.dim-top-nav .nav-btns {
+  padding-top: .75%;
+  padding-top: .75%;
+  padding-left: 5px;
+  padding-right: 0;
+}
+
+.dim-top-nav .btn-img {
+  width: 13px;
+  position: relative;
+  bottom: 2px;
+}
+
+.dim-top-nav .nav_icons {
+  margin-top: 16px;
+}
+
+
+.dim-main {
+  background-color: #f1f1f1;
+  padding: 1.25%;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+
+.dim-side-nav {
+  background: #bee3f5;
+  /*height: 650px;*/
+  overflow: auto;
+  max-height: 76vh;
+  padding-top: 10px;
+}
+
+.dim-side-nav .card {
+  border-radius: 1px;
+}
+
+.dim-side-nav .card-header {
+  padding: 4px;
+  background: white;
+  border-color: white;
+  color: #3d72b2;
+  font-weight: 500;
+}
+
+.dim-side-nav .side-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.dim-side-nav .card-link-body {
+  border-top: 2px solid #bee3f5;
+  font-weight: 400;
+  font-size: small;
+  padding: 5px;
+  margin: 0px 7px;
+  padding-left: 0px;
+}
+
+.dim-side-nav .card-link-body span {
+  padding-left: 5px;
+  font-size: small;
+  font-weight: 500;
+}
+
+.dim-side-nav .fa-icon {
+  color: #5e94ff;
+  padding: 3px;
+  float: right;
+}
+/* curate */
+.dim {
+  width: 100%;
+}
+
+.dim-side-nav .card-body {
+  padding: 0px;
+  max-height: 100px;
+  overflow: auto;
+}
+/*.fa {
+     color: white;
+     display: inline-block !important;
+     padding: 3px;
+}
+ .fa-pencil-square-o {
+     position: relative;
+     top: 3px;
+}
+ */
+.dim-side-nav #accordion {
+  margin-top: 10px;
+  border: 1px solid #169ddd;
+  cursor: pointer;
+}
+
+.dim-top-nav {
+  background: #f8f9fa;
+  height: 60px;
+  /* display: block;
+     */
+}
+
+.sub {
+  padding-top: 12px;
+  padding-right: 0px;
+}
+/*select {
+     font-size: 13px;
+}
+ a {
+     font-size: 15px;
+}
+ .pl {
+     margin-right: 20px;
+}
+ */
+/*.img {
+     padding-top: .75%;
+     padding-top: .75%;
+     padding-left: 5px;
+     padding-right: 0;
+}
+ */
+.col {
+  margin-right: 10px;
+}
+/*.checkbox {
+     height: 25px;
+     display: -webkit-inline-box;
+     width: 100%;
+}
+ */
+/*.selet {
+     width: 100%;
+     height: 100%;
+     font-size: 14px;
+     padding-left: 10px;
+}
+ */
+.dim-graph .pane {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 30px;
+  background-color: white;
+  min-height: 450px;
+  max-height: 450px;
+  overflow: hidden
+}
+
+.dim-graph .graph {
+  overflow: hidden;
+  /*border: #f0e9fe 1.5px solid;
+     */
+  /*padding: 5px;
+     */
+  /*max-height: 450px;
+     */
+  min-height: 450px
+}
+
+
+
+/*GRAPH*/
+$icon_rect_height: 25px;
+$icon_circle_height: 80px; //119px
+
+$inner_row_rec_height: 93px;
+$inner_row_cir_height: 130px;
+
+$inner_row_width: 160px;
+$inner_row_paddingTop: 41px;
+
+// dark colors
+$src_clr: #337ab7;
+$mapper_clr: #f0ad4e;
+$joiner_clr: #e85c67;
+$aggr_clr: #9467bd;
+$tgt_clr: #5cb85c;
+
+// light colors
+$src_clr: #ebdef0;
+$mapper_clr: #fff5cc;
+//#4ab1eb 0rg -- #d5f5e2
+$joiner_clr: #fadbd8;
+$aggr_clr: #dce0ec;
+$tgt_clr: #d5f5e2;
+
+.dim .node .icon {
+  height: $icon_circle_height;
+  /*width: 50px;
+     */
+  /*margin-top: 9px;
+     */
+  margin-bottom: 5px;
+  padding-left: 25px; //5px
+  /*padding-top: 8px;
+     */
+  float: left;
+}
+
+.dim .node .node-name {
+  /*color: black;
+     */
+  text-align: center;
+  padding-left: 5px;
+  font-weight: 500;
+  font-size: 13px;
+  /*float: left;
+     */
+}
+
+.node-name {
+  max-width: 100px !important;
+  overflow: hidden;
+}
+
+.dim .node .node-type-name {
+  padding-left: 5px;
+  float: left;
+  font-weight: 450;
+}
+
+
+.dim .node g .row1 {
+  width: $inner_row_width; //
+  height: $inner_row_cir_height;
+  padding-top: 37px !important; //$inner_row_rec_height 27px
+}
+
+.dim .node .delete-icon {
+  height: 31px;
+  margin-bottom: 5px;
+  float: right;
+}
+
+.dim .node .delete-icon:hover {
+  fill: red !important;
+}
+
+.dim text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+/*.dim svg {
+     border: 1px solid #e0dbdb;
+     top: 15%;
+     left: 20%;
+     min-height: 500px;
+     overflow: auto;
+}
+ */
+.dim line {
+  stroke: steelblue;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+
+/*NODES*/
+
+.node rect {
+  /* stroke: rgb(165, 159, 159);
+     */
+  /* fill: #fff;
+     */
+}
+
+.node-name {
+  color: black;
+}
+
+.node rect, circle {
+  stroke: #80808040;
+  stroke-width: 2px;
+}
+
+.dim circle {
+  fill: white !important;
+  stroke-width: 2px;
+}
+
+.node.source {
+
+  rect {
+    fill: $src_clr !important;
+    font-weight: bold;
+  }
+
+  circle {
+    fill: white !important;
+    font-weight: bold;
+  }
+
+  .node-name, .node-type-name {
+    color: #ae54d1;
+  }
+}
+
+.node.source.highlight {
+  rect {
+    stroke: #ae54d1 !important;
+    stroke-width: 2px;
+  }
+
+  circle {
+    stroke: #ae54d1 !important;
+    stroke-width: 2px;
+  }
+}
+
+.node.mapper {
+
+  .node-name, .node-type-name {
+    color: #e849a4;
+  }
+
+  rect {
+    fill: $mapper_clr !important;
+    font-weight: bold;
+  }
+
+  circle {
+    fill: white !important;
+    font-weight: bold;
+  }
+}
+
+.node.mapper.highlight {
+  rect {
+    stroke: #ebbe0c !important;
+    stroke-width: 2px;
+  }
+
+  circle {
+    stroke: #e849a4 !important;
+    stroke-width: 2px;
+  }
+}
+
+
+.node.joiner {
+
+  .node-name, .node-type-name {
+    color: #63c4fe;
+  }
+
+  rect {
+    fill: $joiner_clr !important;
+    font-weight: bold;
+  }
+
+  circle {
+    fill: white !important;
+    font-weight: bold;
+  }
+}
+
+.node.joiner.highlight {
+
+  rect {
+    stroke: #e85c67 !important;
+    stroke-width: 2px;
+  }
+
+  circle {
+    stroke: #63c4fe !important;
+    stroke-width: 2px;
+  }
+}
+
+.node.agg {
+
+  .node-name, .node-type-name {
+    color: #395bbe;
+  }
+
+  rect {
+    fill: $aggr_clr !important;
+    font-weight: bold;
+  }
+
+  circle {
+    fill: white !important;
+    font-weight: bold;
+  }
+}
+
+.node.agg.highlight {
+
+  rect {
+    stroke: #395bbe !important;
+    stroke-width: 2px;
+  }
+
+  circle{
+    stroke: #395bbe !important;
+    stroke-width: 2px;
+  }
+}
+
+.node.tgt {
+
+  .node-name, .node-type-name {
+    color: #f3c20e; // #62cc72;
+  }
+
+  rect {
+    fill: $src_clr !important;
+    font-weight: bold;
+  }
+
+  circle {
+    fill: white !important;
+    font-weight: bold;
+  }
+}
+
+.node.tgt.highlight {
+  rect {
+    stroke: #ae54d1 !important;
+    stroke-width: 2px;
+  }
+
+  circle {
+    stroke: #f3c20e !important;
+    stroke-width: 2px;
+  }
+}
+
+.node.filter rect {
+  fill: #ee5a05c4;
+}
+
+
+
+$path_color: #2d59a5;
+
+.edgePath path{
+  /*stroke: #333;
+     */
+  /* stroke: #333;
+     */
+  /* fill: #333;
+     */
+  stroke-width: 1.5px;
+  fill: none;
+  /*stroke: rgb(32, 93, 165) !important;
+     */
+  stroke: $path_color;
+  /*fill: none;
+     stroke: lightsteelblue;
+     stroke-width: 2px;
+     */
+}
+
+.arrowhead {
+  /*stroke: rgb(32, 93, 165) !important;
+     fill: rgb(32, 93, 165) !important;
+     */
+  stroke: $path_color;
+  fill: $path_color !important;
+  stroke-width: 1.5px;
+}
+
+.bluebackground {
+  fill: red;
+}
+
+.dim .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.dim .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+/// toolyip
+/* This styles the title of the tooltip */
+.tipsy .name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #60b1fc;
+  margin: 0;
+}
+/* This styles the body of the tooltip */
+.tipsy .description {
+  font-size: 1.2em;
+}
+/// tool //////
+/* dagreD3 Example Style sheet */
+.dim div {
+  text-align: center;
+}
+
+.dim g.node {
+  cursor: pointer;
+}
+
+.dagreD3Node {
+  fill: #eee;
+  stroke: #bbb;
+  stroke-width: 1px;
+}
+
+.dagreD3NodeLabel {
+  font-size: 20pt;
+  color: #555;
+  min-width: 80px;
+  min-height: 60px;
+  line-height: 60px;
+  margin: 0;
+}
+
+.dagreD3EdgeLabel {
+  color: #666;
+  font-size: 10pt;
+}
+
+.highLight > rect, .highLight > circle {
+  stroke: blue;
+  stroke-width: 2px;
+}
+
+.highLight {
+  stroke: blue;
+  stroke-width: 2px;
+}
+
+.nodeFailCnt {
+  color: #ff0033;
+  font-size: 10pt;
+}
+
+.modal-dialog {
+  width: 98%;
+  padding: 0;
+}
+
+.modal-content {
+  height: 99%;
+}
+
+.modal-full {
+  min-width: 98%;
+  margin-left: 80;
+}
+
+.modal-full .modal-content {
+  min-height: 80vh;
+}
+
+.modal-half {
+  min-width: 60%;
+  margin-left: 80;
+}
+
+.modal-half .modal-content {
+  min-height: 80vh;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+  padding-right: 20px;
+}
+
+.modal-header {
+  padding: 8px;
+  border-bottom: 0px solid #e5e5e5;
+}
+
+.modal-title {
+  font-size: 1rem;
+}
+
+.dim-top-nav .logo {
+  position: relative;
+  top: 15px;
+  left: 10px;
+  font-size: 19px;
+  color: #1656a2;
+}
+
+
+/* TABLE */
+
+.dim-table {
+
+  .table thead th {
+    border-bottom: 2px solid #f5fafd
+  }
+
+  .table {
+    border-bottom: 4px solid #f5fafd;
+    margin-top: 15px;
+    border: 5px solid #eeeeee;
+    font-weight: 400 !important;
+  }
+
+  .table td, .table th {
+    padding: 15px 0.75rem;
+    background-color: white !important;
+    border: none;
+  }
+
+  .table th {
+    font-weight: 500;
+  }
+
+  table thead th {
+    color: #2e67ab;
+  }
+
+  .table-left {
+    position: relative;
+    /*top: s;*/
+  }
+}
+
+.padding15 {
+  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-left: 5px;
+}

@@ -1,0 +1,190 @@
+<div>
+  <div class="source">
+    <div class="row">
+      <div class="col-sm-5 left">
+        <div class="row padding15">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="name">Source Name</label>
+              <input type="text" class="form-control" id="name"
+                     required maxlength="12" minlength="2"
+                     [(ngModel)]="src.name" name="name" #name="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="padding15">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Select LOB</label>
+            </div>
+            <div class="col-md-6">
+              <label *ngIf="selected_lob_value != ''">Select APP</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <select class="form-control" [(ngModel)]="selected_lob_value" (change)="getApplications();">
+                <option *ngFor="let l of lobs" value="{{l.ln_of_bsn_id}}">{{l.ln_of_bsn_nm}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select *ngIf="selected_lob_value != ''" class="form-control" [(ngModel)]="selected_app_value">
+                <option *ngFor="let a of apps" value="{{a.apn_id}}">{{a.apn_nm}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="padding15">
+          <div class="row">
+            <div class="col-md-6">
+              <label *ngIf="selected_lob_value != ''">Select DB Platform</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <select *ngIf="selected_lob_value != ''" class="form-control" [(ngModel)]="selected_db_pltfm_nm">
+                <option *ngFor="let d of dbPlatforms" value="{{d.db_pltfm_nm}}">{{d.db_pltfm_nm}}</option>
+              </select>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="padding15">
+          <div class="row">
+            <div class="col-md-6">
+              <label *ngIf="selected_lob_value != ''">Connector</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <select *ngIf="selected_lob_value != ''" class="form-control" [(ngModel)]="selected_db_pltfm_nm">
+                <option *ngFor="let d of dbPlatforms" value="{{d.db_pltfm_nm}}"></option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <button *ngIf="selected_lob_value != ''" class="src-test">Test Connection</button>
+            </div>
+            <div class="col-md-4">
+              <a href="#" *ngIf="selected_lob_value != ''" class="src-create"><u>Create Connector</u></a>
+            </div>
+          </div>
+        </div> -->
+        <div class="row padding15">
+          <div class="col-md-12" *ngIf="selected_app_value != ''">
+            <input class="form-control search" name="src_search" [ngModel]="searchText"
+                   [ngModelOptions]="{standalone: true}" placeholder="Search Catalog" type="text"
+                   (ngModelChange)="getSuggestions($event)">
+            <div class="src-suggestions" *ngIf="showSuggestions">
+              <ul *ngFor="let s of suggestions">
+                <li (click)="onObjSelect(s)"> {{s.obj_nm}}
+                <!--<span style="padding-left:2px">({{s.obj_db_pltfm_nm}})</span>-->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="container-fluid" [hidden]="selected_obj?.attributes.length == 0 && src !== undefined">
+          <div class="row table-row ">
+            <div class="src-vl"></div>
+            <div class="col-sm-11 dim-table"> 
+              <div class="src-scrollable">
+              <table id="example"
+                     class="table table-bordered dt-responsive nowrap src-clr"
+                     style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="src-title">Name</th>
+                    <th class="src-title">Data Type</th>
+                    <th class="src-title">Is Null</th>
+                    <th class="src-title">Is Primary Key</th>
+                  </tr>
+                </thead>
+                <tbody class="src-attr">
+                  <tr class="bottom-border" *ngFor="let a of selected_obj.attributes">
+                    <td class="src-value">
+                      {{ a.assetName}}
+                    </td>
+                    <td>{{a.dataType}}</td>
+                    <td class="icon">
+                      <a *ngIf="a.isNull == 'Y'" href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 30 30">
+                          <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                            <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                              <g id="pencil" transform="translate(1474.447 442.449)">
+                                <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                  <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                                </g>
+                              </g>
+                            </g>
+                            <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                          </g>
+                        </svg>               
+                      </a>
+                      <a *ngIf="a.isNull == 'N'" href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 30 30">
+                          <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                            <g id="pencil" transform="translate(1474.447 442.449)">
+                              <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                              </g>
+                            </g>
+                            <g id="close" transform="translate(1716.887 452.884)">
+                              <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                            </g>
+                          </g>
+                        </svg>
+                      </a>
+                    </td>
+                    <td class="icon">
+                      <a *ngIf="a.isPK == 'Y'" href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 30 30">
+                          <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                            <g id="pencil" transform="translate(1474.447 442.449)">
+                              <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                              </g>
+                            </g>
+                            <g id="close" transform="translate(1716.887 452.884)">
+                              <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                            </g>
+                          </g>
+                        </svg>  
+                      </a>
+                      <a *ngIf="a.isPK == 'N'" href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 30 30">
+                          <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                            <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                              <g id="pencil" transform="translate(1474.447 442.449)">
+                                <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                                  <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                                </g>
+                              </g>
+                            </g>
+                            <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                          </g>
+                        </svg>   
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Validate</button> -->
+      <button type="button" class="save-btn pull-right" (click)="submit()">Save</button>
+    </div>
+    <div class="col-sm-6">
+      <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+

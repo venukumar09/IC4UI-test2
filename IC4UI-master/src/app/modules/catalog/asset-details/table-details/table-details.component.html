@@ -1,0 +1,748 @@
+
+	<div class="container-fluid">
+    <div class="sub">
+      <span [ngStyle]="{'color':columnStatus=='n' ? '#1f446e' : '#55b8e6' }" (click)="tablSta()">Details</span>
+      <span [ngStyle]="{'color':columnStatus=='y' ?  '#1f446e' : '#55b8e6' }" class="vl1 c" (click)="colSta()"> Columns</span>
+      <span [ngStyle]="{'color':columnStatus=='a' ?  '#1f446e' : '#55b8e6' }" class="vl1 c " (click)="annotate()"> Annotate</span>
+      <span [ngStyle]="{'color':columnStatus=='p' ?  '#1f446e' : '#55b8e6' }" class="vl1 c " (click)="previewData()">Profiling</span>
+      <!-- <span class="text-right">
+        back
+        <button type="button" class=" btn btn-primary form-pri-main-btn" (click)="backtosources()" >Back</button>
+      </span> -->
+    </div>
+    <div *ngIf="!showDqEdit">
+    <div class="row headerOptns" *ngIf="columnStatus=='n'">
+            <div class="row card-main">
+                <div class="col-md-10">
+                    <h4 class="heading5">{{tableDetails?.assetName }}</h4>
+                </div>
+                <div class="col-md-2">
+                    <button class="button1" data-toggle="modal" data-target="#myModal">Edit</button>
+        </div>
+                <div class="col-md-5 top10ryt10">
+                    <table class="table-left">
+                                <tbody>
+                                <tr class="bordernone">
+
+                                    <td class="font-weight-head">Data Source</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails?.dsnName }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Data Schema</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails?.schema }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Asset Type</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails?.assetType | titlecase }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">LOB</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{tableDetails?.lobData}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                </div>
+            <div class="col-md-5 top10ryt10">
+                <table class="table-left">
+                            <tbody>
+                            <tr class="bordernone">
+
+                                <td class="font-weight-head">Data Platform</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{tableDetails?.dataPlatform == null ? '...' : tableDetails?.dataPlatform }}</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Name</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{tableDetails?.assetName }}</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Row Count</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{tableDetails?.size === null ? 'N/A' : tableDetails?.size }}</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Application</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{tableDetails?.applicationName}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-12">
+                <div class="description">
+                        <div class="desc-title">Description:</div>
+                        <div href="#" class="desc-text" data-toggle="tooltip" data-placement="right" title="{{tableDetails.description === null ? '...' : tableDetails.description}}">{{tableDetails.description === null ? '...' : tableDetails?.description}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tbl-details-dq-bg" >
+              <div style="margin-bottom:25px;"  [hidden]="tableDetails.assetType.toLowerCase() === 'report'" >
+                <!-- <img src="assets/img/flags.jpg" alt='' style="max-width:98%;display: block;height:auto;" /> -->
+                <div class="row">
+
+
+                  <div class="col-md-2">
+                    <p class="dq-p dq-info-border">
+                      <span class="dq-info red"></span>Score of 0-74
+                    </p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="dq-p dq-info-border">
+                      <span class="dq-info orange"></span>Score of 75-94
+                    </p>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="dq-p">
+                      <span class="dq-info green"></span>Score of 94-100
+                    </p>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <!--DQ-->
+              <div [hidden]="tableDetails.assetType.toLowerCase() === 'report'" >
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Accuracy');hoveredColor(tableDetails.accrPct)"
+                  [ngClass]="{'danger-graph' : tableDetails.accrPct <= 74 && tableDetails.accrPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Accuracy: {{tableDetails.accrPct == null ? 'N/A' : tableDetails.accrPct + '%'}} -->
+                      Accuracy
+                    </h5>
+                  </div>
+
+                  <div class="c100 p{{tableDetails.accrPct}} graph-mg-10" [ngClass]="getColor(tableDetails.accrPct,'bar')">
+                    <span
+                      [ngClass]="getColor(tableDetails.accrPct,'text')">{{tableDetails.accrPct == null ? 'N/A' : tableDetails.accrPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.accuracy | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Completeness');hoveredColor( tableDetails.cmpltPct)"
+                  [ngClass]="{'danger-graph' : tableDetails.cmpltPct <= 74 && tableDetails.cmpltPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Completeness: {{tableDetails.cmpltPct == null ? 'N/A' : tableDetails.cmpltPct + '%'}} -->
+                      Completeness
+                    </h5>
+                  </div>
+                  <div class="c100 p{{tableDetails.cmpltPct}} graph-mg-10" [ngClass]="getColor(tableDetails.cmpltPct,'bar')">
+                    <span [ngClass]="getColor(tableDetails.cmpltPct,'text')">
+                      {{tableDetails.cmpltPct == null ? 'N/A' : tableDetails.cmpltPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.completeness | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Conformity');hoveredColor( tableDetails.cnfmPct)"
+                  [ngClass]="{'danger-graph' : tableDetails.cnfmPct <= 74 && tableDetails.cnfmPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Conformity: {{tableDetails.cnfmPct == null ? 'N/A' : tableDetails.cnfmPct + '%'}} -->
+                      Conformity
+                    </h5>
+                  </div>
+                  <div class="c100 p{{tableDetails.cnfmPct}} graph-mg-10" [ngClass]="getColor(tableDetails.cnfmPct,'bar')">
+                    <span [ngClass]="getColor(tableDetails.cnfmPct,'text')">
+                      {{tableDetails.cnfmPct == null ? 'N/A' : tableDetails.cnfmPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.conformity | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Uniqueness');hoveredColor( tableDetails.uniqPct)"
+                  [ngClass]="{'danger-graph' : tableDetails.uniqPct <= 74 && tableDetails.uniqPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Uniqueness: {{tableDetails.uniqPct == null ? 'N/A' : tableDetails.uniqPct + '%'}} -->
+                      Uniqueness
+                    </h5>
+                  </div>
+                  <div class="c100 p{{tableDetails.uniqPct}} graph-mg-10" [ngClass]="getColor(tableDetails.uniqPct,'bar')">
+                    <span [ngClass]="getColor(tableDetails.uniqPct,'text')">
+                      {{tableDetails.uniqPct == null ? 'N/A' : tableDetails.uniqPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.uniqueness | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="tbl-crl-graph last-tbl-crl-graph"
+                  (mouseover)="hoveredOn('Consistency');hoveredColor( tableDetails.cnsPct)"
+                  [ngClass]="{'danger-graph' : tableDetails.cnsPct <= 74 && tableDetails.cnsPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Consistency: {{tableDetails.cnsPct == null || tableDetails.cnsPct == 0 ? 'N/A' : tableDetails.cnsPct + '%'}} -->
+                      Consistency
+                    </h5>
+                  </div>
+                  <div class="c100 p{{tableDetails.cnsPct}} graph-mg-10" [ngClass]="getColor(tableDetails.cnsPct,'bar')">
+                    <span
+                      [ngClass]="getColor(tableDetails.cnsPct,'text')">{{tableDetails.cnsPct == null || tableDetails.cnsPct == 0 ? 'N/A' : tableDetails.cnsPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.consistency | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="clear"></div>
+                <div class="dq-cont">
+                  <div class="dq-cont-header" [ngStyle]="{'background-color': hoveredElement.color}" style="margin-top:10px">
+                    <h5>{{hoveredElement.title}}</h5>
+                  </div>
+                  <div class="dq-cont-details" style="margin-top:10px">
+                    <p>
+                      {{hoveredElement.text}}
+                    </p>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    <div class="row table-row" *ngIf="columnStatus=='y'">
+      <table class="table tableviewColms1 table-striped table-bordered dt-responsive nowrap" style="width:100% !important">
+        <thead style="background: #f8f9fa;">
+          <tr>
+            <th>Name</th>
+            <!-- <th >Database</th>
+            <th >Schema</th> -->
+            <th style="width: 100px;">Data Type</th>
+            <!-- <th style="text-align:center;width:116px">Search Usage</th> -->
+            <th style="text-align:center;">Is Null</th>
+            <th style="text-align:center;">Is PK</th>
+            <th style="text-align:center;">Is FK</th>
+            <th style="text-align:center;">Rules Applied</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of coldtl">
+            <td>{{data.assetName}}</td>
+            <!-- <td>{{tableDetails?.database}}</td>
+            <td> {{tableDetails?.schema }}</td> -->
+            <td>{{data.dataType}}
+              <span *ngIf="data.dataTypeLength !== '' && data.dataTypeLength !== null">
+                ({{data.dataTypeLength}})
+              </span>
+              </td>
+            <!-- <td style="text-align:center;">{{data.searchCount}}</td> -->
+            <td style="text-align:center;" *ngIf="data.isNull=='Y'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                  <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                    <g id="pencil" transform="translate(1474.447 442.449)">
+                      <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                        <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                      </g>
+                    </g>
+                  </g>
+                  <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                </g>
+              </svg>
+            </td>
+            <td style="text-align:center;" *ngIf="data.isNull=='N'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                  <g id="pencil" transform="translate(1474.447 442.449)">
+                    <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                      <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                    </g>
+                  </g>
+                  <g id="close" transform="translate(1716.887 452.884)">
+                    <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                  </g>
+                </g>
+              </svg>
+              </td>
+              <td style="text-align:center;" *ngIf="data.isPK=='Y'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                  <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                    <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                      <g id="pencil" transform="translate(1474.447 442.449)">
+                        <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                          <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                        </g>
+                      </g>
+                    </g>
+                    <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                  </g>
+                </svg>
+              </td>
+              <td style="text-align:center;" *ngIf="data.isPK=='N'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                  <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                    <g id="pencil" transform="translate(1474.447 442.449)">
+                      <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                        <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                      </g>
+                    </g>
+                    <g id="close" transform="translate(1716.887 452.884)">
+                      <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                    </g>
+                  </g>
+                </svg>
+                </td>
+                <td style="text-align:center;" *ngIf="data.isFK=='Y'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                      <g id="Group_913" data-name="Group 913" transform="translate(-1751 -442)">
+                        <g id="Group_912" data-name="Group 912" transform="translate(43.552 -0.449)">
+                          <g id="pencil" transform="translate(1474.447 442.449)">
+                            <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                              <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#00d138"/>
+                            </g>
+                          </g>
+                        </g>
+                        <path id="correct-2" d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0" transform="translate(1760 452.661)" fill="#fff"/>
+                      </g>
+                    </svg>
+                  </td>
+                  <td style="text-align:center;" *ngIf="data.isFK=='N'">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                      <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+                        <g id="pencil" transform="translate(1474.447 442.449)">
+                          <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                            <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                          </g>
+                        </g>
+                        <g id="close" transform="translate(1716.887 452.884)">
+                          <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+                        </g>
+                      </g>
+                    </svg>
+                    </td>
+                    <td style="text-align:center;">
+                      <span *ngFor="let r of data.rules; ">
+                        <a (click)="showRulevalues(r)" style="color: #2c59a4;cursor: pointer;">
+                         <!-- {{r.rul_nm | titleCasePro}} -->
+                         {{r.rul_nm }}
+                       </a>
+                       <span *ngIf="data.rules.length > 1">,</span>
+                   </span>
+
+                      <!-- <i class="fa fa-info-circle info-class" aria-hidden="true"
+                      data-toggle="modal" (click)= "showAddedRules(data.rules)"></i> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" (click)="dqRulesEdit(data)">
+                            <g id="pencil" transform="translate(-0.001)">
+                              <g id="Group_243" data-name="Group 243" transform="translate(0.001)">
+                                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Zm7.131,10.795-1.425,1.425-2.9-2.9-1.1,1.1,2.9,2.9-7.113,7.113-2.9-2.9-1.1,1.1,2.9,2.9-.709.709-.014-.013a.561.561,0,0,1-.358.257l-2.7.6a.562.562,0,0,1-.671-.672l.6-2.7a.563.563,0,0,1,.258-.358l-.014-.014L19.231,7.894a.43.43,0,0,1,.608,0l2.292,2.292A.43.43,0,0,1,22.131,10.795Z" transform="translate(-0.001)"/>
+                              </g>
+                            </g>
+                          </svg>                           -->
+                    </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row" *ngIf="columnStatus=='a'">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+       </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+
+            <!-- data-target="#myModalAnn" -->
+            <button type="button" class="nav-btns subnav-icons"
+            style="float: right;outline:none" data-toggle="modal" (click)="openAnnote()"
+
+           >Add Annotation</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row table-row" *ngIf="columnStatus=='a'">
+            <table class="table tableviewColms table-striped table-bordered dt-responsive nowrap" style="width:100% !important">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Type</th>
+            <th>Annotation</th>
+            <th>Date</th>
+            <th>Rating</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of storedAnnote">
+            <td>
+              <!-- {{data.usr_nm}} -->
+
+              Gaurav
+            </td>
+            <td>{{data.clbrtn_type_nm}}</td>
+            <td>{{data.clbrtn_txt}}</td>
+            <td>{{data.rec_insrt_ts}}</td>
+            <td>
+              <div class="rate">
+                <!-- <i class= "fa fa-star" checked ></i>
+                <i class= "fa fa-star" checked ></i>
+                <i class= "fa fa-star" checked ></i>
+                <i class= "fa fa-star"  ></i>
+                 <i class= "fa fa-star"  ></i> -->
+
+
+                <!-- <i class= "fa fa-star" [checked]="data.rating===5" ></i>
+                <i class= "fa fa-star" [checked]="data.rating===4"></i>
+                <i class= "fa fa-star" [checked]="data.rating===3"></i>
+                <i class= "fa fa-star" [checked]="data.rating===2"></i>
+                <i class= "fa fa-star" [checked]="data.rating===1"></i> -->
+                <input type="radio" value="5" [checked]="data.rating===5"  />
+                <label title="5star">5 stars</label>
+
+                <input type="radio" value="4" [checked]="data.rating===4" />
+                <label title="4star">4 stars</label>
+
+                <input type="radio" value="3" [checked]="data.rating===3" />
+                <label title="3star">3 stars</label>
+
+                <input type="radio" value="2" [checked]="data.rating===2" />
+                <label title="2star">2 stars</label>
+
+                <input type="radio" value="1" [checked]="data.rating===1" />
+                <label title="1star">1 star</label>
+            </div>
+          </td>
+           </tr>
+
+           <!-- <p *ngIf = "storedAnnote.length == 0">No Annotations Found</p> -->
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div *ngIf="columnStatus=='p'">
+      <app-profiling-data style="width: 95%;" [obj_id]="assetId"></app-profiling-data>
+    </div>
+  </div>
+    <div class="grid-view grid-width" *ngIf="showDqEdit">
+      <app-dq-rules class="asset-dq-rules" [source]="dqSource" [sourceAttributes]="coldtl"
+        (dqEdit)="showDqRules($event)"></app-dq-rules>
+    </div>
+        </div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="data_source">Data Source:</label>
+                      <input type="text" readonly class="form-control" id="data_source" [(ngModel)]="editabletableDetails.dsnName" name="data_source">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="data_source">Data Platform:</label>
+                      <input type="text" readonly class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.dataPlatform" name="dataplatform">
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="data_schema">DB Schema:</label>
+                        <input type="text" class="form-control" id="data_schema" readonly [(ngModel)]="editabletableDetails.schema" name="dbschema">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dbname">Name:</label>
+                        <input type="text" class="form-control" id="dbname" readonly
+                         [(ngModel)]="editabletableDetails.assetName" name="dbname">
+                      </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="data_source">Asset Type:</label>
+                          <input type="text" class="form-control" id="data_source" disabled [(ngModel)]="editabletableDetails.assetType" name="AssetType">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="data_source">Row Count:</label>
+                          <input type="text" class="form-control" readonly id="data_platform"[(ngModel)]="editabletableDetails.size"  name="RowCount">
+                        </div>
+                      </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="data_source">LOB</label>
+                            <input type="text" class="form-control" id="data_source" readonly [(ngModel)]="editabletableDetails.lobData" name="LOB">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="data_source">Application:</label>
+                            <input type="text" class="form-control" id="data_platform" readonly [(ngModel)]="editabletableDetails.applicationName"  name="Application">
+                          </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="comment">Description:</label>
+                            <textarea class="form-control" rows="5" [(ngModel)]="editabletableDetails.description" id="comment" name="text"></textarea>
+                          </div>
+                        </div>
+                        </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success btn-sm btn-update" (click)="updateConnection()">Update</button>
+                  <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+                </div>
+
+              </div>
+            </div>
+            </div>
+
+            <div class="modal fade" id="myModalAnn">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Add Annotation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+
+                    <div class= "row">
+                      <div class= "col-md-2">
+
+                      </div>
+                      <div class= "col-md-8">
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="ann_type">Annotation Type:</label>
+                          <select class="form-control" [(ngModel)]="annoteDetails.type" >
+                              <option *ngFor="let type of annotationTypes" value="{{type.clbrtn_type_id}}">
+                                  {{type.clbrtn_type_nm}}
+                              </option>
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+                     <div class="row">
+                       <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="ann_text">Annotation Text:</label>
+                          <textarea class="form-control" rows="5" [(ngModel)]="annoteDetails.text"
+                          id="ann_text" name="annotetext"></textarea>
+
+                        </div>
+                       </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label >Select Rating:</label>
+                        </div>
+                        <div class="col-md-6">
+
+
+                          <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index" style="display: inline-block">
+                            <li (click)="countStar(star)" id="{{'starId'+i}}" [ngClass]="{'selected': (star <= selectedValue)}"
+                            (mouseover)="addClass(star)" (mouseout)="removeClass(star)"> ★
+                                <!-- <i class="mdi mdi-star ">★</i> -->
+                            </li>
+                        </ul>
+
+                          <!-- <div class="rate">
+                            <input type="radio" id="star5" name="rate"  value = "5"  (change)="onRate(5)"/>
+                            <label for="star5" title="5">5 stars</label>
+                            <input type="radio" id="star4" name="rate"  value = "4"  (change)="onRate(4)"/>
+                            <label for="star4" title="4">4 stars</label>
+                            <input type="radio" id="star3" name="rate"  value = "3"  (change)="onRate(3)"/>
+                            <label for="star3" title="3">3 stars</label>
+                            <input type="radio" id="star2" name="rate"  value = "2"  (change)="onRate(2)"/>
+                            <label for="star2" title="2">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value = "1"   (change)="onRate(1)"/>
+                            <label for="star1" title="1">1 star</label>
+                          </div> -->
+
+
+                         </div>
+                         <div class="col-md-6">
+                          <p class="p20">
+                            {{annoteDetails.rating}} star
+                          </p>
+                         </div>
+                      <!-- </div> -->
+                    </div>
+                      </div>
+                      <div class= "col-md-2">
+
+                      </div>
+                    </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm btn-update" (click)="saveAnnote()">Save</button>
+                    <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+              </div>
+              </div>
+
+
+              <div class="modal fade" id="myModalDq">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Added Dq Rules </h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                      <div class= "row">
+                        <div class= "col-md-2">
+
+                        </div>
+                        <div class= "col-md-8">
+                          <span *ngFor="let r of dataRules; ">
+                            {{r.rul_nm }}
+                           <span *ngIf="dataRules.length > 1">,</span>
+                       </span>
+                        </div>
+                        <div class= "col-md-2">
+
+                        </div>
+                      </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+                </div>
+                </div>
+
+
+                <div class="modal fade"
+                id="modalValues"
+                role="dialog"
+                aria-labelledby="valuesModal"
+                aria-hidden="true">
+             <div class="modal-dialog modal-dialog-centered modal-xl" style="width:1250px;">
+               <div class="modal-content">
+                 <div class="modal-header" style="background-color:#0072c6;color: white;">
+                   <h4 class="modal-title">
+                     Rule: {{selectedRule?.rul_nm | uppercase}}
+                   </h4>
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 </div>
+                 <div class="modal-body mb-1">
+                   <label for="rul_def">Rule Definition:</label>
+                   <div>
+                     <textarea type="text" readonly=true class="form-control" id="rul_def" [ngModel]="selectedRule?.rule_def" name="rul_def" autocomplete="off"></textarea>
+                   </div>
+
+                   <div class="form-group" style="margin-top: 5px;" *ngIf="selectedRule?.rule_def">
+                     <label for="data_source">{{selectedRule.ruleDefValuesLabel}}:</label>
+                     <div>
+                     <textarea type="text" readonly=true class="form-control" id="ruleDefValues" [(ngModel)]="selectedRule.values" name="ruleDefValues" autocomplete="off"></textarea>
+                     </div>
+                   </div>
+
+                   <div class="form-group" style="margin-top: 5px;" *ngIf="selectedRule?.rule_def">
+                       <label for="data_source">Resolved Value:</label>
+                       <div>
+                       <textarea type="text" readonly=true class="form-control" id="resolvedValue" [(ngModel)]="selectedRule.resolvedValue" name="resolvedValue" autocomplete="off"></textarea>
+                       </div>
+                     </div>
+                   <div class="modal-footer" class="padding15">
+                     <!-- <div class="row ">
+                       <div class="col-sm-6">
+                         <button type="button"  (click)="newMethod(current_rule,current_env)" class="btn btn-primary btn-sm pull-right">Save</button>
+                       </div>
+
+                       <div class="col-sm-6">
+                         <button type="button" class="btn btn-danger btn-sm" (click)="closeValuesModal()">Cancel</button>
+                       </div>
+                     </div> -->
+                   </div>
+
+                 </div>
+               </div>
+             </div>
+           </div>

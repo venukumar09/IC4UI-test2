@@ -1,0 +1,197 @@
+<div class="pd-0 ing-dq-rules-bx">
+    <div style="margin-top: 10px;">
+      <h4> DQ Rules</h4>
+      <span class="ing-dq-close" (click)="closeDqRules()" title="Close">close</span>
+    </div>
+    <hr />
+    <form class="label-chg" style="padding: 0 25px 0 0;">
+      <div class="row wrap" style="min-height: 375px;">
+        <div  fxFlex.gt-xs="30" class="pr-1" style="border-right:1px solid #ccc;margin:0;padding-top:15px;">
+          <div>
+            <div class="col-md-4 col-xs-12">
+            <input type="text" class="form-control inpt-border" style=" width: 90%;margin-bottom: 10px;margin-left: 25px;"
+              placeholder="Search Attribute..." [(ngModel)]="searchTextPort" [ngModelOptions]="{standalone: true}">
+          </div>
+              <!-- Attributes -->
+            <div style="max-height:320px;overflow-x: hidden;">
+              <div *ngFor="let s of sourceAttributes ;let i = index;"
+                [ngClass]="{ 'highlight-selected-attr' : s.id === selected_src_for_dq?.id }"
+                style="cursor: pointer;padding: 8px 0 8px 25px;font-size: .875rem !important;"
+                (click)="selectedSrcAttrToAddDq(s)" class="hover-port">
+                <span title="{{s.assetName}}">{{s.assetName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="selected_src_for_dq == null"  fxFlex.gt-xs="70"
+          style="padding-left: 15px;position: relative;">
+          <div class="row wrap">
+            <div >
+              <div style="margin-top: 15px;margin-bottom: 25px;" *ngIf="!showAddNewRule">
+                <div>
+                  <select id="rule_type" placeholder="Select Rule Type" (change)="showRules($event.target.value)"
+                    [ngModel]="selectedRuleType" name="rule_type">
+                    <option *ngFor="let r of ruleTypes" [value]="r.rul_type_nm" ngDefaultControl>
+                      {{r.rul_type_nm | uppercase}}
+                    </option>
+                  </select>
+                </div>
+                <span title="Add Rule"
+                  style="cursor:pointer; background-color: #0072c6;color: white;margin-left: 25px;"
+                  (click)="addNewRule()">add</span>
+                <!-- <input  type="text" class="form-control inpt-border" style=" width: 40%;margin-left : 15px" placeholder="Search DQ Rule..."
+                    [(ngModel)]="searchDqRule" [ngModelOptions]="{standalone: true}"> -->
+              </div>
+
+                <div class="row wrap">
+                  <!-- Rules -->
+                  <div *ngIf="!showAddNewRule">
+                    <div class="custom-control custom-checkbox mb-3" title="{{r.rul_desc_txt}}" *ngFor="let r of dqRules_by_type; let i = index;">
+                      <input type="checkbox" [checked]="r.selected" (change)="selectedDqRuleEvent($event,r)" class="custom-control-input" id="dqrules{{i}}" name="dqrules{{i}}">
+                      <label class="custom-control-label" for="dqrules{{i}}">{{r.rul_nm | uppercase}}</label>
+
+                      <span style="color: #0072c6;margin-left: 5px;cursor: pointer;" titlePosition="right"
+                      class="tooltip" *ngIf="r.rul_type_nm == 'CUSTOM'" title={{r.rul_expr_logic}}>
+                      info</span>
+                    </div>
+
+                    <!-- <span style="padding: 0 20px 0 0;"
+                      *ngFor="let r of dqRules_by_type | filterDataIngestion: searchDqRule : 'rul_nm';let i = index;">
+                      <input type="checkbox" class="custom-control-input tooltip" title="{{r.rul_desc_txt}}" value="i"
+                        [checked]="r.selected" (change)="selectedDqRuleEvent($event,r)" />
+                        <span> {{r.rul_nm | uppercase}}</span>
+
+                      <span style="color: #0072c6;margin-left: 5px;cursor: pointer;" titlePosition="right"
+                        class="tooltip" *ngIf="r.rul_type_nm == 'CUSTOM'" title={{r.rul_expr_logic}}>
+                        info</span>
+                    </span> -->
+                  </div>
+
+                  <div  *ngIf="showAddNewRule">
+                    <div>
+
+                        <select id="rule_type" placeholder="Select Rule Type"
+                          (selectionChange)="showRules(selectedNewRuleType)" [(ngModel)]="selectedNewRuleType"
+                          name="new_rule_type">
+                          <option *ngFor="let r of ruleTypes" [value]="r.rul_type_nm" ngDefaultControl>
+                            {{r.rul_type_nm | uppercase}}
+                          </option>
+                        </select>
+
+
+                      <!-- TDQ,BDQ -->
+                      <form class="example-form" [formGroup]="newRuleForm" *ngIf="selectedNewRuleType !== 'custom'">
+                        <div>
+                          <!-- rule Catg -->
+                            <select id="cat_type" placeholder="Select Rule Category" formControlName="rul_catg_nm"
+                              name="cat_nm">
+                              <option *ngFor="let c of ruleCategory" [value]="c.rul_catg_nm" ngDefaultControl>
+                                {{c.rul_catg_nm | uppercase}}
+                              </option>
+                            </select>
+
+                          <!-- rule name -->
+                          <div class="example-full-width" style="margin-left:15px">
+                            <input  formControlName="rul_nm" class="form-control inpt-border"
+                              placeholder="Rule Name" type="text" required>
+                          </div>
+                          <!-- <mat-error
+                              *ngIf="newRuleForm.get('rul_nm').hasError('required') && newRuleForm.get('rul_nm').touched">
+                              <span>Please enter rule name.</span>
+                            </mat-error> -->
+                        </div>
+
+                        <!-- description -->
+                          <div class="example-full-width full-width">
+                            <textarea  formControlName="rul_desc_txt" class="form-control inpt-border"
+                              placeholder="Rule Description" type="text" required></textarea>
+                          </div>
+
+                        <button  color="primary" class="mr-1" [disabled]="!newRuleForm.valid"
+                          (click)=saveNewRule(newRuleForm.value) type="button">
+                          Save
+                        </button>
+                        <button  color="warn" class="mr-1"
+                          (click)="cancelAddingNewRule()">Close</button>
+                      </form>
+
+                      <!-- CUSTOM -->
+                      <form class="example-form" [formGroup]="newCustomRuleForm" *ngIf="selectedNewRuleType === 'custom'">
+
+                        <div>
+                          <!-- Rule Cat -->
+                          <div>
+                            <select id="cat_type" placeholder="Select Rule Category" formControlName="rul_catg_nm"
+                              name="cat_nm">
+                              <option *ngFor="let c of ruleCategory" [value]="c.rul_catg_nm" ngDefaultControl>
+                                {{c.rul_catg_nm | uppercase}}
+                              </option>
+                            </select>
+                          </div>
+
+                          <!-- rule name -->
+                          <div class="example-full-width" style="margin-left:15px;">
+                            <input  formControlName="rul_nm" class="form-control inpt-border"
+                              placeholder="Rule Name" type="text" required>
+                          </div>
+                          <!-- <mat-error
+                              *ngIf="newCustomRuleForm.get('rul_nm').hasError('required') && newCustomRuleForm.get('rul_nm').touched">
+                              <span>Please enter rule name.</span>
+                            </mat-error> -->
+
+                          <!-- expr datatype -->
+                          <div class="example-full-width" style="margin-left:15px;">
+                            <input  formControlName="rul_expr_dat_type" class="form-control inpt-border"
+                              placeholder="Data Type" type="text" required>
+                          </div>
+                          <!-- <mat-error
+                              *ngIf="newCustomRuleForm.get('rul_expr_dat_type').hasError('required') && newCustomRuleForm.get('rul_expr_dat_type').touched">
+                              <span>Please enter data type.</span>
+                            </mat-error> -->
+                        </div>
+                        <div>
+
+                          <!-- expr  -->
+                          <div class="example-full-width full-width">
+                            <textarea  formControlName="rul_expr_logic" class="form-control inpt-border"
+                              placeholder="Rule Expression" type="text" required></textarea>
+                          </div>
+                          <!-- <mat-error
+                              *ngIf="newCustomRuleForm.get('rul_expr_logic').hasError('required') && newCustomRuleForm.get('rul_expr_logic').touched">
+                              <span>Please enter expression.</span>
+                            </mat-error> -->
+
+                          <!-- description -->
+                          <div class="example-full-width full-width">
+                            <textarea  formControlName="rul_desc_txt" class="form-control inpt-border"
+                              placeholder="Rule Description" type="text" required></textarea>
+                          </div>
+                          <!-- <mat-error
+                              *ngIf="newCustomRuleForm.get('rul_desc_txt').hasError('required') && newCustomRuleForm.get('rul_desc_txt').touched">
+                              <span>Please enter description.</span>
+                            </mat-error> -->
+                        </div>
+
+                        <button  color="primary" class="mr-1" [disabled]="!newCustomRuleForm.valid"
+                          (click)=saveNewRule(newCustomRuleForm.value) type="button">
+                          Save
+                        </button>
+                        <button  color="warn" class="mr-1"
+                          (click)="cancelAddingNewRule()">Close</button>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div style="position: absolute;bottom:10px;" *ngIf="!showAddNewRule">
+            <button  color="primary" class="mr-1" (click)="saveDqRules()">Save
+            </button>
+            <button  color="warn" class="mr-1" (click)="closeDqRules()">Close</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>

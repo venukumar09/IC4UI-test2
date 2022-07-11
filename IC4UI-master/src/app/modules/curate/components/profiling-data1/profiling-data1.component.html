@@ -1,0 +1,1847 @@
+<!-- <div>
+
+    <div *ngIf="file_found" class="profiling-ts">
+        <p style="font-size: 15px">
+        Last Modified : <span style="font-size: 18px;
+                    color: #2a8809;">{{last_modified_ts | date:'short'}}</span>
+        </p>
+    </div>
+
+    <div style="margin-top: 35px;">
+        <iframe *ngIf="file_found" id="profilingFrame" style="max-height: 40em;" [src]="iframeURL" frameBorder="0" height="850px"
+        width="100% !important"></iframe>
+    </div>
+
+    <div *ngIf="!file_found">
+        <h6 class="profiling-nodata">No Records Found.</h6>
+    </div>
+</div> -->
+
+<div class="content-wrapper" style="padding-left: 10px; padding-right: 8px; min-height: 494px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row header" style="display: flow-root;">
+
+                <h1 class="page-header card-title">Overview 1</h1>
+                <div class="col-sm-12 col-md-4 plr-10 float-right" style="padding-top: 47px;">
+                    <a href="#" style="color: #000;"><i class="fa fa-bell"></i>
+                        <p class="last">Last Modified : 7/8/21, 9:22 PM</p>
+                        <!-- <i class="fa fa-sync-alt"></i> -->
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- <plotly-plot
+  [data]="graph1.data"
+  [layout]="graph1.layout"
+  [useResizeHandler]="true"></plotly-plot> -->
+
+            <div class="section-items">
+                <div class="row spacing">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="tab-pane  active" (click)="activeTab('1')" [ngClass]= "{active: tabValue == 1}">
+                            <a href="#overview-dataset_overview" aria-controls="overview-dataset_overview" role="tab"
+                                data-toggle="tab" aria-expanded="false">Overview</a>
+                        </li>
+                        <li role="presentation" class="tab-pane " (click)="activeTab('2')" [ngClass]= "{active: tabValue == 2}">
+                            <a href="#overview-warnings" aria-controls="overview-warnings" role="tab" data-toggle="tab"
+                                aria-expanded="false">Warnings <span class="badge">6</span></a>
+                        </li>
+                        <li role="presentation" class="tab-pane " (click)="activeTab('3')" [ngClass]= "{active: tabValue == 3}">
+                            <a href="#overview-Missing" aria-controls="overview-Missing" role="tab" data-toggle="tab"
+                                aria-expanded="true">Missing</a>
+                        </li>
+                        <li role="presentation" class="tab-pane " (click)="activeTab('4')" [ngClass]= "{active: tabValue == 4}">
+                            <a href="#overview-rejected" aria-controls="overview-rejected" role="tab" data-toggle="tab"
+                                aria-expanded="true">Rejected</a>
+                        </li>
+                    </ul>
+                    <!-- <div id="Graph" #Graph style="min-height: 200px; width: 400px; height: 400px;"> </div> -->
+                    <!-- <div #plotContainer id="plc" style="min-height: 200px; width: 400px; height: 400px; border: 1px solid red" (window:resize)="onResize()"></div> -->
+                  
+                    <div class="tab-content" style="padding-top: 10px; width: 100%;">
+                        <div role="tabpanel" class="tab-pane col-sm-12 active" id="overview-dataset_overview">
+                            <div class="col-sm-6 pull-left">
+                                <p class="h4">Dataset info</p>
+                                <table class="table table-condensed stats">
+                                    <tbody>
+                                        <tr>
+                                            <th>Number of variables</th>
+                                            <td>{{profileData.table.n_var}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Number of observations</th>
+                                            <td>{{profileData.table.n}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Missing (%)</th>
+                                            <td>{{profileData.table.p_cells_missing}}%</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total size in memory</th>
+                                            <td>{{profileData.table.memory_size}} B</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Average record size in memory</th>
+                                            <td> {{profileData.table.record_size}} B</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-6 pull-left">
+                                <p class="h4">Variable types</p>
+                                <table class="table table-condensed stats">
+                                    <tbody>
+                                        <tr>
+                                            <th>Numeric</th>
+                                            <td>{{profileData.table.types.Numeric}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Categorical</th>
+                                            <td>{{profileData.table.types.Categorical}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date</th>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Text (Unique)</th>
+                                            <td>7</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Rejected </th>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane col-sm-12" id="overview-warnings">
+                            <p class="h4">Warnings</p>
+                            <table class="table table-condensed list-warnings">
+                                <tbody>
+                                    <tr style="border-top:0">
+                                        <td class="code"> cityname </td>
+                                        <td><span class="label label-default">has a high cardinality: 65 distinct values
+                                                Warning</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">countyname </td>
+                                        <td><span class="label label-primary">has a high cardinality: 58 distinct values
+                                                Warning</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">lineofbusiness</td>
+                                        <td><span class="label label-default">has a high cardinality: 60 distinct values
+                                                Warning</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">revenue</td>
+                                        <td><span class="label label-default">has a high cardinality: 74 distinct values
+                                                Warning</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">streetaddress</td>
+                                        <td><span class="label label-primary">has a high cardinality: 74 distinct values
+                                                Warning</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">totalemployees</td>
+                                        <td><span class="label label-info">has a high cardinality: 62 distinct values
+                                                Warning</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane col-sm-12 " id="overview-Missing">
+                            <div class="col-sm-12">
+                                <p class="h4">Missing</p>
+                                <table class="table table-condensed stats">
+                                    <tbody>
+                                        <tr>
+                                            <th class="code">action_code</th>
+                                            <td>has 76 / 100.0% missing values Missing</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="code">action_code</th>
+                                            <td>has 26 / 100.0% missing values Missing</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="code">action_code</th>
+                                            <td>has 32 / 100.0% missing values Missing</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane col-sm-12 " id="overview-rejected">
+                            <div class="col-sm-12">
+                                <p class="h4">Rejected</p>
+                                <table class="table table-condensed stats">
+                                    <tbody>
+                                        <tr>
+                                            <th class="code">action_code</th>
+                                            <td>has constant value MISSING Rejected</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="code">eff_end_ts</th>
+                                            <td>has constant value 9999-12-31 00:00:00 Rejected</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="code">eff_strt_ts</th>
+                                            <td>has constant value 1625754373358000000 Rejected</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row header">
+                <a class="anchor-pos" id="variables"></a>
+                <h1 class="page-header">Variables</h1>
+            </div>
+
+            <div class="section-items" *ngFor = "let data of neededArray; let i = index;">
+                <div class="row spacing" *ngIf = "data.type == 'Numeric'">
+
+                    <div class="variable" style="width: 99%;">
+                        <div class="col-md-3">
+                            <p class="h4" title="{{data.name}}"><a href="#">{{data.name}}
+                               </a><br><small>{{data.type}}</small></p><br>
+                               <table class="table table-condensed stats">
+                                  <tbody>
+                                     <tr>
+                                        <th style="border: 0px; padding-left: 0px;">Data Type</th>
+                                        <td style="border: 0px; ">{{getDetails('datatype',data.name)}}</td>
+                                     </tr>
+                                     <tr>
+                                        <th style="border: 0px; padding-left: 0px;">Is Null :</th>
+                                        <td style="border: 0px;"><span>	{{getDetails('null',data.name)}}</span></td>
+                                     </tr>
+                                     <tr>
+                                        <th style="border: 0px; padding-left: 0px;">Is PK : </th>
+                                        <td style="border: 0px;"> <span >	{{getDetails('pk',data.name)}}</span></td>
+                                     </tr>
+                                     
+                                     
+                                     
+                                  </tbody>
+                               </table>
+                               
+                         </div>
+                         <div class="col-md-3">
+                            <table class="table table-condensed stats">
+                               <tbody>
+                                  <tr>
+                                     <th>Distinct count</th>
+                                     <td>{{data.n_distinct}}</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Unique (%)</th>
+                                     <td> {{data.p_unique }}</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Missing</th>
+                                     <td>{{data.p_missing}}</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Missing (n)</th>
+                                     <td>{{data.n_missing}}</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Infinite (%)</th>
+                                     <td>{{data.p_infinite}}</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Infinite (n)</th>
+                                     <td>{{data.n_infinite}}</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Mean</th>
+                                    <td>{{data.mean}}</td>
+                                 </tr>
+                                  
+                               </tbody>
+                            </table>
+                         </div>
+                         <div class="col-md-3">
+                            <table class="table table-condensed stats">
+                               <tbody>
+                                  <!-- <tr>
+                                     <th>CIUDAD DE MEXICO</th>
+                                     <td>1</td>
+                                  </tr>
+                                  <tr>
+                                     <th>San Diego</th>
+                                     <td>3</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Dallas</th>
+                                     <td>3</td>
+                                  </tr>
+                                  <tr>
+                                     <th>Other values (62)</th>
+                                     <td>66</td>
+                                  </tr> -->
+
+                                  <tr>
+                                    <th>Minimun</th>
+                                    <td>{{data.min}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Maximum</th>
+                                    <td>{{data.max}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Zeros</th>
+                                    <td>{{data.n_zeros}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Zeros (%)</th>
+                                    <td>{{data.p_zeros}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Negative</th>
+                                    <td>{{data.n_negative}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Negative (%)</th>
+                                    <td>{{data.p_negative}}</td>
+                                 </tr>
+                                 <tr>
+                                    <th>Memory size</th>
+                                    <td>{{data.memory_size}}</td>
+                                 </tr>
+                                  
+                               </tbody>
+                            </table>
+                          </div>
+                        <div class="col-md-3">
+                            <!-- <div id="Graph" #Graph style="min-height: 200px; width: 400px; height: 400px;"> </div> -->
+                            <plotly-plot
+                            [data]="data.hisvalues"
+                            [layout]="graph1.layout"
+                            [useResizeHandler]="true"></plotly-plot>
+                           </div>
+                         <p class="proile-rating col-md-12" style="clear: both; font-weight: bold">Rules Applied : 
+                            <span>	<a href="#" style="text-decoration: underline; font-size: 14px; 
+                            padding-left: 13px;">
+                            <!-- Null_Check,Value_Gt,  -->
+                            {{getDetails('rules',data.name)}}
+                           </a> 
+                            <a href="#" style="padding-left: 10px"><i class="fa fa-edit iconset"></i></a></span></p>
+                         <div class="col-md-12">
+                            <h5 style="float: left; font-size: 0.9rem; font-weight: bold;">
+                              Description :
+                            </h5>
+                            <p style="float: left; padding-left: 31px;">Column Contain Balance</p>
+                            
+                          </div>
+                         <div class="col-sm-12 text-right" style="clear: both;">
+                            
+                            <button class="btn btn-default btn-sm" data-toggle="collapse" attr.data-target="#bottom--1185845059064631777--{{i}}" aria-expanded="true" aria-controls="collapseExample">Toggle details</button>
+                         </div>
+
+
+                         <!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                           <li class="nav-item">
+                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                           </li>
+                           <li class="nav-item">
+                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                           </li>
+                           <li class="nav-item">
+                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                           </li>
+                         </ul>
+                         <div class="tab-content" id="pills-tabContent">
+                           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+                           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+                         </div> -->
+                         
+                         <div id="bottom--1185845059064631777--{{i}}" class="collapse">
+                            <div class="row spacing">
+
+                              
+                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                           <li class="nav-item">
+                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#overview-dataset_overview1-{{i}}" role="tab" 
+                             aria-controls="pills-home" aria-selected="true">Statistics</a>
+                           </li>
+                           <li class="nav-item">
+                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#overview-warnings1-{{i}}" role="tab" 
+                             aria-controls="pills-profile" aria-selected="false">Histogram</a>
+                           </li>
+                           <li class="nav-item">
+                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#overview-Missing1-{{i}}" role="tab" 
+                             aria-controls="pills-contact" aria-selected="false">Common values</a>
+                           </li>
+
+                           <li class="nav-item">
+                              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#overview-rejected1-{{i}}" role="tab" 
+                              aria-controls="pills-contact" aria-selected="false">Extreme values</a>
+                            </li>
+                         </ul>
+
+
+                               <!-- <ul class="nav nav-pills" role="tablist">
+                                  <li role="presentation" class="tab-pane  active" (click)="activeTab1('1',i)" [ngClass]= "{active: returnValue(1,i)}">
+                                      <a href="#overview-dataset_overview1-{{i}}" aria-controls="overview-dataset_overview" role="tab" data-toggle="tab" 
+                                      aria-expanded="false" >Statistics</a>
+                                    </li>
+                                  <li role="presentation" class="tab-pane " (click)="activeTab1('2')" [ngClass]= "{active: tabValue1 == 2}">
+                                      <a href="#overview-warnings1-{{i}}" aria-controls="overview-warnings" role="tab" data-toggle="tab" 
+                                      aria-expanded="false" > Histogram </a>
+                                    </li>
+                                  <li role="presentation" class="tab-pane " (click)="activeTab1('3')" [ngClass]= "{active: tabValue1 == 3}">
+                                      <a href="#overview-Missing1-{{i}}" aria-controls="overview-Missing" role="tab" data-toggle="tab"
+                                       aria-expanded="true" >Common values</a>
+                                    </li>
+                                    <li role="presentation" class="tab-pane " (click)="activeTab1('4')" [ngClass]= "{active: tabValue1 == 4}">
+                                        <a href="#overview-rejected1-{{i}}" aria-controls="overview-rejected" role="tab" data-toggle="tab" 
+                                        aria-expanded="true" >Extreme values</a>
+                                      </li>
+                               </ul> -->
+                               <div class="tab-content" style="padding-top: 10px; width: 100%;">
+                                  <div role="tabpanel" class="tab-pane col-sm-12 active" id="overview-dataset_overview1-{{i}}" >
+                                     <div class="col-sm-6">
+                                        <p class="h4">Quantile statistics</p>
+                                        <table class="table table-condensed stats">
+                                           <tbody>
+                                              <tr>
+                                                 <th>Minimum</th>
+                                                 <td>{{data.min}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>5-th percentile</th>
+                                                 <td>{{returnPercent(data,5)}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Q1</th>
+                                                 <td>{{returnPercent(data,25)}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>median</th>
+                                                 <td>{{returnPercent(data,50)}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Q3</th>
+                                                 <td>{{returnPercent(data,75)}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>95-th percentile</th>
+                                                 <td>{{returnPercent(data,95)}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Maximum</th>
+                                                 <td>{{data.max}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Range</th>
+                                                 <td>{{data.range}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Interquartile range (IQR)</th>
+                                                 <td>{{data.iqr}}</td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                     <div class="col-sm-6">
+                                        <p class="h4">Descriptive statistics</p>
+                                        <table class="table table-condensed stats">
+                                           <tbody>
+                                              <tr>
+                                                 <th>Standard deviation</th>
+                                                 <td>{{data.std}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Coefficient of variation (CV)</th>
+                                                 <td>{{data.cv}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Kurtosis</th>
+                                                 <td>{{data.kurtosis}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Mean</th>
+                                                 <td>{{data.mean}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Median Absolute Deviation (MAD)</th>
+                                                 <td>{{data.mad}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Skewness</th>
+                                                 <td>{{data.skewness}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Sum</th>
+                                                 <td>{{data.sum}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Variance</th>
+                                                 <td>{{data.variance}}</td>
+                                              </tr>
+                                              <tr>
+                                                 <th>Monotonicity</th>
+                                                 <td>{{data.monotonic_increase == true ? 'Increasing':'Decreasing'}}</td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>
+                                <div role="tabpanel" class="tab-pane col-sm-12" id="overview-warnings1-{{i}}" style="text-align: center;" >
+                                    <!-- <div id="Graph1" #Graph1 style="min-height: 200px; width: 400px; height: 400px;"> </div> -->
+                                    <plotly-plot
+                                    [data]="data.hisvalues"
+                                    [layout]="graph1.layout"
+                                    [useResizeHandler]="true"></plotly-plot>
+                                 </div>
+                                  <div role="tabpanel" class="tab-pane col-sm-12 " id="overview-Missing1-{{i}}" >
+                                     <div class="col-sm-12">
+                                        <table class="freq table table-hover table-striped">
+                                           <thead>
+                                              <tr>
+                                                 <td>Value</td>
+                                                 <td>Count</td>
+                                                 <td>Frequency (%)</td>
+                                              </tr>
+                                           </thead>
+                                           <tbody>
+                                              <tr class="">
+                                                 <td title="10000">10000</td>
+                                                 <td>2</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="2047">2047</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="9518">9518</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="7481">7481</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="5432">5432</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="9526">9526</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="3379">3379</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="1330">1330</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="7473">7473</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="">
+                                                 <td title="5424">5424</td>
+                                                 <td>1</td>
+                                                 <td>
+                                                    <div class="bar" style="width:0.0%"> &nbsp; </div>
+                                                    &lt; 0.1% 
+                                                 </td>
+                                              </tr>
+                                              <tr class="other">
+                                                 <td title="Other values (9990)">Other values (9990)</td>
+                                                 <td>9990</td>
+                                                 <td>
+                                                    <div class="bar" style="width:100.0%"> 99.9% </div>
+                                                 </td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                     </div>
+                                  </div>
+                                  <div role="tabpanel" class="tab-pane col-sm-12 " id="overview-rejected1-{{i}}" >
+                                     <div class="row spacing" style="padding:10px 0px">
+
+                                       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                          <li class="nav-item">
+                                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#overview-dataset_overview2-{{i}}" role="tab" 
+                                            aria-controls="pills-home" aria-selected="true">Minimum 5 values</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#overview-warnings2-{{i}}" role="tab" 
+                                            aria-controls="pills-profile" aria-selected="false">Maximum 5 values</a>
+                                          </li>
+                                         
+                                        </ul>
+
+
+                                        <!-- <ul class="nav nav-pills" role="tablist">
+                                           <li role="presentation" class="tab-pane  active" (click)="activeTab2('1')" [ngClass]= "{active: tabValue2 == 1}">
+                                               <a href="#overview-dataset_overview2" aria-controls="overview-dataset_overview" role="tab" data-toggle="tab" aria-expanded="false">Minimum 5 values</a>
+                                             </li>
+                                           <li role="presentation" class="tab-pane " (click)="activeTab2('2')" [ngClass]= "{active: tabValue2 == 2}">
+                                               <a href="#overview-warnings2" aria-controls="overview-warnings" role="tab" data-toggle="tab" aria-expanded="false"> Maximum 5 values </a>
+                                             </li>
+                                           
+                                        </ul> -->
+                                        
+       
+                                        <div class="tab-content " style="padding-top: 10px; width: 100%;">
+                                           <div role="tabpanel" class="tab-pane col-sm-12 active" id="overview-dataset_overview2-{{i}}">
+                                              <table class="freq table table-hover table-striped">
+                                                 <thead>
+                                                    <tr>
+                                                       <td>Value</td>
+                                                       <td>Count</td>
+                                                       <td>Frequency (%)</td>
+                                                    </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                      <tr class="" *ngFor = "let datamin of data.minvalues">
+                                                         <td title="{{datamin[0]}}">{{datamin[0]}}</td>
+                                                         <td>{{datamin[1]}}</td>
+                                                         <td>
+                                                            <div class="bar" style="width:100.0%">&lt; 0.2% </div>
+                                                         </td>
+                                                      </tr>
+
+                                                    <!-- <tr class="">
+                                                       <td title="1">1</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="2">2</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="3">3</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="4">4</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="5">5</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="6">6</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="7">7</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="8">8</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9">9</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="10">10</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr> -->
+                                                 </tbody>
+                                              </table>
+                                           </div>
+                                           <div role="tabpanel" class="tab-pane col-sm-12" id="overview-warnings2-{{i}}">
+                                              <table class="freq table table-hover table-striped">
+                                                 <thead>
+                                                    <tr>
+                                                       <td>Value</td>
+                                                       <td>Count</td>
+                                                       <td>Frequency (%)</td>
+                                                    </tr>
+                                                 </thead>
+                                                 <tbody>
+
+                                                   <tr class="" *ngFor = "let datamax of data.maxvalues">
+                                                      <td title="{{datamax[0]}}">{{datamax[0]}}</td>
+                                                      <td>{{datamax[1]}}</td>
+                                                      <td>
+                                                         <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                      </td>
+                                                   </tr>
+
+
+                                                    <!-- <tr class="">
+                                                       <td title="10000">10000</td>
+                                                       <td>2</td>
+                                                       <td>
+                                                          <div class="bar" style="width:100.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9999">9999</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9998">9998</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9997">9997</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9996">9996</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9995">9995</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9994">9994</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9993">9993</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9992">9992</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr>
+                                                    <tr class="">
+                                                       <td title="9991">9991</td>
+                                                       <td>1</td>
+                                                       <td>
+                                                          <div class="bar" style="width:50.0%">&lt; 0.1% </div>
+                                                       </td>
+                                                    </tr> -->
+                                                 </tbody>
+                                              </table>
+                                           </div>
+                                        </div>
+                                         </div>
+                                 </div> 
+                                 
+                               </div>
+                            </div>
+                         </div>
+
+
+                    </div>
+                </div>
+
+                 <div class="row spacing" *ngIf = "data.type == 'Categorical'">
+                    <a class="anchor-pos anchor-pos-variable" id="pp_var_-3271806692924668242"></a>
+                    <div class="variable" style="width: 99%;">
+                       <div class="col-sm-3">
+                          <p class="h4" title="{{data.name}}"><a href="#pp_var_-3271806692924668242">{{data.name}}</a><br>
+                           <small>{{data.type}}</small></p>
+                          <p class="variable-description"></p>
+                          <table class="table table-condensed stats">
+                           <tbody>
+                              <tr>
+                                 <th style="border: 0px; padding-left: 0px;">Data Type</th>
+                                 <td style="border: 0px; ">{{getDetails('datatype',data.name)}}</td>
+                              </tr>
+                              <tr>
+                                 <th style="border: 0px; padding-left: 0px;">Is Null :</th>
+                                 <td style="border: 0px;"><span>	{{getDetails('null',data.name)}}</span></td>
+                              </tr>
+                              <tr>
+                                 <th style="border: 0px; padding-left: 0px;">Is PK : </th>
+                                 <td style="border: 0px;"> <span >	{{getDetails('pk',data.name)}}</span></td>
+                              </tr>
+                              
+                              
+                              
+                           </tbody>
+                        </table>
+                       </div>
+                       <div class="col-sm-3">
+                          <table class="table table-condensed stats">
+                             <tbody>
+                                <tr>
+                                   <th>Distinct</th>
+                                   <td>{{data.n_distinct}}</td>
+                                </tr>
+                                <tr>
+                                   <th>Distinct (%)</th>
+                                   <td>&lt; {{data.p_distinct}}%</td>
+                                </tr>
+                                <tr>
+                                   <th>Missing</th>
+                                   <td>{{data.n_missing}}</td>
+                                </tr>
+                                <tr>
+                                   <th>Missing (%)</th>
+                                   <td>{{data.p_missing}}%</td>
+                                </tr>
+                                <tr>
+                                   <th>Memory size</th>
+                                   <td>{{data.memory_size}}KiB</td>
+                                </tr>
+                             </tbody>
+                          </table>
+                       </div>
+                       <div class="col-sm-6">
+                          <div class="col-sm- collapse in" id="minifreqtable">
+                             <table class="mini freq">
+                                <tbody>
+
+                                 <tr class="" *ngFor = "let data1 of data.minvalues">
+                                    <th width="50%"> {{data1[0]}} </th>
+                                    <td width="50%">
+                                      
+                                       <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}" data-toggle="tooltip" data-placement="right" data-html="true" data-delay="500" data-original-title="" title=""> {{data1[1]}}&nbsp; </div>
+                                    </td>
+                                 </tr>
+
+                                   <!-- <tr class="">
+                                      <th width="50%"> France </th>
+                                      <td width="50%">
+                                         <div class="bar" style="width:100.0%" data-toggle="tooltip" data-placement="right" data-html="true" data-delay="500" data-original-title="" title=""> 5015&nbsp; </div>
+                                      </td>
+                                   </tr>
+                                   <tr class="">
+                                      <th width="50%"> Germany </th>
+                                      <td width="50%">
+                                         <div class="bar" style="width:50.0%" data-toggle="tooltip" data-placement="right" data-html="true" data-delay="500" data-original-title="" title=""> 2509&nbsp; </div>
+                                      </td>
+                                   </tr>
+                                   <tr class="">
+                                      <th width="50%"> Spain </th>
+                                      <td width="50%">
+                                         <div class="bar" style="width:49.4%" data-toggle="tooltip" data-placement="right" data-html="true" data-delay="500" data-original-title="" title=""> 2477&nbsp; </div>
+                                      </td>
+                                   </tr> -->
+                                </tbody>
+                             </table>
+                          </div>
+                       </div>
+                       <p class="proile-rating col-md-12" style="clear: both; font-weight: bold">Rules Applied : 
+                        <span>	<a href="#" style="text-decoration: underline; font-size: 14px; 
+                        padding-left: 13px;">
+                        <!-- Null_Check,Value_Gt,  -->
+                        {{getDetails('rules',data.name)}}
+                       </a> 
+                        <a href="#" style="padding-left: 10px"><i class="fa fa-edit iconset"></i></a></span></p>
+                     <div class="col-md-12">
+                        <h5 style="float: left; font-size: 0.9rem; font-weight: bold;">
+                          Description :
+                        </h5>
+                        <p style="float: left; padding-left: 31px;">Column Contain Balance</p>
+                        
+                      </div>
+                       <div class="col-sm-12 text-right"><button class="btn btn-default btn-sm" data-toggle="collapse" attr.data-target="#bottom--3271806692924668242--{{i}}, #minifreqtable-3271806692924668242" aria-expanded="true" aria-controls="collapseExample">Toggle details</button></div>
+                       <div id="bottom--3271806692924668242--{{i}}" class="collapse">
+                          <div class="row spacing">
+
+                           <nav>
+                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" 
+                                href="#overview4--{{i}}" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" 
+                                href="#string4--{{i}}" role="tab" aria-controls="nav-profile" aria-selected="false">Categories</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" 
+                                href="#word4--{{i}}" role="tab" aria-controls="nav-contact" aria-selected="false">Words</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" 
+                                href="#characters4--{{i}}" role="tab" aria-controls="nav-contact" aria-selected="false">Characters</a>
+                              </div>
+                            </nav>
+                            <!-- <div class="tab-content" id="nav-tabContent">
+                              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                            </div> -->
+
+
+                             <!-- <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active" (click)="activeTab3('1')" [ngClass]= "{active: tabValue3 == 1}">
+                                   <a href="#overview4" aria-controls="-3271806692924668242bottom--3271806692924668242overview" role="tab" 
+                                   data-toggle="tab">Overview</a></li>
+                                <li role="presentation" (click)="activeTab3('2')" [ngClass]= "{active: tabValue3 == 2}"><a href="#string4" 
+                                 aria-controls="-3271806692924668242bottom--3271806692924668242string" role="tab" data-toggle="tab">Categories</a></li>
+                                <li role="presentation" (click)="activeTab3('3')" [ngClass]= "{active: tabValue3 == 3}"><a href="#word4" 
+                                 aria-controls="-3271806692924668242bottom--3271806692924668242word" role="tab" data-toggle="tab">Words</a></li>
+                                <li role="presentation" (click)="activeTab3('4')" [ngClass]= "{active: tabValue3 == 4}"><a href="#characters4" 
+                                 aria-controls="-3271806692924668242bottom--3271806692924668242characters" role="tab" data-toggle="tab">Characters</a></li>
+                             </ul> -->
+                             <div class="tab-content" style="width: 100%; padding: 0px; margin-top: 10px;">
+                                <div role="tabpanel" class="tab-pane col-sm-12 active" id="overview4--{{i}}" style="padding: 0px;">
+                                   <div class="row">
+                                      <div class="col-sm-3" style="padding: 0px;">
+                                         <p class="h4">Length</p>
+                                         <table class="table table-condensed stats">
+                                            <tbody>
+                                               <tr>
+                                                  <th>Max length</th>
+                                                  <td>{{data.max_length}}</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Median length</th>
+                                                  <td>{{data.median_length}}</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Mean length</th>
+                                                  <td>{{data.mean_length}}</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Min length</th>
+                                                  <td>{{data.min_length}}</td>
+                                               </tr>
+                                            </tbody>
+                                         </table>
+                                      </div>
+                                      <div class="col-sm-3" style="padding: 0px;">
+                                         <p class="h4">Characters and Unicode</p>
+                                         <table class="table table-condensed stats">
+                                            <tbody>
+                                               <tr>
+                                                  <th>Total characters</th>
+                                                  <td>{{data.n_characters}}</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Distinct characters</th>
+                                                  <td>{{data.n_characters_distinct}}</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Distinct categories</th>
+                                                  <td>{{data.n_category}} <a title="Unicode categories (click for more information)" href="https://en.wikipedia.org/wiki/Unicode_character_property#General_Category" target="_blank"><span class="badge pull-right" style="color:#fff;background-color:#337ab7;" title="Unicode categories (click for more information)">?</span></a></td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Distinct scripts</th>
+                                                  <td>{{data.n_scripts}} <a title="Unicode scripts (click for more information)" href="https://en.wikipedia.org/wiki/Script_(Unicode)#List_of_scripts_in_Unicode" target="_blank"><span class="badge pull-right" style="color:#fff;background-color:#337ab7;" title="Unicode scripts (click for more information)">?</span></a></td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Distinct blocks</th>
+                                                  <td>{{data.n_block_alias}}<a title="Unicode blocks (click for more information)" href="https://en.wikipedia.org/wiki/Unicode_block" target="_blank"><span class="badge pull-right" style="color:#fff;background-color:#337ab7;" title="Unicode blocks (click for more information)">?</span></a></td>
+                                               </tr>
+                                            </tbody>
+                                         </table>
+                                         <div class="caption text-center text-muted"> The Unicode Standard assigns character properties to each code point, which can be used to analyse textual variables. </div>
+                                      </div>
+                                      <div class="col-sm-3" style="padding: 0px;">
+                                         <p class="h4">Unique</p>
+                                         <table class="table table-condensed stats">
+                                            <tbody>
+                                               <tr>
+                                                  <th>Unique</th>
+                                                  <td>{{data.n_unique}} <span class="badge pull-right" style="color:#fff;background-color:#337ab7;" title="The number of unique values (all values that occur exactly once in the dataset).">?</span></td>
+                                               </tr>
+                                               <tr>
+                                                  <th>Unique (%)</th>
+                                                  <td>{{data.p_unique}}%</td>
+                                               </tr>
+                                            </tbody>
+                                         </table>
+                                      </div>
+                                      <div class="col-sm-3" style="padding: 0px;">
+                                         <p class="h4">Sample</p>
+                                         <table class="table table-condensed stats">
+                                            <tbody>
+                                                <tr *ngFor = "let data2 of data.samplevalues">
+
+                                                   <th>{{getValue(data2[0])}} row</th>
+                                                   <td>{{data2[1]}}</td>
+
+                                                </tr>
+
+                                               <!-- <tr>
+                                                  <th>1st row</th>
+                                                  <td>France</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>2nd row</th>
+                                                  <td>Spain</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>3rd row</th>
+                                                  <td>France</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>4th row</th>
+                                                  <td>France</td>
+                                               </tr>
+                                               <tr>
+                                                  <th>5th row</th>
+                                                  <td>Spain</td>
+                                               </tr> -->
+                                            </tbody>
+                                         </table>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane col-sm-12" id="string4--{{i}}" style="padding: 0px;">
+                                   <div class="row">
+                                      <div class="col-sm-4" style="padding: 0px;">
+                                         <h4>Common Values</h4>
+                                         <table class="freq table table-hover table-striped">
+                                            <thead>
+                                               <tr>
+                                                  <td>Value</td>
+                                                  <td>Count</td>
+                                                  <td>Frequency (%)</td>
+                                               </tr>
+                                            </thead>
+                                            <tbody>
+                                             <tr class="" *ngFor = "let data1 of data.minvalues">
+                                                <td title="{{data1[0]}}">{{data1[0]}}</td>
+                                                <td>{{data1[1]}}</td>
+                                                <td>
+                                                   <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}" > {{(data1[1]) / 100 + '%'}} </div>
+                                                </td>
+                                             </tr>
+
+
+                                               <!-- <tr class="">
+                                                  <td title="France">France</td>
+                                                  <td>5015</td>
+                                                  <td>
+                                                     <div class="bar" style="width:100.0%"> 50.1% </div>
+                                                  </td>
+                                               </tr>
+                                               <tr class="">
+                                                  <td title="Germany">Germany</td>
+                                                  <td>2509</td>
+                                                  <td>
+                                                     <div class="bar" style="width:50.0%"> 25.1% </div>
+                                                  </td>
+                                               </tr>
+                                               <tr class="">
+                                                  <td title="Spain">Spain</td>
+                                                  <td>2477</td>
+                                                  <td>
+                                                     <div class="bar" style="width:49.4%"> 24.8% </div>
+                                                  </td>
+                                               </tr> -->
+                                            </tbody>
+                                         </table>
+                                      </div>
+                                    
+                                      <div class="col-sm-4">
+                                        <h4>Length</h4>
+                                        <!-- <div id="Graph2" #Graph2 style="min-height: 200px; width: 400px; height: 400px;"> </div> -->
+                                        <plotly-plot
+                                        [data]="data.hisvalues"
+                                        [layout]="graph1.layout"
+                                        [useResizeHandler]="true"></plotly-plot>
+                                       </div>
+                                      <div class="col-sm-4">
+                                        <h4>Pie Chart</h4>
+                                        <plotly-plot
+                                        [data]="data.pievalues"
+                                        [layout]="graph2.layout"
+                                        [useResizeHandler]="true"></plotly-plot>
+                                        <!-- <div id ="myDiv1"></div> -->
+                                    </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane col-sm-12" id="word4--{{i}}" style="padding: 0px;">
+                                   <div class="col-sm-12" style="padding: 0px;">
+                                      <table class="freq table table-hover table-striped" >
+                                         <thead>
+                                            <tr>
+                                               <td>Value</td>
+                                               <td>Count</td>
+                                               <td>Frequency (%)</td>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
+
+                                          <tr class="" *ngFor = "let data1 of data.minvalues">
+                                             <td title="{{data1[0]}}">{{data1[0]}}</td>
+                                             <td>{{data1[1]}}</td>
+                                             <td>
+                                                <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}" > {{(data1[1]) / 100 + '%'}} </div>
+                                             </td>
+                                          </tr>
+                                          
+                                            <!-- <tr class="">
+                                               <td title="france">france</td>
+                                               <td>5015</td>
+                                               <td>
+                                                  <div class="bar" style="width:100.0%"> 50.1% </div>
+                                               </td>
+                                            </tr>
+                                            <tr class="">
+                                               <td title="germany">germany</td>
+                                               <td>2509</td>
+                                               <td>
+                                                  <div class="bar" style="width:50.0%"> 25.1% </div>
+                                               </td>
+                                            </tr>
+                                            <tr class="">
+                                               <td title="spain">spain</td>
+                                               <td>2477</td>
+                                               <td>
+                                                  <div class="bar" style="width:49.4%"> 24.8% </div>
+                                               </td>
+                                            </tr> -->
+                                         </tbody>
+                                      </table>
+                                   </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane col-sm-12" id="characters4--{{i}}" style="padding: 0px;">
+                                   <div class="col-sm-12" style="padding: 0px;">
+                                      <div class="row spacing" style="padding-left: 0px; padding-right: 0px; padding-top: 0px;">
+
+                                       <nav>
+                                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" 
+                                            href="#characters5--{{i}}" role="tab" aria-controls="nav-home" aria-selected="true">Characters</a>
+                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" 
+                                            href="#categories5--{{i}}" role="tab" aria-controls="nav-profile" aria-selected="false">Categories</a>
+                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" 
+                                            href="#scripts5--{{i}}" role="tab" aria-controls="nav-contact" aria-selected="false">Scripts</a>
+                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" 
+                                            href="#blocks5--{{i}}" role="tab" aria-controls="nav-contact" aria-selected="false">Blocks</a>
+                                          </div>
+                                        </nav>
+                                         <!-- <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active" (click)="activeTab4('1')" [ngClass]= "{active: tabValue4 == 1}">
+                                               <a href="#characters5" aria-controls="-3271806692924668242unicode--3271806692924668242characters" role="tab" data-toggle="tab">Characters</a></li>
+                                            <li role="presentation" (click)="activeTab4('2')" [ngClass]= "{active: tabValue4 == 2}">
+                                               <a href="#categories5" aria-controls="-3271806692924668242unicode--3271806692924668242categories" role="tab" data-toggle="tab">Categories</a></li>
+                                            <li role="presentation" (click)="activeTab4('3')" [ngClass]= "{active: tabValue4 == 3}">
+                                               <a href="#scripts5" aria-controls="-3271806692924668242unicode--3271806692924668242scripts" role="tab" data-toggle="tab">Scripts</a></li>
+                                            <li role="presentation" (click)="activeTab4('4')" [ngClass]= "{active: tabValue4 == 4}">
+                                               <a href="#blocks5" aria-controls="-3271806692924668242unicode--3271806692924668242blocks" role="tab" data-toggle="tab">Blocks</a></li>
+                                         </ul> -->
+                                         <div class="tab-content" style="width: 100%;">
+                                            <div role="tabpanel" class="tab-pane col-sm-12 active" id="characters5--{{i}}" style="margin-top: 20px;">
+                                               <div class="row named-list-item" style="margin-top: 20px;">
+                                                  <h4>Most occurring characters</h4>
+                                                  <table class="freq table table-hover table-striped">
+                                                     <thead>
+                                                        <tr>
+                                                           <td>Value</td>
+                                                           <td>Count</td>
+                                                           <td>Frequency (%)</td>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+
+                                                      <tr class="" *ngFor = "let data1 of data.charcounts">
+                                                         <td title="{{data[0]}}">{{data1[0]}}</td>
+                                                         <td>{{data1[1]}}</td>
+                                                         <td>
+                                                            <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}"> {{(data1[1]) / 100 + '%'}} </div>
+                                                         </td>
+                                                      </tr>
+
+                                                        <!-- <tr class="">
+                                                           <td title="a">a</td>
+                                                           <td>10001</td>
+                                                           <td>
+                                                              <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="n">n</td>
+                                                           <td>10001</td>
+                                                           <td>
+                                                              <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="r">r</td>
+                                                           <td>7524</td>
+                                                           <td>
+                                                              <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="e">e</td>
+                                                           <td>7524</td>
+                                                           <td>
+                                                              <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="F">F</td>
+                                                           <td>5015</td>
+                                                           <td>
+                                                              <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="c">c</td>
+                                                           <td>5015</td>
+                                                           <td>
+                                                              <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="G">G</td>
+                                                           <td>2509</td>
+                                                           <td>
+                                                              <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                              4.2% 
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="m">m</td>
+                                                           <td>2509</td>
+                                                           <td>
+                                                              <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                              4.2% 
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="y">y</td>
+                                                           <td>2509</td>
+                                                           <td>
+                                                              <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                              4.2% 
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="S">S</td>
+                                                           <td>2477</td>
+                                                           <td>
+                                                              <div class="bar" style="width:24.8%"> &nbsp; </div>
+                                                              4.1% 
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="other">
+                                                           <td title="Other values (2)">Other values (2)</td>
+                                                           <td>4954</td>
+                                                           <td>
+                                                              <div class="bar" style="width:49.5%"> 8.3% </div>
+                                                           </td>
+                                                        </tr> -->
+                                                     </tbody>
+                                                  </table>
+                                               </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane col-sm-12" id="categories5--{{i}}">
+                                               <div class="row named-list-item" style="margin-top: 20px;">
+                                                  <h4>Most occurring categories</h4>
+                                                  <table class="freq table table-hover table-striped">
+                                                     <thead>
+                                                        <tr>
+                                                           <td>Value</td>
+                                                           <td>Count</td>
+                                                           <td>Frequency (%)</td>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+
+                                                      <tr class="" *ngFor = "let data1 of data.catalias">
+                                                         <td title="{{data1[0]}}">{{data1[0]}}</td>
+                                                         <td>{{data1[1]}}</td>
+                                                         <td>
+                                                            <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}">{{(data1[1]) / 100 + '%'}}</div>
+                                                         </td>
+                                                      </tr>
+
+
+                                                        <!-- <tr class="" >
+                                                           <td title="Lowercase Letter">Lowercase Letter</td>
+                                                           <td>50037</td>
+                                                           <td>
+                                                              <div class="bar" style="width:100.0%"> 83.3% </div>
+                                                           </td>
+                                                        </tr>
+                                                        <tr class="">
+                                                           <td title="Uppercase Letter">Uppercase Letter</td>
+                                                           <td>10001</td>
+                                                           <td>
+                                                              <div class="bar" style="width:20.0%"> &nbsp; </div>
+                                                              16.7% 
+                                                           </td>
+                                                        </tr> -->
+                                                     </tbody>
+                                                  </table>
+                                               </div>
+                                               <div class="row named-list-item">
+                                                  <h4>Most frequent character per category</h4>
+                                                  <div class="row">
+
+                                                   <div class="col-sm-6" *ngFor = "let data4 of data.catAliasCharCount">
+                                                      <h5><em>{{data4.name}}</em></h5>
+                                                      <table class="freq table table-hover table-striped">
+                                                         <thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>Count</td>
+                                                               <td>Frequency (%)</td>
+                                                            </tr>
+                                                         </thead>
+                                                         <tbody>
+                      
+                                                            <tr class="" *ngFor = "let data5 of data4.values">
+                                                               <td title="{{data5[0]}}">{{data5[0]}}</td>
+                                                               <td>{{data5[1]}}</td>
+                                                               <td>
+                                                                  <div class="bar" style="width:100.0%"> 20.0% </div>
+                                                               </td>
+                                                            </tr>
+                                                          
+                                                         </tbody>
+                                                      </table>
+                                                   </div>
+
+
+                                                     <!-- <div class="col-sm-6">
+                                                        <h5><em>Lowercase Letter</em></h5>
+                                                        <table class="freq table table-hover table-striped">
+                                                           <thead>
+                                                              <tr>
+                                                                 <td>Value</td>
+                                                                 <td>Count</td>
+                                                                 <td>Frequency (%)</td>
+                                                              </tr>
+                                                           </thead>
+                                                           <tbody>
+                        
+                                                              <tr class="">
+                                                                 <td title="a">a</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 20.0% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="n">n</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 20.0% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="r">r</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 15.0% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="e">e</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 15.0% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="c">c</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.1%"> 10.0% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="m">m</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    5.0% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="y">y</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    5.0% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="p">p</td>
+                                                                 <td>2477</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:24.8%"> &nbsp; </div>
+                                                                    5.0% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="i">i</td>
+                                                                 <td>2477</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:24.8%"> &nbsp; </div>
+                                                                    5.0% 
+                                                                 </td>
+                                                              </tr>
+                                                           </tbody>
+                                                        </table>
+                                                     </div>
+                                                     <div class="col-sm-6">
+                                                        <h5><em>Uppercase Letter</em></h5>
+                                                        <table class="freq table table-hover table-striped">
+                                                           <thead>
+                                                              <tr>
+                                                                 <td>Value</td>
+                                                                 <td>Count</td>
+                                                                 <td>Frequency (%)</td>
+                                                              </tr>
+                                                           </thead>
+                                                           <tbody>
+
+                                                              <tr class="">
+                                                                 <td title="F">F</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 50.1% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="G">G</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.0%"> 25.1% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="S">S</td>
+                                                                 <td>2477</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:49.4%"> 24.8% </div>
+                                                                 </td>
+                                                              </tr>
+                                                           </tbody>
+                                                        </table>
+                                                     </div> -->
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane col-sm-12" id="scripts5--{{i}}">
+                                               <div class="row named-list-item" style="margin-top: 20px;">
+                                                  <h4>Most occurring scripts</h4>
+                                                  <table class="freq table table-hover table-striped">
+                                                     <thead>
+                                                        <tr>
+                                                           <td>Value</td>
+                                                           <td>Count</td>
+                                                           <td>Frequency (%)</td>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+
+                                                      <tr class="" *ngFor = " let data1 of data.scriptcount">
+                                                         <td title="{{data1[0]}}">{{data1[0]}}</td>
+                                                         <td>{{data1[1]}}</td>
+                                                         <td>
+                                                            <div class="bar"  [ngStyle]="{'width':(data1[1]) / 100 + '%'}"> {{(data1[1]) / 100 + '%'}} </div>
+                                                         </td>
+                                                      </tr>
+
+                                                      
+                                                        <!-- <tr class="">
+                                                           <td title="Latin">Latin</td>
+                                                           <td>60038</td>
+                                                           <td>
+                                                              <div class="bar" style="width:100.0%"> 100.0% </div>
+                                                           </td>
+                                                        </tr> -->
+                                                     </tbody>
+                                                  </table>
+                                               </div>
+                                               <div class="row named-list-item">
+                                                  <h4>Most frequent character per script</h4>
+
+                                                  <div class="row" style="width: 100%;" *ngFor = "let data2 of data.scrCharCount">
+                                                  
+                                                   <div class="col-sm-12">
+                                                      <h5><em>{{data2.name}}</em></h5>
+                                                      <table class="freq table table-hover table-striped">
+                                                         <thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>Count</td>
+                                                               <td>Frequency (%)</td>
+                                                            </tr>
+                                                         </thead>
+                                                         <tbody>
+
+                                                            <tr class="" *ngFor = "let data3 of data2.values">
+                                                               <td title="{{data3[0]}}">{{data3[0]}}</td>
+                                                               <td>{{data3[1]}}</td>
+                                                               <td>
+                                                                  <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                               </td>
+                                                            </tr>
+
+                                                         </tbody>
+                                                      </table>
+                                                   </div>
+                                                </div>
+
+                                                  <div class="row" style="width: 100%;">
+                                                  
+                                                     <!-- <div class="col-sm-12">
+                                                        <h5><em>Latin</em></h5>
+                                                        <table class="freq table table-hover table-striped">
+                                                           <thead>
+                                                              <tr>
+                                                                 <td>Value</td>
+                                                                 <td>Count</td>
+                                                                 <td>Frequency (%)</td>
+                                                              </tr>
+                                                           </thead>
+                                                           <tbody>
+                                                              <tr class="">
+                                                                 <td title="a">a</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="n">n</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="r">r</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="e">e</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="F">F</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="c">c</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="G">G</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="m">m</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="y">y</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="S">S</td>
+                                                                 <td>2477</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:24.8%"> &nbsp; </div>
+                                                                    4.1% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="other">
+                                                                 <td title="Other values (2)">Other values (2)</td>
+                                                                 <td>4954</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:49.5%"> 8.3% </div>
+                                                                 </td>
+                                                              </tr>
+                                                           </tbody>
+                                                        </table>
+                                                     </div> -->
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane col-sm-12" id="blocks5--{{i}}">
+                                               <div class="row named-list-item" style="margin-top: 20px;">
+                                                  <h4 style="width: 100%;">Most occurring blocks</h4>
+                                                  <table class="freq table table-hover table-striped">
+                                                     <thead>
+                                                        <tr>
+                                                           <td>Value</td>
+                                                           <td>Count</td>
+                                                           <td>Frequency (%)</td>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+
+                                                      <tr class="" *ngFor = "let data1 of data.blockalias">
+                                                         <td title="{{data1[0]}}">{{data1[0]}}</td>
+                                                         <td>{{data1[1]}}</td>
+                                                         <td>
+                                                            <div class="bar" [ngStyle]="{'width':(data1[1]) / 100 + '%'}"> {{(data1[1]) / 100 + '%'}} </div>
+                                                         </td>
+                                                      </tr>
+
+
+                                                        <!-- <tr class="">
+                                                           <td title="ASCII">ASCII</td>
+                                                           <td>60038</td>
+                                                           <td>
+                                                              <div class="bar" style="width:100.0%"> 100.0% </div>
+                                                           </td>
+                                                        </tr> -->
+                                                     </tbody>
+                                                  </table>
+                                               </div>
+                                               <div class="row named-list-item">
+                                                  <h4 style="width: 100%;">Most frequent character per block</h4>
+                                                  <div class="row" style="width: 100%;" *ngFor = "let data2 of data.blocharcount">
+                                                   <div class="col-sm-12">
+                                                      <h5><em>{{data2.name}}</em></h5>
+                                                      <table class="freq table table-hover table-striped">
+                                                         <thead>
+                                                            <tr>
+                                                               <td>Value</td>
+                                                               <td>Count</td>
+                                                               <td>Frequency (%)</td>
+                                                            </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                            <tr class="" *ngFor = "let data3 of data2.values">
+                                                               <td title="{{data3[0]}}">{{data3[0]}}</td>
+                                                               <td>{{data3[1]}}</td>
+                                                               <td>
+                                                                  <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                               </td>
+                                                            </tr>
+                                                          
+                                                         </tbody>
+                                                      </table>
+                                                   </div>
+                                                </div>
+                                                
+                                                
+                                                  <!-- <div class="row" style="width: 100%;">
+                                                     <div class="col-sm-12">
+                                                        <h5><em>ASCII</em></h5>
+                                                        <table class="freq table table-hover table-striped">
+                                                           <thead>
+                                                              <tr>
+                                                                 <td>Value</td>
+                                                                 <td>Count</td>
+                                                                 <td>Frequency (%)</td>
+                                                              </tr>
+                                                           </thead>
+                                                           <tbody>
+                                                              <tr class="">
+                                                                 <td title="a">a</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="n">n</td>
+                                                                 <td>10001</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:100.0%"> 16.7% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="r">r</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="e">e</td>
+                                                                 <td>7524</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:75.2%"> 12.5% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="F">F</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="c">c</td>
+                                                                 <td>5015</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:50.1%"> 8.4% </div>
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="G">G</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="m">m</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="y">y</td>
+                                                                 <td>2509</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:25.1%"> &nbsp; </div>
+                                                                    4.2% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="">
+                                                                 <td title="S">S</td>
+                                                                 <td>2477</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:24.8%"> &nbsp; </div>
+                                                                    4.1% 
+                                                                 </td>
+                                                              </tr>
+                                                              <tr class="other">
+                                                                 <td title="Other values (2)">Other values (2)</td>
+                                                                 <td>4954</td>
+                                                                 <td>
+                                                                    <div class="bar" style="width:49.5%"> 8.3% </div>
+                                                                 </td>
+                                                              </tr>
+                                                           </tbody>
+                                                        </table>
+                                                     </div>
+                                                  </div> -->
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

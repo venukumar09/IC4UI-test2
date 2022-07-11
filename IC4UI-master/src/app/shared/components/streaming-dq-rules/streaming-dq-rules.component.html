@@ -1,0 +1,146 @@
+<div class="container-fluid">
+  <!-- <div class="pd-0 ing-dq-rules-bx">
+      <div style="margin-top: 10px;">
+        <h4> Configure DQ Rules</h4>
+        <span class="ing-dq-close" (click)="closeDqRules()" title="Close">close</span>
+      </div>
+  </div> 
+  <hr />-->
+      <form class="label-chg" style="border: 2px solid #d9eef9;
+      width: 100%;
+      margin: 10px auto;
+      padding: 0px;">
+        <div fxLayout="row wrap" >
+          <div fxFlex="100" fxFlex.gt-xs="20" class="pr-1" style="border-right:1px solid #ccc;margin:0;padding-top:15px;">
+            <div style="min-height: 375px;">
+              <input type="text" class="form-control inpt-border" style=" width: 80%;margin-bottom: 10px;margin-left: 25px;"
+                placeholder="Search Attribute..." [(ngModel)]="searchTextPort" [ngModelOptions]="{standalone: true}">
+                <!-- Attributes -->
+              <div style="max-height:320px;overflow-x: hidden;">
+                <!-- | filterDataIngestion: searchTextPort : 'assetName' --> 
+
+             <div *ngFor="let s of sourceAttributes ;let i = index;"   
+                  [ngClass]="{ 'highlight-selected-attr' : s.id === selected_src_for_dq?.id }"
+                  style="cursor: pointer;padding: 8px 0 8px 25px;font-size: .875rem !important;"
+                  (click)="selectedSrcAttrToAddDq(s)" class="hover-port">
+                  <span title="{{s.assetName}}">{{s.assetName}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="selected_src_for_dq == null" fxFlex="100" fxFlex.gt-xs="70"
+            style="padding-left: 2rem;position: relative;">
+            <div  fxLayout="row wrap">
+              <div fxFlex="100" fxFlex.gt-xs="100">
+                <div style="margin-top: 15px;margin-bottom: 25px;" *ngIf="!showAddNewRule">
+               
+                    <!-- <select id="rule_type" placeholder="Select Rule Type" (change)="showRules($event.target.value)"
+                      [ngModel]="selectedRuleType" name="rule_type">
+                      <option *ngFor="let r of ruleTypes" [value]="r.rul_type_nm" ngDefaultControl>
+                        {{r.rul_type_nm | uppercase}}
+                      </option>
+                    </select> -->
+            
+                  <!-- <span title="Add Rule"
+                    style="cursor:pointer; background-color: #0072c6;color: white;margin-left: 25px;"
+                    (click)="addNewRule()">add</span> -->
+                  <!-- <input  type="text" class="form-control inpt-border" style=" width: 40%;margin-left : 15px" placeholder="Search DQ Rule..."
+                      [(ngModel)]="searchDqRule" [ngModelOptions]="{standalone: true}"> -->
+                </div>
+    
+                  <div fxLayout="row wrap">
+                    <!-- Rules -->
+                    <div fxFlex="100" fxFlex.gt-xs="100" *ngIf="!showAddNewRule">
+                      <div >
+                        <div *ngFor="let rul of dqRules_by_type let r = index;">
+                          <h5>{{rul.name}}</h5>
+                          <div class="card-main-str-dq">
+                            <span  *ngFor="let value of rul.values let i = index;" style="margin-left: 1.5rem;">
+                              <input type="checkbox" class="custom-control-input" title="{{value.rul_desc_txt}}"  [(ngModel)]="value.selected" (change)="selectedDqRuleEvent($event,value)" 
+                              class="custom-control-input" id="dqrules{{r}}{{i}}" name="dqrules{{r}}{{i}}" [value]="value.rul_id">
+                              <label  class="custom-control-label" title="{{value.rul_desc_txt}}" style="margin-right:2rem ;" for="dqrules{{r}}{{i}}" >
+                                <span title="{{value.rul_def }}">{{value.rul_nm | uppercase}}</span>
+                              </label>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   
+                  </div>
+              </div>
+            </div>
+            <div style="position: absolute;bottom:10px;" *ngIf="!showAddNewRule">
+              <button  color="primary" class="mr-1" (click)="saveDqRules()">Save
+              </button>
+              <button  color="warn" class="mr-1" (click)="closeDqRules()">Close</button>
+            </div>
+          </div>
+        </div>
+          
+    <!-- Values Modal  -->
+    <div class="row">
+      <div class="modal fade"
+           id="modalRules"
+           role="dialog"
+           aria-labelledby="myModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-full" style="width:1250px;">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:#0072c6;color: white;">
+              <h4 class="modal-title">
+             
+              </h4>
+              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+            <div class="modal-body mb-1">
+              <p>{{selectedRule?.rule_def}}</p>
+              
+              <div class="form-group">
+                <label for="data_source">$attr1:</label>
+                <div>
+                  <input type="text" class="form-control" id="attr1" [(ngModel)]="attr1" name="attr1" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="showAttr2">
+                <label for="data_source">$attr2:</label>
+                <div>
+                  <input type="text" class="form-control" id="attr2" [(ngModel)]="attr2" name="attr2" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="showCond">
+                <label for="data_source">$cond1:</label>
+                <div>
+                  <input type="text" class="form-control" id="attr2" [(ngModel)]="cond1" name="attr2" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="showVal">
+                <label for="data_source">$val1:</label>
+                <div>
+                  <input type="text" class="form-control" id="attr2" [(ngModel)]="val1" name="attr2" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="modal-footer" class="padding15">
+                <div class="row ">
+                  <div class="col-sm-6">
+                    <button type="button"  (click)="newMethod(current_rule,current_env)" class="save-btn pull-right">Save</button>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      </form>
+</div>

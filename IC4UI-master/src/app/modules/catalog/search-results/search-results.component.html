@@ -1,0 +1,234 @@
+<div class="container-fluid">
+<div class="row headerOptns">
+  <div id="accordion" class="filterSection">
+      <div class="card">
+        <div class="card-header" data-toggle="collapse" href="#collapseOne">
+          <a class="card-link">
+            Filters
+          </a>
+        </div>
+        <div id="collapseOne" class="collapse " data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <h6 class="filHead">Asset Type</h6>
+              </div>
+              <div class="col-md-4">
+                <h6 class="filHead">Data Platform</h6>
+              </div>
+              <div class="col-md-4">
+                <h6 class="filHead">Application</h6>
+              </div>
+            </div>
+              <div class="row">
+              <div class="col-md-4">
+                <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Busness" name="Bussiness Glosary Term">
+                <label class="custom-control-label" for="Busness">Bussiness Glosary Term</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Column" name="Column">
+                <label class="custom-control-label" for="Column">Column</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="File" name="File">
+                <label class="custom-control-label" for="File">File</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Report" name="Report">
+                <label class="custom-control-label" for="Report">Report</label>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="File2" name="File2">
+                <label class="custom-control-label" for="File2">File</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Local" name="Local">
+                <label class="custom-control-label" for="Local">Local</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Microsoft SQL server" name="Microsoft SQL server">
+                <label class="custom-control-label" for="Microsoft SQL server">Microsoft SQL server</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="S3" name="S3">
+                <label class="custom-control-label" for="S3">S3</label>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Demo" name="Demo">
+                <label class="custom-control-label" for="Demo">Demo</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Manual" name="Manual">
+                <label class="custom-control-label" for="Manual">Manual</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="Onesolution" name="Onesolution">
+                <label class="custom-control-label" for="Onesolution">Onesolution</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="OSSI" name="OSSI">
+                <label class="custom-control-label" for="OSSI">OSSI</label>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <h5 class="ResCount">{{mainSearchData.length}} Result(s) found for {{searchText}}</h5>
+</div>
+<div class="row card-main" *ngFor="let res of mainSearchData">
+
+    <div class="col-md-3 card-left">
+      <div class="assetName">{{res.assetName}}</div>
+      <div class="card-left-Main">
+        <table class="table-left">
+          <tbody>
+          <tr class="bordernone">
+            <td class="font-weight500 headattr">LOB</td>
+            <td class="font-weight500">:</td>
+            <td class="font-weight500 hiddenElipses100" title="{{res.assetType}}">{{res.lob}}</td>
+          </tr>
+          <tr class="bordernone">
+            <td class="font-weight500 headattr">APP</td>
+            <td class="font-weight500">:</td>
+            <td class="font-weight500 hiddenElipses100" title="{{res.schema}}">{{res.applicationName}}</td>
+          </tr>
+          <tr class="bordernone">
+
+            <td class="font-weight500 headattr">Owner Mail</td>
+            <td class="font-weight500">:</td>
+            <td class="font-weight500 hiddenElipses100" title="{{res.ownrMailId}}">{{res.ownrMailId}}</td>
+          </tr>
+        </tbody>
+        </table>
+        <div *ngIf="res.assetType!='column'&&(res.ovlDqPct && res.ovlDqPct!='null')" class="DqScore-title" >DQ Score</div>
+        <div *ngIf="res.assetType!='column'&&(res.ovlDqPct && res.ovlDqPct!='null')" class="DqScore-text">
+          <span ><img class="dqPie" width="60" height="60" src="../../../../assets/images/searchPie.PNG"></span>
+          <span class="DqScore">{{res.ovlDqPct}}</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-9 card-right">
+      <table class="table">
+        <thead>
+          <th>Data Platform</th>
+          <th *ngIf="res.assetType!='column'">Asset Type</th>
+          <th *ngIf="res.assetType!='File'">Schema</th>
+          <th *ngIf="res.assetType=='column'">Table Name</th>
+          <th *ngIf="res.assetType!='column'"style="text-align: center;">Row Count</th>
+          <th style="width: 186px;">Creation Date</th>
+          <th style="width: 186px;">Last Updated Date</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{res.dataPlatform}}</td>
+
+          <td *ngIf="res.assetType!='column'">{{res.assetType}}</td>
+          <td  *ngIf="res.assetType!='File'">{{res.schemaName}}</td>
+          <td *ngIf="res.assetType=='column'">{{res.tableName}}</td>
+          <td *ngIf="res.assetType!='column'" style="text-align: center;">{{res.size}}</td>
+          <td>{{res.creationDate | date:'medium'}}</td>
+          <td>{{res.lastUpdatedDate | date:'medium'}}</td>
+        </tr>
+        </tbody>
+
+      </table>
+      <div class="description">
+        <div class="desc-title">Description:</div>
+        <div href="#" class="desc-text" data-toggle="tooltip" data-placement="right" title="{{res.description}}">{{res.description}}</div>
+      </div>
+      <!-- <div>
+
+      </div> -->
+      <div *ngIf="res.assetType!='Table'"></div>
+      <div class="buttonsSec">
+        <button *ngIf="res.assetType!='column'" class="button1" (click)="configureDQ(res)">ConfigureDQ</button>
+        <button class="button1" (click)="knowUrData(res)">Know Your Data</button>
+        <button *ngIf="res.assetType!='column'" class="button1" >Impact Analysis</button>
+        <button *ngIf="res.assetType!='column'" class="button1" >Explore Data</button>
+        <button *ngIf="res.assetType=='Table' || res.assetType=='File'" class="button1" (click)="formbuild(res)">Build Ingestion</button>
+
+      </div>
+    </div>
+</div>
+</div>
+<!-- main Code
+<div class="card display" *ngFor="let res of mainSearchData.searchResults">
+    <div class="card-header headercolor">
+      <div class="row">
+        <div class="col-sm-9 top5">
+
+          {{res.assetName}}
+          <span class="vl"><span class="bold">Asset Type:</span> {{res.assetType}}</span>
+          <span *ngIf="res.assetType=='column'"> <span class="vl"><span class="bold" >Table Name:</span> {{res.tableName}}</span></span>
+          <span class="vl"><span class="bold">Schema Name:</span>{{res.schemaName}}</span>
+
+        </div>
+        <div class="col-sm-3">
+          <div class="row">
+            <div class="col-2"></div> -->
+            <!-- <div class="col-12">
+              <span class="float-righ"><i class="fa fa-info-circle info" ></i>DQ
+                Score</span>
+                <span class="fa-stack float-right">
+                  <span class="fa fa-circle-o fa-stack-2x"></span>
+                  <strong class="fa-stack-1x" style="font-size:xx-small">
+                    100
+                  </strong>
+                </span>
+            </div> -->
+            <!-- <div class="col-5">
+
+            </div> -->
+          <!-- </div>
+        </div> -->
+        <!-- <div class="col-sm-1 "style="padding-right: 50px;">
+
+        </div> -->
+      <!-- </div>
+    </div> -->
+<!--
+    <div class="card-body">
+      <div class="card-title">
+        <table class='table borderless'>
+          <tr>
+            <th class="fontWeight500">Data Platform</th>
+            <th class="fontWeight500"*ngIf="res.assetType!='column'">Row count</th>
+            <th class="fontWeight500"*ngIf="res.assetType=='column'">Environment</th>
+            <th class="fontWeight500">LOB</th>
+            <th class="fontWeight500">Application</th>
+            <th class="fontWeight500">Creation Date</th>
+            <th class="fontWeight500">Last Updated Date</th>
+          </tr>
+          <tr>
+            <td>{{res.dataPlatform}}</td>
+            <td *ngIf="res.assetType!='column'">{{res.size}}</td>
+            <td *ngIf="res.assetType=='column'">{{res.site}}</td>
+            <td>{{res.lob}}</td>
+            <td>{{res.applicationName}}</td>
+            <td>{{res.creationDate}}</td>
+            <td>{{res.lastUpdatedDate}}</td>
+          </tr>
+        </table>
+
+         <br> -->
+        <!-- <div class="row">
+          <div class="content col-sm-9"><span class="desc">Description :</span> {{res.description}} </div>
+          <div class="col-sm-3">
+            <a class="btn btn-primary float-right button3"  (click)="knowUrData(res)">Know Your Data</a>
+          </div>
+
+        </div> -->
+        <!-- <br> -->
+      <!-- </div>
+    </div>
+  </div>  -->

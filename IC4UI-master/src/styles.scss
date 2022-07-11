@@ -1,0 +1,197 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import "~assets/css/common.css";
+// @import "~assets/css/circle.scss";
+@import "./assets/css/circle.scss";
+@import '~ngx-toastr/toastr';
+
+@import "~nouislider/distribute/nouislider.min.css";
+
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~ngx-toastr/toastr-bs4-alert';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$IC4UI-primary: mat-palette($mat-indigo);
+$IC4UI-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$IC4UI-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$IC4UI-theme: mat-light-theme($IC4UI-primary, $IC4UI-accent, $IC4UI-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($IC4UI-theme);
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import '~bs-stepper/dist/css/bs-stepper.min.css';
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
+.d-container .mat-dialog-container {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+}
+.modal-content{
+    border-radius:0px !important;
+    width: 90%;
+    margin:0 auto;
+}
+.form-success-btn-modal:hover,.form-success-btn-modal{
+    position: relative;
+    background: #00d138;
+    border-radius: 40px;
+    height: 35px;
+    font-weight: 500;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border: none;
+    color: white !important;
+}
+.modal-header{
+    position: relative;
+    background:#169ddd;
+    color:White;
+    border-radius:0px !important;
+}
+.modal-footer{
+    border-radius:0px !important;
+}
+input[type=text],textarea,input[type=password],select{
+    border-radius:0px !important;
+}
+label{
+    font-size:small !important;
+}
+.close{
+    color:white;
+}
+.dataTables_length>label{
+    width: 260px;
+    top: 10px;
+    left: 20px;
+    position: relative;
+}
+.dataTables_filter>label{
+    width: 493px;
+    display: block;
+    margin-top:10px;
+    text-align: right;
+
+}
+.dataTables_info{
+    display: none;
+}
+.dataTables_paginate{
+    float: right;
+    margin-right: 75px;
+}
+th{
+    outline:none;
+}
+table{
+    font-size: 14px;
+}
+tr:hover{
+    background-color: #f6f6f6 !important;
+}
+.table th,.table td{
+    vertical-align: middle;
+}
+tr:nth-child(even) {background-color: #f6f6f6;}
+.modal-header .close{
+    font-size: large;
+  }
+label>input[type=search]{
+    width: 175px !important;
+    display: inline-block !important;
+    position: relative !important;
+    left: 5px !important;
+    border-radius: 0px !important;
+    height: 30px !important;
+
+}
+label>select{
+    width:77px !important;
+}
+.page-link{
+    border: 0px !important;
+}.pagination{
+    font-size: 12px !important;
+}
+td{
+    padding-top: 5px !important;
+    padding-bottom:5px !important;
+}
+tr{
+    border-bottom:2px solid #f6f7f8;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.page-item.active .page-link{
+    color:#007bff;
+    background-color:white;
+    font-weight: 500;
+}
+.page-link{
+    color: black;
+}
+.modal-title{
+    font-size: 16px;
+}
+.box-shadow {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+}
+.modal-footer{
+    padding: 8px 10px !important;
+}
+.paginate_button{
+    outline: none !important;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:#aba9a9 !important;
+    border-radius:20px;
+  }
+  .form-control:disabled, .form-control[readonly]
+  {
+      opacity: 1;
+      background: #ffffff;
+      cursor:not-allowed;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background:#aba9a9 !important ;
+  }
+// body{
+//     background: #2158aa;
+// }

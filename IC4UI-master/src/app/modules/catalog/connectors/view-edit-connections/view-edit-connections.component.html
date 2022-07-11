@@ -1,0 +1,145 @@
+<div class='row connector'>
+  <div class="col-9 col-sm-10 ">
+     <h5 class="heading5">
+        <span class="inline-block cursor-pointer connector1" (click)="backtosources()">Connector</span>
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <span class="bread-crumb inline-block cursor-pointer">View & Edit Connections</span>
+     </h5>
+  </div>
+  <div class="col-3 col-sm-3"></div>
+</div>
+<div class="row table-row " >
+	<table class="table tableviewConn table-hover box-shadow" cellspacing="0">
+    <thead>
+      <tr class="strip">
+        <th>Connection Name</th>
+        <th>Platform</th>
+        <th>Type</th>
+        <th>Host</th>
+        <!-- <th>Port</th> -->
+        <th style="min-width: 180px;">Modified Date</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of connections">
+        <td>{{data.conn_nm}}</td>
+        <td>{{data.db_pltfm_nm}}</td>
+        <td>{{data.conn_type}}</td>
+        <td>{{data.host_url_txt}}</td>
+        <!-- <td>{{data.port_nbr}}</td> -->
+        <td>{{data.rec_lst_updt_ts}}</td>
+        <td class="center">
+
+          <svg  class="marginryt10" xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewBox="0 0 30 30" data-toggle="modal" data-target="#editConnections" (click)="viewConnection(data)">
+            <g id="pencil" transform="translate(-0.001)">
+              <g id="Group_243" data-name="Group 243" transform="translate(0.001)">
+                <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Zm7.131,10.795-1.425,1.425-2.9-2.9-1.1,1.1,2.9,2.9-7.113,7.113-2.9-2.9-1.1,1.1,2.9,2.9-.709.709-.014-.013a.561.561,0,0,1-.358.257l-2.7.6a.562.562,0,0,1-.671-.672l.6-2.7a.563.563,0,0,1,.258-.358l-.014-.014L19.231,7.894a.43.43,0,0,1,.608,0l2.292,2.292A.43.43,0,0,1,22.131,10.795Z" transform="translate(-0.001)"/>
+              </g>
+            </g>
+          </svg>
+
+          
+
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewBox="0 0 30 30">
+            <g id="Group_766" data-name="Group 766" transform="translate(-1707.448 -442.449)">
+              <g id="pencil" transform="translate(1474.447 442.449)">
+                <g id="Group_243" data-name="Group 243" transform="translate(233.001)">
+                  <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z" transform="translate(-0.001)" fill="#ff6a6a"/>
+                </g>
+              </g>
+              <g id="close" transform="translate(1716.887 452.884)">
+                <path id="Path_245" data-name="Path 245" d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z" transform="translate(0 0)" fill="#fff"/>
+              </g>
+            </g>
+          </svg> -->
+          
+         
+          <!-- <span><img height="40" src="https://img.icons8.com/bubbles/50/000000/edit-file.png"></span> -->
+              <!-- <span><img width="30" src="https://img.icons8.com/color/48/000000/close-window.png"></span> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="editConnections">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">View Databases</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+              <table class="table tableviewDB table-hover">
+                <thead>
+                  <tr>
+                    <th>Database Name</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th class="center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="tableRow" *ngFor="let dbdtl of selectedConDtl.dbDetails">
+                    <td *ngIf="dbdtl.editable==false">{{dbdtl.db_nm}}</td>
+                    <td *ngIf="dbdtl.editable==false">{{dbdtl.db_usr_id}}</td>
+                    <td *ngIf="dbdtl.editable==false" type="password"><input class="passwordview" readonly type="password" value="{{dbdtl.db_pwd_txt}}" id="myInput">
+                      </td>
+                    <td *ngIf="dbdtl.editable==false" class="center">
+                      <svg  (click)="editDBtrue(dbdtl)"class="marginryt10" xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewBox="0 0 30 30" (click)="editDb(dbdtl)">
+                      <g id="pencil" transform="translate(-0.001)">
+                        <g id="Group_243" data-name="Group 243" transform="translate(0.001)">
+                          <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Zm7.131,10.795-1.425,1.425-2.9-2.9-1.1,1.1,2.9,2.9-7.113,7.113-2.9-2.9-1.1,1.1,2.9,2.9-.709.709-.014-.013a.561.561,0,0,1-.358.257l-2.7.6a.562.562,0,0,1-.671-.672l.6-2.7a.563.563,0,0,1,.258-.358l-.014-.014L19.231,7.894a.43.43,0,0,1,.608,0l2.292,2.292A.43.43,0,0,1,22.131,10.795Z" transform="translate(-0.001)"/>
+                        </g>
+                      </g>
+                    </svg>
+                  </td>
+                  <td *ngIf="editable.db_usr_id==dbdtl.db_usr_id && dbdtl.editable==true">
+                    <div class="">
+                      <!-- <label for="db_name">Database Name:</label> -->
+                      <input type="text" class="form-control" id="db_nm" placeholder="Enter Database Name"[(ngModel)]='dbdtl.db_nm' name="Edit_Database_Name" disabled>
+                    </div>
+                  </td>
+                  <td *ngIf="editable.db_usr_id==dbdtl.db_usr_id && dbdtl.editable==true">
+                    <div class="">
+                      <!-- <label for="db_usrnm">UserName:</label> -->
+                      <input type="text" class="form-control" id="db_usrnm" placeholder="Enter UserName"[(ngModel)]='dbdtl.db_usr_id' name="Edit_Database_UserName">
+                    </div>
+                  </td>
+                  <td *ngIf="editable.db_usr_id==dbdtl.db_usr_id && dbdtl.editable==true">
+                    <div class="">
+                      <!-- <label for="db_password">Password:</label> -->
+                      <input type="password" class="form-control" id="db_password" placeholder="Enter Password" [(ngModel)]='dbdtl.db_pwd_txt' name="Edit_Database_password">
+                    </div>
+                  </td>
+                  <td *ngIf="editable.db_usr_id==dbdtl.db_usr_id && dbdtl.editable==true" class="center">
+                    <svg class="ticksvg" (click)="Upadatedtl(dbdtl)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="#43A047" d="M40.6 12.1L17 35.7 7.4 26.1 4.6 29 17 41.3 43.4 14.9z"/></svg>
+                    <svg class="closesvg" (click)="editDBfalse()"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/><path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"/><path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"/></svg>
+                    <!-- <svg  class="marginryt10 top7" xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewBox="0 0 30 30" (click)="editDb(dbdtl)">
+                    <g id="pencil" transform="translate(-0.001)">
+                      <g id="Group_243" data-name="Group 243" transform="translate(0.001)">
+                        <path id="Path_243" data-name="Path 243" d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Zm7.131,10.795-1.425,1.425-2.9-2.9-1.1,1.1,2.9,2.9-7.113,7.113-2.9-2.9-1.1,1.1,2.9,2.9-.709.709-.014-.013a.561.561,0,0,1-.358.257l-2.7.6a.562.562,0,0,1-.671-.672l.6-2.7a.563.563,0,0,1,.258-.358l-.014-.014L19.231,7.894a.43.43,0,0,1,.608,0l2.292,2.292A.43.43,0,0,1,22.131,10.795Z" transform="translate(-0.001)"/>
+                      </g>
+                    </g>
+                  </svg> -->
+                </td>
+                </tr>
+                </tbody>
+              </table>
+              
+            </div>
+          
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Submit</button> -->
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+	</div>

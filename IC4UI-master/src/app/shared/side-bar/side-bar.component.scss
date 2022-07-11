@@ -1,0 +1,26 @@
+.sidebar {
+    position: fixed;
+    height: 100%;
+    background: -webkit-gradient(linear, left bottom, left top, from(#1691d4), to(#1656a2));
+    background: linear-gradient(to top, #1691d4, #1656a2);
+    font-family:  "Helvetica Neue",sans-serif;
+    padding: 0;
+    width: 15%;;
+    z-index: 11;
+    transition: width 0.25s ease, background 0.25s ease;
+    -webkit-transition: width 0.25s ease, background 0.25s ease;
+    -moz-transition: width 0.25s ease, background 0.25s ease;
+    -ms-transition: width 0.25s ease, background 0.25s ease;
+}
+.menu-title{
+    color: white;
+    font-family: "Helvetica Neue",sans-serif;
+}
+a.active{
+    color: white;
+    font-family: "Helvetica Neue",sans-serif;
+    font-weight: bold;
+}
+.textactive{
+    font-weight: bolder;
+}

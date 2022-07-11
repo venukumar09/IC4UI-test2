@@ -1,0 +1,48 @@
+.dim-top-nav .logo img {
+    margin: 0 10px 0 0;
+    position: relative;
+    bottom: 3px;
+    width: 24px;
+  }
+  
+  .dim-top-nav .icon {
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  
+.dim-top-nav {
+  background: #f8f9fa;
+  height: 60px;
+  /* display: block;
+     */
+}
+
+.dim-top-nav .logo {
+  position: relative;
+  top: 15px;
+  left: 10px;
+  font-size: 19px;
+  color: #1656a2;
+}
+
+.dim-top-nav .subnav-icons {
+  color: #169DDD;
+  border: 2px solid #169DDD;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 2px 15px;
+  position: relative;
+  top: 2px;
+  font-size: 13px;
+  margin-left: 5px;
+  cursor: pointer;
+  background: white;
+}
+
+.dim-top-nav .nav-btns {
+  padding-top: .75%;
+  padding-top: .75%;
+  padding-left: 5px;
+  padding-right: 0;
+}

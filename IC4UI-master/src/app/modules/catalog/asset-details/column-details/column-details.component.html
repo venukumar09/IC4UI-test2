@@ -1,0 +1,659 @@
+
+	<div class="container-fluid">
+    <div class="sub">
+
+      <span [ngStyle]="{'color':columnStatus=='d' ? '#1f446e' : '#55b8e6' }" (click)="details()">Details</span>
+      <span [ngStyle]="{'color':columnStatus=='a' ?  '#1f446e' : '#55b8e6' }" class="vl1 c " (click)="annotate()"> Annotate</span>
+      <span [ngStyle]="{'color':columnStatus=='l' ?  '#1f446e' : '#55b8e6' }" class="vl1 c " (click)="leverage()"> Leverage Data</span>
+    
+      <button class="button1" (click)="goToTable()"> Back</button>
+      <!-- <span class="vl1 c"> Columns</span>
+      <span class="vl1 c "> Annotate</span>
+      <span class="vl1 c "> Preview Data</span> -->
+    </div>
+    <div>  
+    <div class="row headerOptns" *ngIf="columnStatus=='d'">
+            <div class="row card-main">
+                <div class="col-md-10">
+                    <h4 class="heading5">{{columnDetails.assetName}}</h4>
+                </div>
+                <div class="col-md-2">
+                    <button class="button1" data-toggle="modal"  data-target="#myModal">Edit</button>
+        </div>
+                <div class="col-md-5 top10ryt10">
+                    <table class="table-left">
+                                <tbody>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Data Source</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{columnDetails.dsnName}}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                  <td class="font-weight-head">Data Platform</td>
+                                  <td class="font-weight500">:</td>
+                                  <td class="font-weight500">{{columnDetails.dataPlatform == null ? '...' : columnDetails.dataPlatform }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Schema Name</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{columnDetails.schema | titlecase }}</td>
+                                </tr>
+                                <tr class="bordernone">
+                                    <td class="font-weight-head">Table Name</td>
+                                    <td class="font-weight500">:</td>
+                                    <td class="font-weight500">{{columnDetails.tableName}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                </div>
+            <div class="col-md-5 top10ryt10">
+                <table class="table-left">
+                            <tbody>
+                            <tr class="bordernone">
+
+                                <td class="font-weight-head">Asset type</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{columnDetails.dataPlatform == null ? '...' : columnDetails.dataPlatform }}</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Data Type Name</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{columnDetails.dataTypeName == null ? '...' : columnDetails.dataTypeName }} ({{columnDetails.attributeLength}})</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Searches</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{columnDetails.searchCount}}</td>
+                            </tr>
+                            <tr class="bordernone">
+                                <td class="font-weight-head">Business Term</td>
+                                <td class="font-weight500">:</td>
+                                <td class="font-weight500">{{columnDetails.businessName == null ? '... ?' : columnDetails.businessName  }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <div class="col-md-1"></div>
+            <!-- <div class="col-md-4">
+              <table class="table-left">
+                <tbody>
+                <tr class="bordernone">
+
+                    <td class="font-weight-head">Is NULL</td>
+                    <td class="font-weight500">:</td>
+                    <td class="font-weight500 top9">{{columnDetails.dataPlatform == null ? '...' : columnDetails.dataPlatform }}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div> -->
+            <div class="col-md-4">
+              <table class="table-left">
+                <tbody>
+                <tr class="bordernone">
+
+                    <td class="font-weight-head">Is NULL</td>
+                    <td class="font-weight500">:</td>
+                    <td class="font-weight500 top9">
+                      <p *ngIf='columnDetails.isNull === "Y"'>True</p>
+                      <p *ngIf='columnDetails.isNull === "N"'>False</p>
+                      <!-- <p *ngIf='columnDetails?.isNull.trim() === ""'>...</p> -->
+                    </td>
+                  </tr>
+              </tbody>
+              </table>
+            </div>
+            <div class="col-md-4">
+              <table class="table-left">
+                <tbody>
+                <tr class="bordernone">
+
+                    <td class="font-weight-head">Is PK</td>
+                    <td class="font-weight500">:</td>
+                    <td class="font-weight500 top9">
+                      <p *ngIf='columnDetails.isPK === "Y"'>True</p>
+                      <p *ngIf='columnDetails.isPK === "N"'>False</p>
+                      <!-- <p *ngIf='columnDetails?.isPK.trim() === ""'>...</p> -->
+                    </td>
+                  </tr>
+              </tbody>
+              </table>
+            </div>
+            <div class="col-md-4">
+              <table class="table-left">
+                <tbody>
+                <tr class="bordernone">
+
+                    <td class="font-weight-head">Is FK</td>
+                    <td class="font-weight500">:</td>
+                    <td class="font-weight500 top9">
+                      <p *ngIf='columnDetails.isFK === "Y"'>True</p>
+                      <p *ngIf='columnDetails.isFK === "N"'>False</p>
+                      <!-- <p *ngIf='columnDetails?.isFK.trim() === ""'>...</p> -->
+                    </td>
+                  </tr>
+              </tbody>
+              </table>
+            </div>
+            <div class="col-md-12">
+                <div class="description">
+                        <div class="desc-title">Description:</div>
+                        <div href="#" class="desc-text" data-toggle="tooltip" data-placement="right" title="{{columnDetails.description === null ? '...' : columnDetails.description}}">{{columnDetails.description === null ? '...' : columnDetails.description}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row dqmainRow">
+              <img class="dqMain" src="../../../../../assets/images/dqmain.PNG">
+            </div> -->
+
+            <div class="card-main tbl-details-dq-bg">
+              <div class="row">
+
+                <div class="col-md-2">
+                  <p class="dq-p  dq-info-border">
+                    <span class="dq-info red"></span>Score of 0-74
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <p class="dq-p  dq-info-border">
+                    <span class="dq-info orange"></span>Score of 75-94
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <p class="dq-p">
+                    <span class="dq-info green"></span>Score of 94-100
+                  </p>
+  
+                </div>
+  
+              </div>
+
+
+              <div>
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Accuracy');hoveredColor(columnDetails.accrPct)"
+                  [ngClass]="{'danger-graph' : columnDetails.accrPct <= 74 && columnDetails.accrPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Accuracy: {{columnDetails.accrPct == null ? 'N/A' : columnDetails.accrPct + '%'}} -->
+                      Accuracy
+                    </h5>
+                  </div>
+    
+                  <div class="c100 p{{columnDetails.accrPct}} graph-mg-10"
+                    [ngClass]="getColor(columnDetails.accrPct,'bar')">
+                    <span
+                      [ngClass]="getColor(columnDetails.accrPct,'text')">{{columnDetails.accrPct == null ? 'N/A' : columnDetails.accrPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.accuracy | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+    
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Completeness');hoveredColor( columnDetails.cmpltPct)"
+                  [ngClass]="{'danger-graph' : columnDetails.cmpltPct <= 74 && columnDetails.cmpltPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Completeness: {{columnDetails.cmpltPct == null ? 'N/A' : columnDetails.cmpltPct + '%'}} -->
+                      Completeness
+                    </h5>
+                  </div>
+                  <div class="c100 p{{columnDetails.cmpltPct}} graph-mg-10"
+                    [ngClass]="getColor(columnDetails.cmpltPct,'bar')">
+                    <span [ngClass]="getColor(columnDetails.cmpltPct,'text')">
+                      {{columnDetails.cmpltPct == null ? 'N/A' : columnDetails.cmpltPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.completeness | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+    
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Conformity');hoveredColor( columnDetails.cnfmPct)"
+                  [ngClass]="{'danger-graph' : columnDetails.cnfmPct <= 74 && columnDetails.cnfmPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Conformity: {{columnDetails.cnfmPct == null ? 'N/A' : columnDetails.cnfmPct + '%'}} -->
+                      Conformity
+                    </h5>
+                  </div>
+                  <div class="c100 p{{columnDetails.cnfmPct}} graph-mg-10"
+                    [ngClass]="getColor(columnDetails.cnfmPct,'bar')">
+                    <span [ngClass]="getColor(columnDetails.cnfmPct,'text')">
+                      {{columnDetails.cnfmPct == null ? 'N/A' : columnDetails.cnfmPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+    
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.conformity | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+    
+                <div class="tbl-crl-graph" (mouseover)="hoveredOn('Uniqueness');hoveredColor( columnDetails.uniqPct)"
+                  [ngClass]="{'danger-graph' : columnDetails.uniqPct <= 74 && columnDetails.uniqPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Uniqueness: {{columnDetails.uniqPct == null ? 'N/A' : columnDetails.uniqPct + '%'}} -->
+                      Uniqueness
+                    </h5>
+                  </div>
+                  <div class="c100 p{{columnDetails.uniqPct}} graph-mg-10"
+                    [ngClass]="getColor(columnDetails.uniqPct,'bar')">
+                    <span [ngClass]="getColor(columnDetails.uniqPct,'text')">
+                      {{columnDetails.uniqPct == null ? 'N/A' : columnDetails.uniqPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.uniqueness | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+    
+                <div class="tbl-crl-graph last-tbl-crl-graph"
+                  (mouseover)="hoveredOn('Consistency');hoveredColor( columnDetails.cnsPct)"
+                  [ngClass]="{'danger-graph' : columnDetails.cnsPct <= 74 && columnDetails.cnsPct !== null}">
+                  <div>
+                    <h5>
+                      <!-- Consistency: {{columnDetails.cnsPct == null || columnDetails.cnsPct == 0 ? 'N/A' : columnDetails.cnsPct + '%'}} -->
+                      Consistency
+                    </h5>
+                  </div>
+                  <div class="c100 p{{columnDetails.cnsPct}} graph-mg-10" [ngClass]="getColor(columnDetails.cnsPct,'bar')">
+                    <span
+                      [ngClass]="getColor(columnDetails.cnsPct,'text')">{{columnDetails.cnsPct == null || columnDetails.cnsPct == 0 ? 'N/A' : columnDetails.cnsPct + '%'}}</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                  <div class="abt-graph">
+                    <p>
+                      {{helpText.consistency | slice: 0 : 45 }}...
+                    </p>
+                  </div>
+                </div>
+    
+                <div class="clear"></div>
+                <div class="dq-cont">
+                  <div class="dq-cont-header" [ngStyle]="{'background-color': hoveredElement.color}" style="margin-top:10px">
+                    <h5>{{hoveredElement.title}}</h5>
+                  </div>
+                  <div class="dq-cont-details" style="margin-top:10px">
+                    <p>
+                      {{hoveredElement.text}}
+                    </p>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row card-main">
+              <div class="domain-info1 col-md-12">
+                <h4 class="heading5">Rules Applied</h4>
+                <div class="domain-cont">
+                  <ul class="Rules-info-ul" *ngIf="columnDetails.rulesApplied.length > 0">
+                    <!-- <li *ngFor="let r of columnDetails.rulesApplied">{{ columnDetails.rulesApplied == null ? '...' : columnDetails.rulesApplied }} </li> -->
+                    <li *ngFor="let r of columnDetails.rulesApplied">
+                      {{ r == null ? '...' : r | titlecase}}
+                    </li>
+                  </ul>
+                  <ul class="Rules-info-ul" *ngIf="columnDetails.rulesApplied.length === 0">
+                    <li>
+                      ...
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="domain-info1 col-md-12">
+                <h4 class="heading5">Profiling</h4>
+                <div class="domain-cont">
+                  Total Rows
+                  Mean Value
+                  Max Value
+                  Unique Values Count
+                  Standard Deviation
+                  Null Count
+                  Min Value
+                </div>
+              </div>
+
+
+              <div class="domain-info1 col-md-12 ">
+                <h4 class="heading5">Associated Business Terms</h4>
+                <div class="domain-cont">
+                  <!-- <ul class="Rules-info-ul" *ngIf="columnDetails.rulesApplied.length > 0">
+                   
+                    <li *ngFor="let r of columnDetails.rulesApplied">
+                      {{ r == null ? '...' : r | titlecase}}
+                    </li>
+                  </ul> -->
+                  <ul class="Rules-info-ul" *ngIf="columnDetails.rulesApplied.length === 0">
+                    <li>
+                      ...
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="domain-info1 col-md-12 ">
+                <h4 class="heading5">Data Sensitivity</h4>
+                <div class="domain-cont">
+                 
+                  Personally Identified Information (PII)
+                  Protected Health Information (PHI)
+                  Payment Card Information (PCI)
+                  Payment Card Information (PCI)
+                  
+                </div>
+              </div>
+
+              </div>
+    </div>
+
+    <div class="row" *ngIf="columnStatus=='a'">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4">
+      
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+
+           
+         
+          </div>
+          <div class="col-md-6">
+            <!-- data-target="#myModalAnn" -->
+            <button type="button" class="nav-btns subnav-icons" 
+            style="float: right;outline:none" data-toggle="modal"  
+            (click)="openAnnote()"
+           >Add Annotation</button>
+
+          </div>
+        </div>
+     
+      </div>
+    </div>
+    
+    <div class="row table-row" *ngIf="columnStatus=='a'">
+            <table class="table tableviewColms table-striped table-bordered dt-responsive nowrap" style="width:100% !important">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Type</th>
+            <th>Annotation</th>
+            <th>Date</th>
+            <th>Rating</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of storedAnnote">
+            <td>
+              <!-- {{data.usr_nm}} -->
+
+              Gaurav
+            </td>
+            <td>{{data.clbrtn_type_nm}}</td>
+            <td>{{data.clbrtn_txt}}</td>
+            <td>{{data.rec_insrt_ts}}</td>
+            <td> 
+
+              <ul class="list-inline rating-list2" *ngFor="let star of stars; let i= index" > 
+                <li id="{{'starId'+i}}" [ngClass]="{'selected': (star <= data.rating)}" 
+               > ★
+                
+                </li>
+            </ul>
+
+          </td>
+           </tr>
+        </tbody>
+      </table>
+
+      <p *ngIf= "storedAnnote.length == 0" class="center">No Annotations Added</p>
+   
+    </div>
+
+
+
+
+        </div>
+        
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Edit</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form>            
+            <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dataSource">Data Source:</label>
+                <input type="text" class="form-control" id="dataSource" name="dataSourceEdit" [(ngModel)]="editabletableDetails.dsnName" >
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dataPlatform">Data Platform:</label>
+                <input type="text" class="form-control" id="dataPlatform" name="dataPlatformEdit"[(ngModel)]="editabletableDetails.dataPlatform" >
+              </div>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="data_schema">Data Schema:</label>
+                  <input type="text" class="form-control" id="data_schema" name="dataSchemaEdit"[(ngModel)]="editabletableDetails.schema" >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="tblnm">Table Name:</label>
+                  <input type="text" class="form-control" id="tblnm" name="dataTblNmEdit" [(ngModel)]="editabletableDetails.tableName" >
+                </div>
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6" >
+                  <div class="form-group" >
+                    <label for="asset_type">Asset Type:</label>
+                    <input type="text" class="form-control" id="asset_type" name="dataAssetTypeEdit" [(ngModel)]="editabletableDetails.assetType" >
+                  </div>
+                </div>
+                
+                <div class="col-md-6" >
+                  <div class="form-group">
+                    <label for="data_type_name-input2" >Data Type Name</label>
+                    <input type="text" class="form-control" name="data_type_name-input2" id="data_type_name-input2" [(ngModel)]="editabletableDetails.dataTypeName" >
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="searches">Searches</label>
+                      <input type="text" class="form-control" name="searches"id="searches" [(ngModel)]="editabletableDetails.searchCount" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="businessterm">Business Term:</label>
+                      <input type="text" class="form-control" id="businessterm" name="businessterm" [(ngModel)]="editabletableDetails.businessName == null ? '... ?' : editabletableDetails.businessName"  >
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" [(ngModel)]="editabletableDetails.isNull" class="custom-control-input" id="customCheck" name="isNull">
+                        <label class="custom-control-label" for="customCheck">Is Null</label>
+                      </div>
+                      
+                      <!-- <option value="1">1</option> -->
+                      <!-- </input> -->
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" [(ngModel)]="editabletableDetails.isPK" class="custom-control-input" id="customCheck" name="isPk">
+                        <label class="custom-control-label" for="customCheck">Is PK</label>
+                      </div>
+                      
+                      <!-- <option value="1">1</option> -->
+                      <!-- </input> -->
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" [(ngModel)]="editabletableDetails.isFK" class="custom-control-input" id="customCheck" name="isFK">
+                        <label class="custom-control-label" for="customCheck">Is FK</label>
+                      </div>
+                      
+                      <!-- <option value="1">1</option> -->
+                      <!-- </input> -->
+                    </div>
+                    
+                 
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="comment">Description:</label>
+                      <textarea class="form-control" [(ngModel)]="editabletableDetails.description" name="comment" id="comment" >{{editabletableDetails.description}}</textarea>
+                    </div>
+                  </div>
+                  </div>
+                </form>
+              </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-sm btn-update" (click)="updateConnection()">Update</button>
+            <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+      </div>
+
+      <div class="modal fade" id="myModalAnn">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+  
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add Annotation</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+  
+            <!-- Modal body -->
+            <div class="modal-body">
+
+              <div class= "row">
+                <div class= "col-md-2">
+
+                </div>
+                <div class= "col-md-8">
+                  
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ann_type">Annotation Type:</label>
+                    <select class="form-control" [(ngModel)]="annoteDetails.type" >
+                        <option *ngFor="let type of annotationTypes" value="{{type.clbrtn_type_id}}">
+                            {{type.clbrtn_type_nm}}
+                        </option>
+                    </select>
+                  </div>
+                </div>
+                 
+              </div>
+               <div class="row">
+                 <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ann_text">Annotation Text:</label>
+                    <textarea class="form-control" rows="5" [(ngModel)]="annoteDetails.text" 
+                    id="ann_text" name="annotetext"></textarea>
+                  
+                  </div>
+                 </div>
+              
+              </div>
+  
+              <div class="row">
+                <div class="col-md-12">
+                  <label >Select Rating:</label>
+                  </div>
+                  <div class="col-md-6">
+
+
+                    <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index" style="display: inline-block"> 
+                      <li (click)="countStar(star)" id="{{'starId'+i}}" [ngClass]="{'selected': (star <= selectedValue)}" 
+                      (mouseover)="addClass(star)" (mouseout)="removeClass(star)"> ★
+                         
+                      </li>
+                  </ul>
+                
+                   </div>
+                   <div class="col-md-6">
+                    <p class="p20">
+                      {{annoteDetails.rating}} star
+                    </p>
+                   </div>
+              
+              </div>  
+            
+            </div>
+                <div class= "col-md-2">
+                  
+                </div>
+              </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success btn-sm btn-update" (click)="saveAnnote()">Save</button>
+              <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Close</button>
+            </div>
+  
+          </div>
+        </div>
+        </div>
+        </div>
+     
+      
+
+      </div>
+
+  <!--new Code-->

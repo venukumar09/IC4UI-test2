@@ -1,0 +1,257 @@
+
+    <div class="container-fluid">
+        <div class="row row1">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="nav-sub-icons">
+                     <svg class="vl" id="dashboard" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 27.68 27.68">
+                          <path id="Path_261" data-name="Path 261" d="M10.668,0H2.018A2.02,2.02,0,0,0,0,2.018v5.19A2.021,2.021,0,0,0,2.018,9.227h8.65a2.021,2.021,0,0,0,2.018-2.018V2.018A2.021,2.021,0,0,0,10.668,0Zm0,0" fill="#052e5d"/>
+                          <path id="Path_262" data-name="Path 262" d="M10.668,213.332H2.018A2.02,2.02,0,0,0,0,215.35v12.11a2.02,2.02,0,0,0,2.018,2.018h8.65a2.02,2.02,0,0,0,2.018-2.018V215.35A2.021,2.021,0,0,0,10.668,213.332Zm0,0" transform="translate(0 -201.799)" fill="#052e5d"/>
+                          <path id="Path_263" data-name="Path 263" d="M288,341.332h-8.65a2.021,2.021,0,0,0-2.018,2.018v5.19a2.021,2.021,0,0,0,2.018,2.018H288a2.02,2.02,0,0,0,2.018-2.018v-5.19A2.021,2.021,0,0,0,288,341.332Zm0,0" transform="translate(-262.339 -322.879)" fill="#052e5d"/>
+                          <path id="Path_264" data-name="Path 264" d="M288,0h-8.65a2.021,2.021,0,0,0-2.018,2.018v12.11a2.021,2.021,0,0,0,2.018,2.018H288a2.021,2.021,0,0,0,2.018-2.018V2.018A2.02,2.02,0,0,0,288,0Zm0,0" transform="translate(-262.339)" fill="#052e5d"/>
+                    </svg>
+                    <div class="vl verlin"></div>
+                    <div>
+                       <button class="button active" (click)="ruleType = 'TDQ'">TDQ</button>
+                       <button class="button1" (click)="ruleType = 'BDQ'">BDQ</button>
+                       <button class="button1" (click)="ruleType = 'CDQ'">CDQ</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+        <table class="table-border">
+          <tr class="dq-title">
+            <th class="table-title">S.no</th>
+            <th class="table-title">Columns</th>
+            <th class="table-title" *ngFor="let r of ruleNames;let i = index;">{{r}}</th>
+            <!-- <th class="table-title">Confirmity</th>
+            <th class="table-title">Completeness</th>
+            <th class="table-title">Accuracy</th>
+            <th class="table-title">Consistency</th> -->
+          </tr>
+          <tr *ngFor="let col of columnDetails;let i = index">
+            <td  style="text-align:center!important;">{{i+1}}</td>
+            <td style="text-align:center!important;" (click)="openModel(col,i)"><a href="javascript:void(0);" data-toggle="modal"  data-target="#myModal">
+                {{col.assetName}}
+            </a>
+            </td>
+            <ng-container *ngFor="let r of ruleNames;let i = index;">
+                <td >
+                    <div class="td-box">
+                        <ng-container *ngFor="let rule of col.rules">
+                            
+                            <p [attr.data-letters]="rule.rul_sht_nm" *ngIf="r === rule.rul_catg_nm && rule.rul_type_nm == ruleType" title="{{rule.rul_nm}}" class="data-circle data"></p> 
+                            <!-- <span class="text">{{rule.rul_nm}}</span> -->
+                        </ng-container>
+                      
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- <td>
+                <div class="td-box">
+                    <p data-letters="DC" class="data-circle"></p>
+                    <p data-letters1="FC" class="data-circle">
+                </div>
+            </td>
+           <td >
+                <div class="td-box">
+                <p data-letters="NC"  class="data-circle"></p>
+                <p data-letters1="BC" class="data-circle">
+                </div>
+            </td>
+            <td >
+                <div class="td-box">
+                     <p data-letters="VV" class="data-circle"></p>
+                </div>
+            </td>
+            <td >
+                <div class="td-box">
+                <p data-letters="LE"  class="data-circle"></p>
+                <p data-letters1="RN" class="data-circle">    
+                </div>
+            </td> -->
+          </tr>
+          
+        </table>
+    </div>
+  </div>
+    
+</div>
+
+<div class="modal modal-size" id="myModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header title">
+          <h4 class="modal-title">DQ</h4>
+          <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" style="background-color:white!important;">
+            <!-- <div class="row">
+                <div class="col-sm-12">
+                    <p>{{rule.rul_catg_nm}}
+                    <i class="fa fa-plus-square" style="font-size:20px;color:skyblue;float:right" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"></i>
+                    </p>
+                </div>
+            </div> -->
+            <ng-container *ngFor="let r of ruleNames;let i = index;">
+                <div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>{{r}}
+                            <i class="fa fa-plus-square" style="font-size:20px;color:#417bff;float:right" data-toggle="collapse" [attr.data-target]="'#multiCollapseExample'+i" aria-expanded="false" aria-controls="multiCollapseExample"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-12">
+                       <div class="col">
+                           <div class="collapse multi-collapse show" id="multiCollapseExample{{i}}">
+                               <div class="card card-body card-color">
+                                   <ng-container *ngFor="let rule of dqRules;let j = index;">
+                                       <div class="row" *ngIf="r === rule.rul_catg_nm && rule.rul_type_nm == ruleType">          
+                                               <div class="custom-control custom-checkbox custom-control-inline" >
+                                                 <input type="checkbox" [(ngModel)]="rule.selected" (change)="onRuleChange(rule,$event)" class="custom-control-input" id="customCheckDisabled1{{j}}" [value]="rule.rul_id">
+                                                 <label class="custom-control-label input-display" for="customCheckDisabled1{{j}}" style="margin-left: 25px;"><span class="label-text">{{rule.rul_nm}}<i class="fa fa-info-circle data-hover"  style="font-size:15px;color:gray;margin-left: 5px;" title="{{rule.rul_desc_txt}}"></i></span></label>
+                                               </div>
+                                               <div *ngIf="rule.has_input">
+                                                <input type="text" class="input-accuracy" style="margin-left: 80px;" (change)="onRuleValueChange(rule,$event,j)" [(ngModel)]="rule.rul_val" />
+                                               </div>
+                                               <!-- <div class="custom-control custom-checkbox custom-control-inline">
+                                                 <input type="checkbox" class="custom-control-input" id="customCheckDisabled2">
+                                                 <label class="custom-control-label input-display" for="customCheckDisabled2" style="margin-left: 25px;"><span class="label-text">Format Check</span></label>
+                                               </div> -->
+                                       </div>
+                                    </ng-container>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- <div class="row">
+                <div class="col-sm-12">
+                    <p>Uniqueness
+                    <i class="fa fa-plus-square" style="font-size:20px;color:skyblue;float:right" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                   <div class="col">
+                       <div class="collapse multi-collapse show" id="multiCollapseExample2">
+                           <div class="card card-body card-color">
+                                   <div class="row">          
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                             <input type="checkbox" class="custom-control-input" id="customCheckDisabled3">
+                                             <label class="custom-control-label input-display" for="customCheckDisabled3" style="margin-left: 25px;"><span class="label-text">Is key</span></label>
+                                           </div>
+                                   </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>Completeness
+                    <i class="fa fa-plus-square" style="font-size:20px;color:skyblue;float:right" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                   <div class="col">
+                       <div class="collapse multi-collapse show" id="multiCollapseExample3">
+                           <div class="card card-body card-color">
+                                   <div class="row">          
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                             <input type="checkbox" class="custom-control-input" id="customCheckDisabled4">
+                                             <label class="custom-control-label input-display" for="customCheckDisabled4" style="margin-left: 25px;"><span class="label-text">Null Check</span></label>
+                                           </div>
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                             <input type="checkbox" class="custom-control-input" id="customCheckDisabled5">
+                                             <label class="custom-control-label input-display" for="customCheckDisabled5" style="margin-left: 25px;"><span class="label-text">Blank Check</span></label>
+                                           </div>
+                                   </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>Accuracy
+                    <i class="fa fa-plus-square" style="font-size:20px;color:skyblue;float:right" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                   <div class="col">
+                       <div class="collapse multi-collapse show" id="multiCollapseExample4">
+                           <div class="card card-body card-color">
+                                   <div class="row">          
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                             <input type="checkbox" class="custom-control-input" id="customCheckDisabled6">
+                                             <label class="custom-control-label" for="customCheckDisabled6" style="margin-left: 25px;"><span class="label-text">Valid Values</span></label>
+                                             <input type="text" class="input-accuracy input-display">
+                                           </div>
+                                           
+                                   </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>Consistency
+                    <i class="fa fa-plus-square" style="font-size:20px;color:skyblue;float:right" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                   <div class="col">
+                       <div class="collapse multi-collapse show" id="multiCollapseExample5">
+                           <div class="card card-body card-color">
+                                   <div class="row">          
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                             <input type="checkbox" class="custom-control-input " id="customCheckDisabled7">
+                                             <label class="custom-control-label input-display" for="customCheckDisabled7" style="margin-left: 25px;"><span class="label-text">Length</span></label>
+                                             <input type="text" class="input-accuracy" style="margin-left: 80px;">
+                                           </div>
+                                           <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="customCheckDisabled8">
+                                            <label class="custom-control-label input-display" for="customCheckDisabled8" style="margin-left: 25px;"><span class="label-text">Range</span></label>
+                                            <input type="text" class="input-accuracy" style="margin-left: 80px;">
+                                          </div>
+                                           
+                                   </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div> -->
+        </div>
+        
+  <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" style="background-color:green;border:green!important;width:78px;" data-dismiss="modal" (click)="saveDqRules()">Save</button>
+                <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancel</button>
+            </div>
+      </div>
+    </div>
+  </div>           

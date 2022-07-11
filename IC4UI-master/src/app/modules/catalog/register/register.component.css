@@ -1,0 +1,226 @@
+.form-control{
+    border-radius: 1px;
+}
+.regclone{
+    background:white;
+    border:2px solid #b1bec7;
+    border-radius:20px;
+      padding-right:35px;
+      padding-left: 35px;
+    padding-top:2px;
+      padding-bottom:2px;
+      margin-top: 20px; 
+      color:#163d68; 
+      font-weight: 500;
+}
+input[type="radio"] {
+-ms-transform: scale(2); /* IE 9 */
+-webkit-transform: scale(2); /* Chrome, Safari, Opera */
+transform: scale(2);
+background-color: white;
+}
+.push-right{
+    text-align: right;
+}
+.body{
+    color:#062f5e;
+    position: relative;
+ }
+.radio-block{
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    margin-left:-35px;
+      margin-bottom: 20px;
+}
+.radio{
+    display: inline-block;
+} 
+.head-registration{
+    width: 99%;
+  border-bottom: 3px solid #f0f2f4;
+  margin: 0 auto;
+  padding: 0px;
+}
+.col{
+    padding:0px;
+    margin-right: 10px;
+}
+.regHeading{
+    position: relative;
+  left: 8px;
+  /* top: 9px; */
+  color:#062f5e;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+  /* The container */
+  .container {
+      display: block;
+      position: relative;
+      padding-left: 45px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      float:left;
+      margin: 0 20px 0 20px;
+      font-family: 'Roboto';
+      font-size: 15px;
+  }
+
+  /* Hide the browser's default radio button */
+  .container input {
+      position: absolute !important;
+      opacity: 0;
+      cursor: pointer;
+      float:left;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: white;
+      border: 1.5px solid rgb(143, 140, 140);
+      border-radius: 50%;
+      float:left;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+  
+      float:left;
+  }
+
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+      background-color: #ffffff;
+      border: 1.5px solid rgb(143, 140, 140);
+      float:left;
+  }
+
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      float:left;
+  }
+
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+      display: block;
+      float:left;
+      position: relative;
+      left:3px;
+  }
+
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+      top: 14%;
+      left: 13%; 
+      width: 68%;
+      height: 72%;
+      border-radius: 50%;
+      background: #2196F3;
+      float:left;
+  }
+  .nav-sub-icons{
+    position: relative;
+    left:20px;
+    display: block;
+    top: 0px;
+}
+.manual input:checked ~ .checkmark:after {
+  left: 4px !important;
+}
+.manual{
+  left: 14% !important;
+}
+.vl{
+  display: inline-block;
+}
+.dashboard{
+  position: relative !important;
+  top: 11px !important;
+}
+.sub-nav-bar{
+    background: #f8f9fa;
+  }
+.active ,.button1:hover{
+  background-image: linear-gradient(150deg,#1656a2 30%,#1696d8 80.71%);
+  outline: none;
+  border: none;
+  color: white;
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 72px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.button{
+  float:left; 
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  /*border-style: solid;*/
+  color: white;
+}
+.verlin{
+  position: absolute;
+  top: 5px;
+  left: 50px;
+  background: red;
+  border-right: 1px solid #b3afaf;
+  height: 41px;
+}
+.button1{
+  float:left; 
+  border-color: #1a9fdd;
+  padding: 4px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-style: solid;
+  color: #1981b1;
+  background:#f8f9fa
+}
+ 

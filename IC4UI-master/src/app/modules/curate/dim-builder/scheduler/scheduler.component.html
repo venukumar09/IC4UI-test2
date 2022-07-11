@@ -1,0 +1,125 @@
+<div class="dim_sch">
+  <div class="right-body">
+    <div class="row innn">
+      <div class="col-sm-4">
+        <label style="width:100%;">
+          Job Name
+          <input style="border-bottom: 1px dashed ;background: #e4e1e1;outline: none;" [readonly]=false type="text" class="inpt" [(ngModel)]="job.jobName">
+        </label>
+      </div>
+      <div class="col-sm-4">
+        <label>
+          Calender Name
+        </label>
+        <select class="inpt" id="sel1" name="calenderName" (change)="onSelectedCalender()"
+          [(ngModel)]="job.calenderName">
+          <option *ngFor="let c of calenderNames" [value]="c.clndr_nm">{{c.clndr_nm}}</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label>Schedule Name</label>
+        <select class="inpt" id="sel1" name="ScheduleName" (selectionChange)="onSelectedSchedule()"
+          [(ngModel)]="job.scheduleName">
+          <option *ngFor="let s of filterScheduleNames" [value]="s.sch_nm">{{s.sch_nm}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row innn">
+      <div class="col-sm-4">
+        <label>
+          Job Effective Start Date
+        </label>
+        <input type="date" class="inpt" id="jobeffectiveStartdate" name='JobEffectiveStartDate'
+          title="If StartDate = 10th Sept 2018, 10pm and ScheduleInterval = 24hrs (daily job) then 1st ExceutionDate = 11th Sept 2018, 10pm.&#13;If StartDate = 10th Sept 2018, 3 pm and ScheduleInterval = 7 days(weekly job) then 1st ExecutionDate = 17th Sept 2018, 3pm."
+        [(ngModel)]=" job.effectiveStartDate"  (ngModelChange)="selectedEffectiveStartDt($event)" value="{{effectiveStartDate | date:'yyyy-MM-dd'}}">
+
+      </div>
+      <div class="col-sm-4">
+        <label>
+          Schedule Effective Start Date
+        </label>
+        <input type="date" class="inpt" id="scheffectivestartdate" name='ScheduleEffectiveStartDate'
+              [(ngModel)]=" job.scheduleeffectiveStartDate"
+                (ngModelChange)="selectedScheduleEffStartDt($event)" value="{{effectiveStartDate | date:'yyyy-MM-dd'}}">
+      </div>
+      <div class="col-sm-4">
+        <label>
+          Schedule Start Time
+        </label>
+        <input type="time" class="inpt" name='ScheduleStartTime' [(ngModel)]="job.scheduleStartTime">
+      </div>
+
+    </div>
+
+    <div class="row innn">
+      <div class="col-sm-4" *ngIf="job.isCronExpression.toLowerCase() === 'n'">
+        <label>
+          Job SLA Start-Time
+        </label>
+        <input type="time" class="inpt" name='JobSLAStart-Time' [(ngModel)]="job.slaStartTime">
+      </div>
+
+      <div class="col-sm-4">
+        <label>
+          Job SLA End-Time
+        </label>
+        <input type="time" class="inpt" name='JobSLAEnd-Time' [(ngModel)]="job.slaEndTime">
+      </div>
+      <div class="col-sm-4">
+        <label>
+          SLA offset Days
+        </label>
+        <input type="number" class="inpt" name='ScheduleStartTime' [(ngModel)]="job.slaOffsetDays">
+      </div>
+    </div>
+    <div class="row innn">
+      <div class="col-sm-4">
+        <label>
+          Impact
+        </label>
+        <select class="inpt" id="sel1" name="Impact" [(ngModel)]="job.impact">
+          <option [value]="'low'">Low</option>
+          <option [value]="'medium'">Medium</option>
+          <option [value]="'high'">High</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label style="width:100%">
+          Support Group
+          <input type="text" class="inpt" name='SupportGroup' [(ngModel)]="job.supportGroup">
+        </label>
+      </div>
+      <div class="col-sm-4">
+        <label>
+          Ticketing Type
+        </label>
+        <select id="temp" class="inpt" placeholder="Ticketing Type" [(ngModel)]="job.ticketing_system_type">
+          <option [value]="'jeera'">Jira</option>
+          <option [value]="'gathi'">Gathi</option>
+        </select>
+      </div>
+    </div>
+    <div class="row innn">
+      <div class="col-md-12 dim-sch-queries">
+        <div>
+          <div style="padding-top:3px;font-weight:bold"> {{job.queries?.output_table_name}}:</div>
+          <div>{{job.queries?.query}}</div>
+        </div>
+      </div>
+    </div>
+  <div class="btn-block">
+    <div class="row">
+      <div class="col-5"></div>
+      <div class="col-3">
+        <div class="row">
+          <div class="col-4">
+            <button class="save-btn"  (click)="submit()">Submit</button>
+          </div>
+          <div class="col-4">
+            <button class="cancel-btn" (click)="cancel()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

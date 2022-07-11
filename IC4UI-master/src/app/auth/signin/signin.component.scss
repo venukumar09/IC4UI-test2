@@ -1,0 +1,89 @@
+.main-sign-in{
+  background-image: url('../../../assets/images/login_bg.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.svg-login{
+    position: relative;
+}
+.row{
+    width:99%;
+}
+.login-block{
+    position: relative;
+    top:120px;
+  display: block;
+  /*background: red;*/
+  font-size: 12px;
+  margin:0 auto;
+  background: white;
+  border-radius:3px;
+  padding: 20px 50px;
+  width: 85%;
+  height: 400px;
+}
+.input-text{
+    border-radius:2px;
+}
+.not-account{
+      font-size: 14px;
+      margin: 10px auto;
+      text-align: center;
+      font-weight: 600;
+      padding: 10px;
+      cursor: pointer;
+}
+.form-success-btn{
+      position: relative;
+      background: #00d138;
+      border-radius: 40px;
+      height: 42px;
+      font-weight: 500;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 50px;
+      padding-right: 50px;
+      border: none;	
+  }
+.forgot-password{
+  position: relative;
+  bottom:27px;
+  left:60%;
+  color: #ccc;
+  cursor: pointer;
+  font-weight: 500;
+}
+.form-group,.btn,.not-account{
+      bottom: 75px;
+      position: relative;
+}
+@font-face {
+     font-family: 'HelveticaNeue', cursive;
+     src : url('/fonts/font/HelveticaNeue.ttc')format("ttc");
+  }
+@media screen and (max-width: 510px) {
+    .forgot-password{
+        position: relative;
+        bottom:27px;
+        left:56%;
+        color: #ccc;
+        cursor: pointer;
+        font-weight: 500;
+      }
+  }
+  label,.forgot-password{
+    color:#9a9a9a;
+    font-weight: 500;
+  }
+.login-block-main{
+  margin:0 auto;
+}
+.logo-login{
+  position: relative;
+  width: 200px;
+  height: 150px;
+  margin:0 auto;
+  bottom: 80px;
+}

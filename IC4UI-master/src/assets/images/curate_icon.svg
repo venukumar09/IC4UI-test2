@@ -1,0 +1,10 @@
+   <svg class="mainLogo" xmlns="http://www.w3.org/2000/svg" width="38.12" height="25.991"
+              viewBox="0 0 38.12 25.991">
+              <g id="visibility-button" transform="translate(0 -89.25)">
+                <g id="visibility" transform="translate(0 89.25)">
+                  <path id="Path_224" data-name="Path 224"
+                    d="M19.06,89.25a20.415,20.415,0,0,0-19.06,13,20.475,20.475,0,0,0,38.12,0A20.415,20.415,0,0,0,19.06,89.25Zm0,21.659a8.664,8.664,0,1,1,8.664-8.664A8.58,8.58,0,0,1,19.06,110.909Zm0-13.862a5.2,5.2,0,1,0,5.2,5.2A5.105,5.105,0,0,0,19.06,97.047Z"
+                    transform="translate(0 -89.25)" fill="#1656a2" />
+                </g>
+              </g>
+            </svg>

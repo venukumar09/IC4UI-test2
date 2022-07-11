@@ -1,0 +1,119 @@
+
+<script>
+    
+    </script>
+    
+<div *ngIf="!showTable">
+    <div class="row">
+        <div class="col-sm-12" *ngIf="files.length == 0">
+            <div class="upload" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                <!-- <input type="button" id="btnFileUpload" value="Upload Files"/><i class="fa fa-cloud-upload" style="font-size:48px;color:blue"></i> -->
+                <button type="button" id="btnFileUpload" value="Upload Files" style="font-size:24px"> <i
+                        class="fa fa-cloud-upload" style="color:rgb(92, 157, 211);font-size:40px"></i> Upload
+                    files</button>
+                <span id="spnFilePath"></span>
+                <!-- <input type="file" id="FileUpload1" style="display: none" /> -->
+                <input hidden type="file" id="FileUpload1" #fileInput (change)="uploadFile($event.target.files)">
+            </div>
+
+        </div>
+        <div id="btnFileUpload1" class="align-center" *ngFor="let file of files;let i= index">
+            <div class="file-block">
+            <p> {{ file.name }} </p>
+       
+                <svg class="delete-file" (click)="deleteAttachment(i)"xmlns="http://www.w3.org/2000/svg" width="15.267" height="20.483" viewBox="0 0 15.267 20.483">
+                    <g id="rubbish-bin" transform="translate(0 0)">
+                      <g id="Group_433" data-name="Group 433" transform="translate(0)">
+                        <path id="Path_446" data-name="Path 446" d="M74.73,113.975a1.031,1.031,0,0,0,1.03.988h9.623a1.031,1.031,0,0,0,1.03-.988L87.1,99.468H74.043Zm8.018-10.9a.419.419,0,0,1,.419-.419h.67a.419.419,0,0,1,.419.419v8.288a.419.419,0,0,1-.419.419h-.67a.419.419,0,0,1-.419-.419Zm-2.93,0a.419.419,0,0,1,.419-.419h.67a.419.419,0,0,1,.419.419v8.288a.419.419,0,0,1-.419.419h-.67a.419.419,0,0,1-.419-.419v-8.288Zm-2.93,0a.419.419,0,0,1,.419-.419h.67a.419.419,0,0,1,.419.419v8.288a.419.419,0,0,1-.419.419h-.67a.419.419,0,0,1-.419-.419Z" transform="translate(-72.939 -94.48)" fill="#1656a2"/>
+                        <path id="Path_447" data-name="Path 447" d="M66.635,1.055H62.2V.216A.216.216,0,0,0,61.98,0H57.318A.216.216,0,0,0,57.1.216v.839H52.663a.647.647,0,0,0-.647.647V3.734H67.282V1.7A.647.647,0,0,0,66.635,1.055Z" transform="translate(-52.016 0)" fill="#1656a2"/>
+                      </g>
+                    </g>
+                  </svg>
+            </div>
+        </div>
+    </div>
+    <div class="row"  *ngIf="files.length == 0">
+        <div class="col-sm-12">
+            <div class="Download">
+                <a download href="#" style="color:black;"><i class="fa fa-file-text"
+                        style="font-size:36px; margin-top: 10%; "></i>
+                    &nbsp;&nbsp;&nbsp;Download Sample Template</a>
+            </div>
+        </div>
+    </div>
+    <div class="row " style="margin-top: 30px;">
+        <div class="col-sm-9"></div>
+        <div class="btn_col col-sm-3">
+            <button type="button" (click)="sendFile()" class="btn-next">Next</button>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- View Details -->
+
+<div *ngIf="showTable">
+    <div class="row">
+        <div class="col-sm-9 col-8 block">
+            <div class="inline-block" style="font-size:25px;">New Registration</div>
+            <i class="fa fa-caret-right inline-block" id="icons-sizing"></i>
+            <div class=" inline-block" id="text-icons" style="font-size:23px;margin-left: -5px">Object Details</div>
+        </div>
+        <div class="col-sm-3 col-4 pull-right">
+            <button (click)="showTable = false" type="button" class=" btn btn-primary form-pri-main-btn">Back</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Table Name</th>
+                        <th>Column</th>
+                        <th>Data Type</th>
+                        <th>Size</th>
+                        <th>Format</th>
+                        <th>Is Null</th>
+                        <th>Is Primary Key</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="bottom-border" *ngFor="let d of tableDetails; let i=index;">
+                        <td>{{d.obj_phy_nm}}</td>
+                        <td>{{d.obj_prpt_nm}}</td>
+                        <td>{{d.obj_prpt_dat_type}}</td>
+                        <td>{{d.obj_prpt_len ? d.obj_prpt_len : '--' }}</td>
+                        <td>{{d.obj_prpt_date_fmt_type  ? d.obj_prpt_len : '--'}}</td>
+                        <td>
+                            <label class="container">
+                                <i [ngStyle]="{ 'color' : d.is_nlbl_flg == 'Y' ? '#00d138' : 'red' }" class="fa"
+                                    [ngClass]="{ 'fa-check' :  d.is_nlbl_flg == 'Y' , 'fa-times' : d.is_nlbl_flg == 'N'}"
+                                    aria-hidden="true">
+                                </i>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="container">
+                                <i [ngStyle]="{ 'color' : d.is_prmy_key_flg == 'Y' ? '#00d138' : 'red' }" class="fa"
+                                    [ngClass]="{ 'fa-times' : d.is_prmy_key_flg == 'N' , 'fa-check' :  d.is_prmy_key_flg == 'Y'}"
+                                    aria-hidden="true">
+                                </i>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-11"></div>
+        <div class="btn_col col-sm-1">
+            <button type="button" class="btn-next" (click)="insertData()">Submit</button>
+        </div>
+    </div>
+</div>
+
+

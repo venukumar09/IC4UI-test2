@@ -1,0 +1,1948 @@
+<div class="container">
+    <div class="card" style="margin-bottom:10px;">
+        <div id="stepper1" class="bs-stepper">
+            <div class="bs-stepper-header ">
+                <div class="step" data-target="#test-l-1">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle" style="font-size: small;">1</span>Review Source
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-2">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle" style="font-size: small;">2</span>Setup Target
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-3">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle" style="font-size: small;">3</span>Schedule
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-4">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle" style="font-size: small;">4</span>Airflow
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="bs-stepper-content rowpad">
+                <div id="test-l-1" class="content">
+
+                    <div *ngIf="!showDQRules">
+                        <div class="card-body2" style="margin-bottom:20px">
+                            <div class="row" style="float: right;">
+                                <a href="javascript: void(0);" class="display" (click)="gotoDQRules()">DQ Rules</a>
+                                <!-- <a href="javascript: void(0);" class="display">DQ Rules</a> -->
+                                <a href="#" target="" class="display">Standardization Rules</a>
+                                <a href="#" target="" class="display">View Rules</a>
+                            </div>
+                            <div class="row space">
+                                <div class="col-sm-2">
+                                    <label style="color:black;margin-bottom:20px;margin-left: 20px;">Delivery
+                                        Mode:</label>
+                                </div>
+                                <!-- <div class="col-sm-2 radio_btn1 " style="margin-left:-100px;" *ngFor="let op of options">
+                                    <input type="radio" name="radio-group1" value="{{op}}" (change)="onItemChange($event)">
+                                    <label for="test"><span style="margin-left:10px;margin-bottom:40px;">{{op}}</span></label>
+                                </div> -->
+                                <!-- <div class="col-md-2 radio_btn1" *ngFor="let op of options" style="margin-left:-100px;">
+                                    <div><input type="radio" id="test2" name="radio-group1"><label for="test2"><span
+                                                class="radio-lbl">{{op}}</span></label>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-2 radio_btn1" style="margin-left:-90px;">
+                                    <div><input type="radio" id="test3" name="radio-group1" value="push"
+                                            [checked]="register.mode == 'push'" (change)="deliveryModeChng('push')"
+                                            checked><label for="test3"><span class="radio-lbl">Push</span></label></div>
+                                </div>
+                                <div class="col-md-2 radio_btn1" style="margin-left:-90px;">
+                                    <div><input type="radio" id="test12" name="radio-group1" value="pull"
+                                            [checked]="register.mode == 'pull'"
+                                            (change)="deliveryModeChng('pull')"><label for="test12"><span
+                                                class="radio-lbl">Pull</span></label></div>
+                                </div>
+                                <div class="col-sm-3" *ngIf="register.mode=='push'">
+                                    <input type="text" class="text-line2" placeholder="Landing File Name"
+                                        [(ngModel)]="source.lnd_file_nm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body2" style="margin-bottom:20px">
+                            <div class="col">
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Object</label></div>
+                                        <div><input type="text" class="text-line1 " [(ngModel)]="source.obj_phy_nm"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Object Type</label></div>
+                                        <div><input type="text" class="text-line1 " [(ngModel)]="source.obj_type_nm"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Data Platform</label></div>
+                                        <div><input type="text" class="text-line1 " [(ngModel)]="source.obj_db_pltfm_nm"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Db Schema Name</label></div>
+                                        <div><input type="text" class="text-line1 " [(ngModel)]="source.obj_schm_nm"
+                                                disabled></div>
+                                    </div>
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Site</label></div>
+                                        <div>
+                                            <!-- <select class="optional-tag">
+                                                <option>gathi_demo</option>
+                                                <option>Gathi</option>
+                                            </select> -->
+                                            <select class="optional-tag" [(ngModel)]="source.conn_id"
+                                                (change)=siteChange()>
+                                                <span></span>
+                                                <option *ngFor="let s of sites" [value]="s.conn_id">
+                                                    {{s.conn_nm}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Object Format Type</label></div>
+                                        <div><input type="text" class="text-line2 "
+                                                [(ngModel)]="source.obj_fmt_type_nm">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">RawZone Format Type</label></div>
+                                        <div><input type="text" class="text-line2 "
+                                                [(ngModel)]="source.dl_raw_fmt_type_nm">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Organisation</label></div>
+                                        <div><select class="optional-tag" [(ngModel)]="source.org_id"
+                                                (change)="organizationChange(source.org_id)">
+                                                <option *ngFor="let o of organizations" [value]="o.org_id">
+                                                    {{o.org_nm}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">LOB</label></div>
+                                        <div><select class="optional-tag" [(ngModel)]="source.ln_of_bsn_id"
+                                                (change)="lobSelectChng()">
+                                                <option *ngFor="let l of finalLob" [value]="l.ln_of_bsn_id">
+                                                    {{l.ln_of_bsn_nm}}
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Application</label></div>
+                                        <div>
+                                            <select
+                                                [disabled]="source.ln_of_bsn_id == null ||  source.ln_of_bsn_id == '-1'"
+                                                class="optional-tag" (change)="applicationSelectChng()"
+                                                [(ngModel)]="source.apn_id">
+                                                <option *ngIf="finalApplications.length === 0">
+                                                    --No Applications Found--
+                                                </option>
+                                                <option *ngFor="let a of finalApplications" [value]="a.apn_id"
+                                                    ngDefaultControl>
+                                                    {{a.apn_nm}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">RawZone Site</label></div>
+                                        <div><select class="optional-tag" (change)="rawZoneSiteChange()"
+                                                [(ngModel)]="source.dl_raw_site_id">
+                                                <option *ngFor="let s of sites" [value]="s.conn_id">
+                                                    {{s.conn_nm}}
+                                                </option>
+
+                                            </select></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">RawZone Location</label></div>
+                                        <div><input type="text" class="text-line2 " [(ngModel)]="source.dl_raw_loc_txt">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Profiling Site</label></div>
+                                        <div><select class="optional-tag" (change)="profilingSiteChange()"
+                                                [(ngModel)]="source.prflg_zn_site_id">
+                                                <option *ngFor="let p of sites" [value]="p.conn_id">
+                                                    {{p.conn_nm}}
+                                                </option>
+                                            </select></div>
+                                    </div>
+
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-md-4">
+                                        <div><label class="op-label">Profiling Location</label></div>
+                                        <div><input type="text" class="text-line2 "
+                                                [(ngModel)]="source.prflg_zn_loc_txt">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"
+                                        *ngIf="register.mode == 'push' || this.source.obj_type_nm.toLowerCase() =='file' ">
+                                        <div><label class="op-label">Landing Location</label></div>
+                                        <div><input type="text" class="text-line2"
+                                                [(ngModel)]="source.lnd_file_path_txt">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="this.source.obj_type_nm.toLowerCase() =='file'">
+                                        <div><label class="op-label">Delimiter</label></div>
+                                        <div><input type="text" class="text-line2" [(ngModel)]="source.file_dlmt_cd">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row rowpad">
+                                    <div class="col-sm-4">
+                                        <label style="color:black;margin-top: 35px;margin-left: 20px;">Remove Header
+                                            Record Indicator Mode:</label>
+                                    </div>
+                                    <div class="col-md-2 radio_btn1" style="margin-top: 30px;margin-left:-100px;">
+                                        <div><input type="radio" id="header_yes" name="radio-group2" value="yes"
+                                                [checked]="option.mode == 'yes'" (change)="onSelectionChange('yes')"
+                                                checked><label for="header_yes">
+                                                <span class="radio-lbl">Yes</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 radio_btn1" style="margin-top: 30px;margin-left:-100px;">
+                                        <div><input type="radio" id="header_no" name="radio-group2" value="no"
+                                                [checked]="option.mode == 'no'"
+                                                (change)="onSelectionChange('no')"><label for="header_no">
+                                                <span class="radio-lbl">No</span></label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row " style="height: 320px; padding: 20px;" *ngIf="!configDqRules">
+                            <div class="src-scrollable">
+                                <table class="table-border">
+
+                                    <tr class="dq-title">
+                                        <th class="table-title">Name</th>
+                                        <th class="table-title">Data Type</th>
+                                        <th class="table-title">Is Null</th>
+                                        <th class="table-title">Is PK</th>
+                                        <!-- <th class="table-title">Is FK</th> -->
+                                        <th class="table-title">Is CDC</th>
+                                        <th class="table-title">Rules Applied</th>
+                                        <th class="table-title" >Edit Rules</th>
+                                    </tr>
+                                    <tr *ngFor="let data of columnDetails; let i = index">
+                                        <td style="padding-left: 10px;">
+                                            <!-- (click)="goToColDet(data.id)" -->
+                                            <a  style="color: #2c59a4;cursor: pointer;">
+                                                {{data.assetName}}
+                                            </a>
+
+
+                                        </td>
+                                        <td>{{data.dataType | titlecase}}
+                                            <span *ngIf="data.dataTypeLength !== '' && data.dataTypeLength !== null">
+                                                ({{data.dataTypeLength}})
+                                            </span>
+                                        </td>
+                           
+                                        <td>
+                                            <input type="checkbox"  [(ngModel)]="data.isNull1" (change)="changeSelection(data.isNull1,i,'null')"
+                                        id="null{{i}}" name="null{{i}}" >   
+                                        <!-- {{data.isNull}} -->
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox"  [(ngModel)]="data.isPK1" (change)="changeSelection(data.isPK1,i,'pk')"
+                                        id="pk{{i}}" name="pk{{i}}" > 
+                                        <!-- {{data.isPK}} -->
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox"  [(ngModel)]="data.isCDC1" (change)="changeSelection(data.isCDC1,i,'cdc')"
+                                        id="cdc{{i}}" name="cdc{{i}}" > 
+                                        <!-- {{data.isCDC}} -->
+                                        </td>
+                                        <!-- <td style="text-align:center;" *ngIf="data.isNull=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isNull=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+                                        <!-- <td style="text-align:center;" *ngIf="data.isPK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isPK=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+                                        <!-- <td style="text-align:center;" *ngIf="data.isFK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td style="text-align:center;" *ngIf="data.isFK=='N'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+                                        <td style="text-align:center;">
+                                            <span *ngFor="let r of data.rules; ">
+                                                <a (click)="showRulevalues(r)" style="color: #2c59a4;cursor: pointer;">
+                                                    <!-- {{r.rul_nm | titleCasePro}} -->
+                                                    {{r.rul_nm }}
+                                                </a>
+                                                <span *ngIf="data.rules.length > 1">,</span>
+                                            </span>
+                                            <span *ngIf="data.rules.length == 0"> -- </span>
+                                        </td>
+
+                                        <td class="icon" style="text-align:center;" >
+                                            <a (click)="dqRulesEdit(data)" style="cursor:pointer" title="Edit Rules">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+
+                                <p *ngIf="columnDetails.length == 0" class="center">No Columns Added</p>
+
+
+                                <div class="row">
+                                    <div class="modal fade" id="modalValues" role="dialog" aria-labelledby="valuesModal"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-xl" style="width:1250px;">
+                                            <div class="modal-content">
+                                                <div class="modal-header"
+                                                    style="background-color:#0072c6;color: white;">
+                                                    <h4 class="modal-title">
+                                                        Rule: {{selectedRule?.rul_nm | uppercase}}
+                                                    </h4>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body mb-1">
+                                                    <label for="rul_def">Rule Definition:</label>
+                                                    <div>
+                                                        <textarea type="text" readonly=true class="form-control"
+                                                            id="rul_def" [ngModel]="selectedRule?.rule_def"
+                                                            name="rul_def" autocomplete="off"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group" style="margin-top: 5px;"
+                                                        *ngIf="selectedRule?.rule_def">
+                                                        <label
+                                                            for="data_source">{{selectedRule.ruleDefValuesLabel}}:</label>
+                                                        <div>
+                                                            <textarea type="text" readonly=true class="form-control"
+                                                                id="ruleDefValues" [(ngModel)]="selectedRule.values"
+                                                                name="ruleDefValues" autocomplete="off"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group" style="margin-top: 5px;"
+                                                        *ngIf="selectedRule?.rule_def">
+                                                        <label for="data_source">Resolved Value:</label>
+                                                        <div>
+                                                            <textarea type="text" readonly=true class="form-control"
+                                                                id="resolvedValue"
+                                                                [(ngModel)]="selectedRule.resolvedValue"
+                                                                name="resolvedValue" autocomplete="off"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer" class="padding15">
+                                                        <!-- <div class="row ">
+                        <div class="col-sm-6">
+                          <button type="button"  (click)="newMethod(current_rule,current_env)" class="btn btn-primary btn-sm pull-right">Save</button>
+                        </div>
+  
+                        <div class="col-sm-6">
+                          <button type="button" class="btn btn-danger btn-sm" (click)="closeValuesModal()">Cancel</button>
+                        </div>
+                      </div> -->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="configDqRules">
+                            <app-cde-dq-rules class="asset-dq-rules" [source]="dqSource"
+                                [sourceAttributes]="columnDetails" (dqEdit)="showDqRules($event)"
+                                (finalRules)="finalRules($event)"></app-cde-dq-rules>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-10"></div>
+                            <div class="col-sm-2">
+                                <button (click)="goToView('TRG')" class="next" style="float: right; margin-top:10px;">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="showDQRules">
+                        <div class="row">
+                            <div class="col-sm-10"></div>
+                            <div class="col-sm-2">
+                                <button (click)="backFromDq()" class="next" style="float: right;">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="showDQRules">
+                        <app-cde-dq-rules class="asset-dq-rules" [source]="dqSource" [sourceAttributes]="columnDetails"
+                            (dqEdit)="showDqRules($event)" (finalRules)="finalRules($event)"></app-cde-dq-rules>
+                    </div>
+
+
+                </div>
+                <div id="test-l-2" class="content">
+
+                    <div class="card-body2" style="margin-bottom:20px">
+                        <div class="row" style="padding: 10px;">
+                            <div class="col-md-2 radio_btn1">
+                                <div><label></label></div>
+                                <div><input class="text-line2" type="radio" id="public" name="radio-group3"
+                                        value="is Public" [checked]="public.mode == 'is Public'"
+                                        (change)="onSelectionpublic('is Public')" checked><label for="public"><span
+                                            class="radio-lbl">Is
+                                            Public</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 radio_btn1">
+                                <div><label></label></div>
+                                <div><input class="text-line2" type="radio" id="private" name="radio-group3 "
+                                        value="is private" [checked]="public.mode == 'is private'"
+                                        (change)="onSelectionpublic('is private')"><label for="private"><span
+                                            class="radio-lbl">Is
+                                            Private</span></label></div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- <select class="optional-tag" >
+                                    <option class="ll">Subject Area</option>
+                                    <option>Life insurance</option>
+                                </select> -->
+                                <div><label>Subject Area</label></div>
+                                <select class="optional-tag" (change)="target_subjAreaChng()"
+                                    [(ngModel)]="source.prflg_zn_site_id" required>
+                                    <option *ngFor="let s of subjectAreas" [value]="s.sub_area_nm">
+                                        {{s.sub_area_nm}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <div> <label>Description</label></div>
+                                <div><input type="text" class="text-line2" [(ngModel)]="target.obj_desc_txt" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col card-body2 ">
+                        <div class="row rowpad">
+                            <div class="col-md-4">
+                                <div><label class="op-label">Object</label></div>
+                                <div><input type="text" class="text-line2 " [(ngModel)]="defaultValues.trg_dat_src_nm">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Object Type</label></div>
+                                <div><input type="text" class="text-line2 " [(ngModel)]="defaultValues.trg_obj_type_nm">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Data Schema Name</label></div>
+                                <div><input type="text" class="text-line2 " [(ngModel)]="defaultValues.trg_schema_nm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+                            <div class="col-md-4">
+                                <div><label class="op-label">Data Platform</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="target.obj_db_pltfm_nm">
+                                        <option *ngFor="let d of uniqueTargetDbPlatforms" [value]="d.targetDbPlatform"
+                                            ngDefaultControl>
+                                            {{d.targetDbPlatform}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Site</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="target.conn_id">
+                                        <option *ngFor="let s of sites" [value]="s.site_id">
+                                            {{s.conn_nm}}
+                                        </option>
+                                    </select></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">LOB</label></div>
+                                <div><select class="optional-tag" (change)="target_lobSelectChng()"
+                                        [(ngModel)]="target.ln_of_bsn_id">
+                                        <option *ngFor="let l of finalLob" [value]="l.ln_of_bsn_id">
+                                            {{l.ln_of_bsn_nm}}
+                                        </option>
+                                    </select></div>
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+                            <div class="col-md-4">
+                                <div><label class="op-label">Application</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="target.apn_id">
+                                        <option *ngIf="finalTarApplications.length === 0">
+                                            --No Applications Found--
+                                        </option>
+                                        <option *ngFor="let a of finalTarApplications" [value]="a.apn_id">
+                                            {{a.apn_nm}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Target Location</label></div>
+                                <div><input type="text" class="text-line2 " [(ngModel)]="defaultValues.target_location">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row " style="height: 320px; padding: 20px;">
+                            <div class="src-scrollable">
+                                <table class="table-border">
+                                    <tr class="dq-title">
+                                        <th class="table-title">S.no</th>
+                                        <th class="table-title">Name</th>
+                                        <th class="table-title">Datatype</th>
+                                        <th class="table-title">Is Null</th>
+                                        <th class="table-title">Is primary Key</th>
+                                        <!-- <th class="table-title">Is Foreign Key</th> -->
+                                        <th class="table-title">CDC Flag</th>
+                                    </tr>
+                                    <tr *ngFor="let colms of targetAttributes; let i =index">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{colms.assetName}}</td>
+                                        <td>{{colms.dataType}}</td>
+
+                                        <td *ngIf="colms.isNull=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isNull!='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isPK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isPK!='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <!-- <td *ngIf="colms.isFK=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isFK!='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+                                        <td *ngIf="colms.isCdc=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isCdc!='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <!-- <td *ngIf="colms.isCdc=='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_913" data-name="Group 913"
+                                                    transform="translate(-1751 -442)">
+                                                    <g id="Group_912" data-name="Group 912"
+                                                        transform="translate(43.552 -0.449)">
+                                                        <g id="pencil" transform="translate(1474.447 442.449)">
+                                                            <g id="Group_243" data-name="Group 243"
+                                                                transform="translate(233.001)">
+                                                                <path id="Path_243" data-name="Path 243"
+                                                                    d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                    transform="translate(-0.001)" fill="#00d138" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <path id="correct-2"
+                                                        d="M4.815,9.968a.674.674,0,0,1-.478-.2L.2,5.631a.676.676,0,1,1,.955-.955L4.815,8.337l7.8-7.8a.676.676,0,0,1,.955.956L5.293,9.77A.674.674,0,0,1,4.815,9.968Zm0,0"
+                                                        transform="translate(1760 452.661)" fill="#fff" />
+                                                </g>
+                                            </svg>
+                                        </td>
+                                        <td *ngIf="colms.isCdc!='Y'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 30 30">
+                                                <g id="Group_766" data-name="Group 766"
+                                                    transform="translate(-1707.448 -442.449)">
+                                                    <g id="pencil" transform="translate(1474.447 442.449)">
+                                                        <g id="Group_243" data-name="Group 243"
+                                                            transform="translate(233.001)">
+                                                            <path id="Path_243" data-name="Path 243"
+                                                                d="M15,0A15,15,0,1,0,30,15,15,15,0,0,0,15,0Z"
+                                                                transform="translate(-0.001)" fill="#ff6a6a" />
+                                                        </g>
+                                                    </g>
+                                                    <g id="close" transform="translate(1716.887 452.884)">
+                                                        <path id="Path_245" data-name="Path 245"
+                                                            d="M6,5.1,10.014,1.09a.638.638,0,1,0-.9-.9L5.1,4.2,1.089.188a.638.638,0,0,0-.9.9L4.2,5.1.187,9.112a.638.638,0,1,0,.9.9L5.1,6l4.011,4.011a.638.638,0,1,0,.9-.9Z"
+                                                            transform="translate(0 0)" fill="#fff" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </td> -->
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+                            <button (click)="goToView('SRC')" class="previous">Back</button>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button (click)="sendDetails()" class="next">Next</button>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="test-l-3" class="content">
+
+                    <div class="card-body2" style="margin-bottom:20px;padding: 20px;">
+
+                        <div class="accordion2" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                        Job Details
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body" style="padding:10px;">
+                                        <div class="row rowpad">
+                                            <div class="col-md-6">
+                                                <div><label class="op-label">Job Name:</label></div>
+                                                <div><input type="text" class="text-line2 " [(ngModel)]="job.jobName"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div><label class="op-label">Support Group Mail:</label></div>
+                                                <div><input type="text" class="text-line2 "
+                                                        [(ngModel)]="job.supportMail" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row rowpad">
+                                            <div class="col-md-12">
+                                                <div><label class="op-label">Description:</label></div>
+                                                <div>
+                                                    <textarea class="form-control" rows="5"
+                                                        [(ngModel)]="job.description" id="comment"
+                                                        name="text"></textarea>
+                                                    <!-- <input type="text" class="text-line2 " [(ngModel)]="job.jobName" required> -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <section class="content"> -->
+                        <div class="container-fluid reviewset">
+                            <div class="row">
+                                <div class="col-md-4 card">
+                                    <div class="card  card-tabs">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-md-10" style="padding-right: 10px;">
+                                                    <select class="custom-select selectbold"
+                                                        [(ngModel)]="job.selectedTempltId"
+                                                        (change)="newTemplateSelection(false)">
+                                                        <!-- <option>Choose Template</option>
+                                         <option> test</option> -->
+                                                        <option *ngFor="let t of jobTemplates" [value]="t.templateId">
+                                                            {{t.templateName}}
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-2 float-right nav-item dropdown"
+                                                    style="padding:0px; margin:0px;">
+                                                    <ul class="navbar-nav ml-auto" style="width:100%; padding: 0px;">
+                                                        <li class="nav-item dropdown">
+                                                            <!-- <a class="nav-link buttonstyle" data-toggle="dropdown"
+                                                                href="#">
+                                                                <i class="fa fa-plus"></i>
+
+                                                            </a> -->
+
+                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fa fa-plus"></i>
+                                                              </button>
+
+                                                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                                              
+                                                                <li class="dropdown-submenu" *ngFor="let p of processByType">
+                                                                  <a  class="dropdown-item" tabindex="-1" href="javascript:void(0);">{{ p.param_grp_nm}}</a>
+                                                                  <ul class="dropdown-menu" style = "position:absolute;">
+                                                                  
+                                                                    <li class="dropdown-submenu" *ngFor = "let t of p.types ">
+                                                                      <a class="dropdown-item" href="javascript:void(0);">{{t.pcs_type_nm}}</a>
+                                                                      <ul class="dropdown-menu" style = "position:absolute;">
+                                                                          <li class="dropdown-item" *ngFor="let pcs of t.process" (click)="addProcess(pcs,'list')">
+                                                                              
+                                                                              <a href="javascript:void(0);">{{ pcs.pcs_nm }}</a>
+                                                                              <!-- <span style="margin-top:-32px;display: inherit;"
+                                                                              *ngIf="pcs.pcs_desc_txt && pcs.pcs_desc_txt!='None'">{{ pcs.pcs_desc_txt }}</span> -->
+                                                                          
+                                                                          </li>
+                                                                                                                                                   
+                                                                      </ul>
+                                                                    </li>
+                                                                   
+                                                                  </ul>
+                                                                </li>
+                                                              </ul>
+                                                            <!-- <div
+                                                                class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                                                                <div class="dropdown-divider"></div>
+                                                                <a href="#" class="dropdown-item">
+                                                                    Option 1
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a href="#" class="dropdown-item">
+                                                                    Option 2
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+                                                            </div> -->
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body configure">
+                                        <!-- {{newTemplateProcess.length}} -->
+                                        <p *ngIf="newTemplateProcess.length == 0"> No Records
+                                            
+                                        </p>
+
+                                        <!-- {{menuItems | json}}
+
+                                        {{investmentClasses | json}} -->
+
+                                     
+                                        <ul class="todo-list ui-sortable" data-widget="todo-list"
+                                            *ngIf="newTemplateProcess.length != 0">
+                                            <li *ngFor="let t of newTemplateProcess; let i = index;">
+
+                                                <span class="text" (click)="editProcess(t,i)"> {{i+1}}.
+                                                    {{t.pcs_nm}}</span>
+
+                                                <!-- <div class="tools tooltipset" title="Edit" (click)= "editProcess(t,i)">
+                                                <i class="fa fa-edit"></i>
+                                              </div> -->
+
+                                                <div class="tools tooltipset" title="Delete"
+                                                    (click)="removeProcess(t,i)">
+                                                    <i class="fa fa-trash"></i>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <!-- <ul class="todo-list ui-sortable" data-widget="todo-list">
+                                     <li>
+                                      
+                                       <span class="text">Data Pull</span>
+                                      
+                                       <div class="tools tooltipset" title="Hello from speech bubble! Hello from speech bubble! Hello from speech bubble! Hello from speech bubble!" >
+                                         <i class="fa fa-trash"></i>
+                                       </div>
+                                     </li>
+                                     <li >
+                                       
+                                       
+                                       <span class="text">Control Validation</span>
+                                       <div class="tools tooltipset" title="Hello from speech bubble! Hello from speech bubble! Hello from speech bubble! Hello from speech bubble!" >
+                                         <i class="fa fa-trash"></i>
+                                       </div>
+                                     </li>
+                                     <li>
+                                       
+                                       
+                                       <span class="text">Delta</span>
+                                      
+                                       <div class="tools tooltipset" title="Hello from speech bubble! Hello from speech bubble! Hello from speech bubble! Hello from speech bubble!" >
+                                         <i class="fa fa-trash"></i>
+                                       </div>
+                                     </li>
+                                     <li>
+                                       
+                                       
+                                       <span class="text">TDQ</span>
+                                       
+                                       <div class="tools tooltipset" title="Hello from speech bubble! Hello from speech bubble! Hello from speech bubble! Hello from speech bubble!" >
+                                         <i class="fa fa-trash"></i>
+                                       </div>
+                                     </li>
+                                     
+                                     
+                                   </ul> -->
+                                    </div>
+                                    <div class="card-footer clearfix" style="padding:2vh; text-align:center;">
+                                        <a href="#"> <b
+                                                style="text-align: center; margin: 0px auto;  text-decoration: underline; color: #ed9621; font-size: 2.4rvm;">
+                                                Global Variables</b></a>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-8 pl-10">
+                                    <div class="card card-primary card-outline card-tabs">
+                                        <div class="card-header p-0 pt-1">
+                                            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="custom-tabs-one-home-tab"
+                                                        data-toggle="pill" href="#custom-tabs-one-home" role="tab"
+                                                        aria-controls="custom-tabs-one-home"
+                                                        aria-selected="true">Mandatory</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="custom-tabs-one-profile-tab"
+                                                        data-toggle="pill" href="#custom-tabs-one-profile" role="tab"
+                                                        aria-controls="custom-tabs-one-profile"
+                                                        aria-selected="false">Optional</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="card-body mandatory">
+                                            <div class="tab-content" id="custom-tabs-one-tabContent">
+                                                <div class="tab-pane fade show active" id="custom-tabs-one-home"
+                                                    role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+
+<!-- 
+                                                    <div class="container">
+                                                        <div class="row">
+                                                          <h2>Multi level dropdown menu in Bootstrap</h2>
+
+                                                    
+                                                          <hr>
+                                                          <div class="dropdown">
+                                                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Dropdown
+                                                              </button>
+                                                              <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                                                  <li class="dropdown-item"><a href="#">Some action</a></li>
+                                                                  <li class="dropdown-item"><a href="#">Some other action</a></li>
+                                                                  <li class="dropdown-divider"></li>
+                                                                  <li class="dropdown-submenu" >
+                                                                    <a  class="dropdown-item" tabindex="-1" href="#">Hover me for more options</a>
+                                                                    <ul class="dropdown-menu">
+                                                                      <li class="dropdown-item"><a tabindex="-1" href="#">Second level</a></li>
+                                                                      <li class="dropdown-submenu">
+                                                                        <a class="dropdown-item" href="#">Even More..</a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li class="dropdown-item"><a href="#">3rd level</a></li>
+                                                                              <li class="dropdown-submenu"><a class="dropdown-item" href="#">another level</a>
+                                                                              <ul class="dropdown-menu">
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                              </ul>
+                                                                            </li>
+                                                                              <li class="dropdown-item"><a href="#">3rd level</a></li>
+                                                                        </ul>
+                                                                      </li>
+                                                                      <li class="dropdown-item"><a href="#">Second level</a></li>
+                                                                      <li class="dropdown-item"><a href="#">Second level</a></li>
+                                                                    </ul>
+                                                                  </li>
+
+                                                                  <li class="dropdown-submenu" *ngFor="let p of processByType">
+                                                                    <a  class="dropdown-item" tabindex="-1" href="javascript:void(0);">{{ p.param_grp_nm}}</a>
+                                                                    <ul class="dropdown-menu">
+                                                                    
+                                                                      <li class="dropdown-submenu" *ngFor = "let t of p.types ">
+                                                                        <a class="dropdown-item" href="javascript:void(0);">{{t.pcs_type_nm}}</a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li class="dropdown-item" *ngFor="let pcs of t.process" (click)="addProcess(pcs,'list')">
+                                                                                
+                                                                                <a href="javascript:void(0);">{{ pcs.pcs_nm }}</a>
+                                                                                <span style="margin-top:-32px;display: inherit;"
+                                                                                *ngIf="pcs.pcs_desc_txt && pcs.pcs_desc_txt!='None'">{{ pcs.pcs_desc_txt }}</span>
+                                                                            
+                                                                            </li>
+                                                                              <li class="dropdown-submenu" >
+                                                                                  <a class="dropdown-item" href="#">another level</a>
+                                                                              <ul class="dropdown-menu">
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                                  <li class="dropdown-item"><a href="#">4th level</a></li>
+                                                                              </ul>
+                                                                            </li>
+                                                                             
+                                                                        </ul>
+                                                                      </li>
+                                                                     
+                                                                    </ul>
+                                                                  </li>
+                                                                </ul>
+                                                          </div>
+                                                      </div>
+                                                  </div> -->
+
+<!-- 
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                                                         Dropdown <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                          <li><a href="#">Action</a></li>
+                                                          <li><a href="#">Another action</a></li>
+                                                          <li class="dropdown">
+                                                            <a href="#">One more dropdown</a>
+                                                            <ul class="dropdown-menu">
+                                                              <li><a href="#">Action</a></li>
+                                                              <li><a href="#">Another action</a></li>
+                                                              <li class="dropdown">
+                                                                <a href="#">One more dropdown</a>
+                                                                <ul class="dropdown-menu">
+                                                                ...
+                                                                </ul>
+                                                              </li>
+                                                              <li><a href="#">Something else here</a></li>
+                                                              <li><a href="#">Separated link</a></li>
+                                                             </ul>
+                                                          </li>
+                                                          <li><a href="#">Something else here</a></li>
+                                                          <li><a href="#">Separated link</a></li>
+                                                        </ul>
+                                                      </div> -->
+
+
+                                                    <!-- <a *ngFor="let mi of investmentClasses;let i = index">
+                                                        <span class="dropdown-menu-container">
+                                                          <mat-icon mat-list-icon>{{ mi.icon }}</mat-icon>
+                                                          <span class="dropdown-menu-item">{{ mi.value }} <br></span>
+                                                        </span>
+                                                        <div class="submenu-container">
+                                                          <span *ngFor="let sub of mi.subMenu;let j = index" class="submenu-item"
+                                                            (click)="onClick($event, i, j)"> {{ sub.text }} <br></span> 
+                                                        </div>
+                                                      </a> -->
+
+                                                    <div class="row" *ngIf="isNewProcess">
+                                                        <div class="col-md-4 colset">
+                                                            <label for="exampleInputEmail1">Name</label>
+                                                            <!-- [name]="parmaname+index+{{i}}" -->
+                                                            <div class="form-group"
+                                                                *ngFor="let d of newPcsObj.mandatory; let i = index">
+                                                                <input type="text" placeholder="Name" [disabled]="true"
+                                                                    [(ngModel)]="d.parm_nm_txt"
+                                                                    class="form-control mt-10" required>
+                                                            </div>
+                                                            <!-- <div class="form-group">
+                                                 <label for="exampleInputEmail1">Name</label>
+                                                 <input type="text" class="form-control"  placeholder="IN1">
+                                                 <input type="text" class="form-control mt-10" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10" placeholder="Bus_DT">
+                                                 <input type="text" class="form-control mt-10" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10" placeholder="Bus_DT">
+
+                                                 <input type="text" class="form-control"  placeholder="IN1">
+                                                 <input type="text" class="form-control mt-10" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10" placeholder="Bus_DT">
+                                                 <input type="text" class="form-control mt-10" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10" placeholder="Bus_DT">
+                                               </div> -->
+                                                        </div>
+                                                        <div class="col-md-8 colset">
+                                                            <label for="exampleInputEmail1">Value</label>
+                                                            <!-- [name]="value+index" -->
+                                                            <div class="form-group"
+                                                                *ngFor="let d of newPcsObj.mandatory; let i = index"
+                                                                style="padding-left:5px; margin-left:5px;">
+                                                                <input type="text" placeholder="Value"
+                                                                    [(ngModel)]="d.parm_val_txt"
+                                                                    (change)="parmChange(d,i,'mandatory')"
+                                                                    class="form-control mt-10" required>
+
+                                                            </div>
+
+                                                            <!-- <div class="form-group" style= "padding-left:5px; margin-left:5px;">
+                                                 <label for="exampleInputEmail1">Value</label>
+                                                 <input type="text" class="form-control" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10"  placeholder="$Bus_DT">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                               
+                                                 <input type="text" class="form-control" placeholder="$OUT1">
+                                                 <input type="text" class="form-control mt-10"  placeholder="$Bus_DT">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                                 <input type="text" class="form-control mt-10"  placeholder="s3a://intzone/$IN1_OR">
+                                             
+                                               
+                                                </div> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
+                                                    aria-labelledby="custom-tabs-one-profile-tab">
+                                                    Mauris tincidunt mi at erat gravida, eget tristique urna bibendum.
+                                                    Mauris pharetra purus ut ligula tempor, et vulputate metus
+                                                    facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                                                    posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus
+                                                    interdum, nisl ligula placerat mi, quis posuere purus ligula eu
+                                                    lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere
+                                                    nec nunc. Nunc euismod pellentesque diam.
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-4 btn-group " *ngIf="isNewProcess">
+                            <div class=" col-md-6 plr-10 float-right">
+                                <button type="button" class="btn btn-block btn-default" (click)="cancelProcess()" >Cancel</button>
+                            </div>
+                            <div class="col-md-6 float-right">
+                                <button type="button" class="btn btn-block btn-primary" (click)="saveProcess()">Save</button>
+                              </div>
+
+                              <div class="clearfix">
+
+                              </div>
+                           </div> -->
+                        </div>
+                        <!-- </section> -->
+
+
+
+                        <!-- <div class="row rowpad">
+                            <div class="col-md-4">
+                                <div><label class="op-label">Job Name</label></div>
+                                <div><input type="text" class="text-line2 " [(ngModel)]="job.jobName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Calendar Name</label></div>
+                            
+                                <div><select class="optional-tag" (change)="onSelectedCalender()" [(ngModel)]="job.calenderName">
+                                    <option *ngFor="let s of calenderNames" [value]="s.clndr_nm">
+                                        {{s.clndr_nm}}
+                                    </option>
+
+                                </select></div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div><label class="op-label">Schedule Name</label></div>
+                                <div><select class="optional-tag" (change)="onSelectedSchedule()" [(ngModel)]="job.scheduleName">
+                                    <option *ngFor="let s of filterScheduleNames" [value]="s.sch_nm">
+                                        {{s.sch_nm}}
+                                    </option>
+
+                                </select></div>
+                          
+
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+                            <div class="col-sm-4">
+                                <div><label class="op-label">Job Effective Start Date</label></div>
+                                <div><input type="date" class="text-line2" (Change)="selectedEffectiveStartDt($event)"
+                                        value="{{effectiveStartDate | date:'yyyy-MM-dd'}}" id="jobeffectiveStartdate"
+                                        placeholder="Job Effective Start Date"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">Schedule Effective Start Date</label></div>
+                                <div><input type="date" class="text-line2" id="scheffectivestartdate"
+                                        value="{{schffectiveStartDate | date:'yyyy-MM-dd'}}"
+                                        placeholder="Schedule Effective Start Date" disabled></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">Schedule Start Time</label></div>
+                                <div><input type="time" class="text-line2" [(ngModel)]="job.scheduleStartTime"></div>
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+
+                            <div class="col-sm-4">
+                                <div><label class="op-label">SLA Start Time</label></div>
+                                <div><input type="time"  class="text-line2 " [(ngModel)]="job.slaStartTime"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">SLA End Time</label></div>
+                                <div><input type="time" class="text-line2" [(ngModel)]="job.slaEndTime"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">SLA Offset Days</label></div>
+                                <div><input type="number" class="text-line2 " [(ngModel)]="job.slaOffsetDays"></div>
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+                            <div class="col-sm-4">
+                                <div><label class="op-label ">Input Object</label></div>
+                                <div><input type="text" class="text-line2" [(ngModel)]="job.inputObj"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">Output Object</label></div>
+                                <div><input type="text" class="text-line2" [(ngModel)]="job.outputObj"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div><label class="op-label">Impact</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="job.impact">
+                                      
+                                        <option>Medium</option>
+                                        <option>Low</option>
+                                        <option>High</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                        <div class="row rowpad">
+                            <div class="col-sm-4">
+                                <div><label class="op-label ">Ticketing Type</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="job.ticketing_system_type">
+                                        <option>Gathi</option>
+
+                                    </select></div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div><label style="color:black;">Cron Expression:</label></div>
+                            </div>
+                            <div class="col-sm-2 " style="position: relative; right: 90px;">
+                                <div>
+                                    <input type="radio" id="cron_yes" name="radio-group" [checked]="cronjb.mode == 'yes'" (change)="onSelectionCron('yes')">
+                                    <label for="cron_yes"><span style="margin-left:10px;">Yes</span></label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 " style="position: relative; right: 180px;">
+                                <div>
+                                    <input type="radio" id="cron_no" name="radio-group"  [checked]="cronjb.mode == 'no'" (change)="onSelectionCron('no')">
+                                    <label for="cron_no"><span style="margin-left:10px;">No</span></label>
+                                </div>
+                            </div>
+                          
+
+                        </div> -->
+
+
+                        <!-- <div class="row rowpad">
+                            <div class="col-sm-4">
+                                <div><label class="op-label ">Select Job Template Name</label></div>
+                                <div><select class="optional-tag" [(ngModel)]="job.selectedTempltId" (change)="newTemplateSelection(false)">
+                                        <option *ngFor="let t of jobTemplates" [value]="t.templateId">
+                                            {{t.templateName}}
+                                        </option>
+                                       
+                                    </select></div>
+                            </div>
+                        </div>
+                        <div class="row rowpad" *ngIf = "job.selectedTempltId != ''">
+                              <ul class="list-group">
+                                <li *ngFor="let t of newTemplateProcess; let i = index;" class="list-group-item d-flex justify-content-between align-items-center" > 
+                                    {{i+1}}. {{t.pcs_nm}}
+                                    <span style= "margin-right:50px; margin-left:50px; font-size:30px;color:blue" 
+                                       (click)= "editProcess(t,i)"><i class="fa fa-edit"></i></span>
+                                    <span style= "margin-right:50px; font-size:30px;color:red" >
+                                         <i class="fa fa-trash"></i></span>              
+                               </li> 
+                              </ul>
+
+                              <div *ngIf= "isNewProcess"> 
+                                <ul>
+                                    <li *ngFor="let d of newPcsObj.mandatory; let i = index">
+                                      <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                         
+                                            <input type="text" placeholder="Name"
+                                               [name]="parmaname+index"
+                                              [disabled]="true" [(ngModel)]="d.parm_nm_txt" required>
+                                          
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                        
+                                            <input type="text" placeholder="Value"
+                                                [name]="value+index"
+                                              [(ngModel)]="d.parm_val_txt"
+                                              (change)="parmChange(d,i,'mandatory')" required>
+                                         
+                                        </div>
+                                       </div>
+                                    </li>
+                                  </ul>
+
+                                  <div class="row">
+                                    <div class="col-sm-8"></div>
+                                    <div class="col-sm-2">
+                                        <button (click)="saveProcess()" class="next">Save</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button (click)="cancelProcess()" class="previous">Cancel</button>
+                                    </div> 
+                                  </div>
+
+
+                              </div>
+                        </div>  -->
+
+                    </div>
+
+                    <div class="container-fluid reviewset">
+                        <div class="col-8 btn-group float-right" style="margin-bottom: 20px;">
+                            <div class=" col-md-3 plr-10 float-right">
+                                <!-- <button type="button" class="btn btn-block btn-default" (click)="cancelProcess()" >Cancel</button> -->
+                                <button type="button" (click)="previous()" class="btn-block previous">Back</button>
+                            </div>
+                            <div class="col-md-3 float-right">
+                                <!-- <button type="button" class="btn btn-block btn-primary" (click)="saveProcess()">Save</button> -->
+                                <button type="button" class="btn-block next2" (click)="submitData('r')">Run Now</button>
+                            </div>
+
+                            <div class=" col-md-3 plr-10 float-right">
+
+                                <!-- <button type="button" class="btn btn-block btn-default" (click)="cancelProcess()" >Cancel</button> -->
+                                <!-- <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-block btn-success" >Schedule</button> -->
+                                <button type="button" class="btn-block next2" (click)="schedule()">Schedule</button>
+                            </div>
+                            <div class="col-md-3 float-right">
+                                <!-- <button type="button" class="btn btn-block btn-primary" (click)="saveProcess()">Save</button> -->
+                                <!-- <button type="button" (click)="submitInjectionData()" class="btn btn-block btn-success">Save</button>  -->
+                                <button type="button" (click)="submitData('s')" class="btn-block next2">Save</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="row " style="margin-top: 15px;">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-2">
+                            <button (click)="previous()" class="previous">Back</button>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="previous" data-toggle="modal" data-target="#myModal">Run Now</button>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="previous" data-toggle="modal" data-target="#myModal">Schedule</button>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button (click)="submitInjectionData()" class="next">Save</button>
+
+                        </div>
+                    </div> -->
+
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Schedule</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div id="accordion">
+                                        <div class="card">
+                                            <!-- <div class="card-header " data-toggle="collapse" href="#collapseOne">
+                                    <a class="card-link" >
+                                      MDM Job
+                                    </a>
+                                  </div> -->
+                                            <!-- <div id="collapseOne" class="collapse show" data-parent="#accordion"> -->
+                                            <div class="card-body">
+                                                <div class="row rowpad">
+                                                    <div class="col-md-4">
+                                                        <div><label class="op-label">Job Name</label></div>
+                                                        <div><input type="text" class="text-line2 "
+                                                                [(ngModel)]="job.jobName" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div><label class="op-label">Calendar Name</label></div>
+
+                                                        <div><select class="optional-tag"
+                                                                (change)="onSelectedCalender()"
+                                                                [(ngModel)]="job.calenderName">
+                                                                <option *ngFor="let s of calenderNames"
+                                                                    [value]="s.clndr_nm">
+                                                                    {{s.clndr_nm}}
+                                                                </option>
+
+                                                            </select></div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div><label class="op-label">Schedule Name</label></div>
+                                                        <div><select class="optional-tag"
+                                                                (change)="onSelectedSchedule()"
+                                                                [(ngModel)]="job.scheduleName">
+                                                                <option *ngFor="let s of filterScheduleNames"
+                                                                    [value]="s.sch_nm">
+                                                                    {{s.sch_nm}}
+                                                                </option>
+
+                                                            </select></div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row rowpad">
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">Job Effective Start Date</label>
+                                                        </div>
+                                                        <div><input type="date" class="text-line2"
+                                                                (Change)="selectedEffectiveStartDt($event)"
+                                                                value="{{effectiveStartDate | date:'yyyy-MM-dd'}}"
+                                                                id="jobeffectiveStartdate"
+                                                                placeholder="Job Effective Start Date"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">Schedule Effective Start
+                                                                Date</label></div>
+                                                        <div><input type="date" class="text-line2"
+                                                                id="scheffectivestartdate"
+                                                                value="{{schffectiveStartDate | date:'yyyy-MM-dd'}}"
+                                                                placeholder="Schedule Effective Start Date"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">Schedule Start Time</label></div>
+                                                        <div><input type="time" class="text-line2"
+                                                                [(ngModel)]="job.scheduleStartTime"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row rowpad">
+
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">SLA Start Time</label></div>
+                                                        <div><input type="time" class="text-line2 "
+                                                                [(ngModel)]="job.slaStartTime"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">SLA End Time</label></div>
+                                                        <div><input type="time" class="text-line2"
+                                                                [(ngModel)]="job.slaEndTime"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">SLA Offset Days</label></div>
+                                                        <div><input type="number" class="text-line2 "
+                                                                [(ngModel)]="job.slaOffsetDays"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row rowpad">
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label ">Input Object</label></div>
+                                                        <div><input type="text" class="text-line2"
+                                                                [(ngModel)]="job.inputObj"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">Output Object</label></div>
+                                                        <div><input type="text" class="text-line2"
+                                                                [(ngModel)]="job.outputObj"></div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label">Impact</label></div>
+                                                        <div><select class="optional-tag" [(ngModel)]="job.impact">
+                                                                <!-- <option></option> -->
+                                                                <option [value]="'low'">Low</option>
+                                                                <option [value]="'medium'">Medium</option>
+                                                                <option [value]="'high'">High</option>
+                                                            </select></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row rowpad">
+                                                    <div class="col-sm-4">
+                                                        <div><label class="op-label ">Ticketing Type</label></div>
+                                                        <div><select class="optional-tag"
+                                                                [(ngModel)]="job.ticketing_system_type">
+                                                                <option [value]="'jeera'">Jira</option>
+                                                                <option [value]="'gathi'">Gathi</option>
+                                                                <!-- <option>P1</option>
+                                                        <option>P2</option>
+                                                        <option>P3</option> -->
+                                                            </select></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div><label style="color:black;">Cron Expression:</label></div>
+                                                    </div>
+                                                    <div class="col-sm-2 " style="position: relative; right: 90px;">
+                                                        <div>
+                                                            <input type="radio" id="cron_yes" name="radio-group"
+                                                                [checked]="job.isCronExpression.trim().toLowerCase() == 'y'"
+                                                                value="Y" (change)="onSelectionCron('yes','Y')">
+                                                            <label for="cron_yes"><span
+                                                                    style="margin-left:10px;">Yes</span></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2 " style="position: relative; right: 180px;">
+                                                        <div>
+                                                            <input type="radio" id="cron_no" name="radio-group"
+                                                                [checked]="job.isCronExpression.trim().toLowerCase() =='n' "
+                                                                value="N" (change)="onSelectionCron('no','N')">
+                                                            <label for="cron_no"><span
+                                                                    style="margin-left:10px;">No</span></label>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <!-- <div class="row">
+                                        <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="JobName">Job Name:</label>
+                                           <input type="text" class="form-control" id="Job Name" placeholder="Enter Job Name" title="{{mdmjob}}" name="jobNm" [(ngModel)]="mdmjob" disabled>
+                                         </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="sel1">Calender Name:</label>
+                                           <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdClndrNm">
+                                             <option *ngFor="let clnm of calenderNames" value="{{clnm.clndr_nm}}">{{clnm.clndr_nm}}</option>
+                                           </select>
+                                           </div>
+                                       </div>
+                                       <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="sel1">Schedule Name:</label>
+                                           <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="slctdSchdlNm">
+                                             <option *ngFor="let schnm of scheduleNames" value="{{schnm.sch_nm}}">{{schnm.sch_nm}}</option>
+                                           </select>
+                                           </div>
+                                       </div>
+                                      </div> -->
+                                                <!-- <div class="row">
+                                        <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="jobstrtdate">Job Effective Start Date:</label>
+                                           <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate" [(ngModel)]="jbStrtDt">
+                                         </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="strtdate">Schedule Effective Start Date:</label>
+                                           <input type="date" class="form-control" id="strtdate" name="strtdate" [(ngModel)]="schStrtDt">
+                                         </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                         <div class="form-group">
+                                           <label for="strttime">Schedule Start Time:</label>
+                                           <input type="time" class="form-control" id="strttime" name="strttime" [(ngModel)]="schStrttm">
+                                         </div>
+                                        </div>
+                                      </div> -->
+
+
+                                                <!-- <div class="row">
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="jobstrtdate">SLA Start Time:</label>
+                                         <input type="time" class="form-control" id="SLAStrtTm" name="SLAStrtTm" [(ngModel)]="SLAStrtTm">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strtdate">SLA End Time:</label>
+                                         <input type="time" class="form-control" id="SLAEndTm" name="SLAEndTm" [(ngModel)]="SLAEndTm">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strttime">SLA offset Days:</label>
+                                         <input type="text" class="form-control" id="offsetdays" name="profoffsetdays" (ngModel)="offsetdays">
+                                       </div>
+                                      </div>
+                                    </div> -->
+                                                <!-- <div class="row">
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label for="sel1">Impact:</label>
+                                          <select class="form-control" id="sel1" name="sellist1">
+                                            <option>p1</option>
+                                            <option>p2</option>
+                                            <option>p3</option>
+                                          </select>
+                                          </div>
+                                      </div>
+                              
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label for="email">Supporting Group:</label>
+                                          <input type="text" class="form-control" id="email" placeholder="Enter Supporting Group" name="email" [(ngModel)]="supprtGrp">
+                                        </div>
+                                      </div>
+                                   
+                                     <div class="col-md-4">
+                                      <div class="form-group">
+                                        <label for="sel1">Ticketing Type:</label>
+                                        <select class="form-control" id="sel1" name="sellist1" (ngModel)="ticketingType">
+                                          <option value="jira">Jira</option>
+                                          <option value="gathi">Gathi</option>
+                                          
+                                        </select>
+                                        </div>
+                                    </div>
+                                     </div> -->
+                                                <!-- <div class="row">
+                                       
+                               
+                                       
+                                     </div> -->
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+                                    <!-- <div id="accordion">
+                              <div class="card">
+                                <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+                                  <a class="card-link" >
+                                    Profiling Job
+                                  </a>
+                                </div>
+                                <div id="collapseTwo" class="collapse " data-parent="#accordion">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="JobName">Job Name:</label>
+                                         <input type="text" class="form-control" id="Job Name" placeholder="Enter Job Name"title="{{mdmjob}}" name="jobNm" [(ngModel)]="profjob" disabled>
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="sel1">Calender Name:</label>
+                                         <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="profslctdClndrNm">
+                                           <option *ngFor="let clnm of calenderNames">{{clnm.clndr_nm}}</option>
+                                         </select>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="sel1">Schedule Name:</label>
+                                         <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="profslctdSchdlNm">
+                                           <option *ngFor="let schnm of scheduleNames">{{schnm.sch_nm}}</option>
+                                         </select>
+                                         </div>
+                                     </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="jobstrtdate">Job Effective Start Date:</label>
+                                         <input type="date" class="form-control" id="jobstrtdate" name="jobstrtdate" [(ngModel)]="profjbStrtDt">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strtdate">Schedule Effective Start Date:</label>
+                                         <input type="date" class="form-control" id="strtdate" name="strtdate" [(ngModel)]="profschStrtDt">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strttime">Schedule Start Time:</label>
+                                         <input type="time" class="form-control" id="strttime" name="profstrttime" (ngModel)="profjob_start_time">
+                                       </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="jobstrtdate">SLA Start Time:</label>
+                                         <input type="time" class="form-control" id="profSLAStrtTm" name="profSLAStrtTm" [(ngModel)]="profSLAStrtTm">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strtdate">SLA End Time:</label>
+                                         <input type="time" class="form-control" id="profSLAEndTm" name="profSLAEndTm" [(ngModel)]="profSLAEndTm">
+                                       </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <div class="form-group">
+                                         <label for="strttime">SLA offset Days:</label>
+                                         <input type="text" class="form-control" id="profoffsetdays" name="profoffsetdays" (ngModel)="profoffsetdays">
+                                       </div>
+                                      </div>
+                                    </div>
+                                
+                                  <div class="row">
+                                  
+                                   <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="sel1">Impact:</label>
+                                      <select class="form-control" id="sel1" name="profsellist1">
+                                        <option>p1</option>
+                                        <option>p2</option>
+                                        <option>p3</option>
+                                      </select>
+                                      </div>
+                                  </div>
+                          
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="email">Supporting Group:</label>
+                                      <input type="text" class="form-control" id="email" placeholder="Enter Supporting Group" name="email" [(ngModel)]="profsupprtGrp"> 
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label for="sel1">Ticketing Type:</label>
+                                      <select class="form-control" id="sel1" name="sellist1">
+                                        <option>Jira</option>
+                                        <option>Gathi</option>
+                                      </select>
+                                      </div>
+                                  </div>
+                                   </div>
+                                   <div class="row">
+                     
+                                   </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-update"
+                                        (click)="submitData('sc')">Submit</button>
+                                    <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="test-l-4" class="content text-center">
+
+                    <div class="right-main ariflow" *ngIf="isAirflow">
+                        <!-- <div class="right-header">
+                          <div class="rytHdrBtn"  [ngClass]="{'rytHdrBtnActive':activeNavBlock=='source'}" (click)="activeNavBlock='source'">Airflow</div>
+                          <div class="close-btn" (click)="isAirflow = false">X</div>
+                        </div> -->
+                        <div class="right-body">
+                            <iframe [hidden]="!isAirflow" id="airflowFrame" [src]="airflowurl" frameBorder="0"
+                                height="500px" width="100% !important"></iframe>
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top: 15px;">
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+
+                            <button (click)="goToView('SCH')" class="previous">Back</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

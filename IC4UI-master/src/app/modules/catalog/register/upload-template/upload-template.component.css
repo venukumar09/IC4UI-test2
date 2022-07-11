@@ -1,0 +1,304 @@
+#btnFileUpload{
+    position: relative;
+    width: 90%;
+    height: 250px;
+    margin: auto;
+    display: block;
+    border:#ccd5db;
+    top: 30px;
+    border: 2px solid #cbd4da;
+    background-color: white;
+    padding-top: 0%;
+  
+  }
+
+  #btnFileUpload1{
+    position: relative;
+    width: 60%;
+    /* height: 250px; */
+    margin: auto;
+    display: block;
+    border:#ccd5db;
+    top: 30px;
+    border: 1px solid #cbd4da;
+    background-color: white;
+    padding-top: 0%;
+  
+  }
+  
+  .align-center{
+    /* text-align: center; */
+  }
+  .files-list{
+    padding:20px;
+
+    display: block;
+  }
+  .file-block{
+    position: relative;
+    /* top: 88px; */
+    margin: 0px 30px;
+  }
+  .file-block p{
+    display: inline-block;
+    position: relative;
+    top: 8px;
+    /* right: 150px; */
+    font-size: 24px;
+
+    }
+  .delete-file{
+    display: inline-block;
+    top: 6px;
+    left: 69%;
+    position: relative;
+  }
+  .upload{
+    position: relative;
+    top: 15px;
+            padding-top: 2%;
+            padding-bottom: 8%;
+    border: 10px solid #fcfcfc;
+    width: 100%;
+    height: 100%;
+    background-color: #fcfcfc;
+            border: 0px solid rgb(216, 215, 215);
+  }
+    .Download{
+        display: inline-block;
+        padding-top:2%;
+    }
+    .btn_col
+    {
+        padding-top:2%;
+        text-align: right;
+        margin-left:-100px;
+  padding-bottom: 3%;
+    }
+    .btn-next{
+        background:rgb(4, 250, 4);
+        border:2px solid rgb(4, 250, 4);
+      border-radius:25px;
+        padding-right:50px;
+        padding-left: 50px;
+      padding-top:10px;
+        padding-bottom:10px;
+        margin-top: 20px; 
+        color:#ffffff; 
+        font-weight: 500;
+        text-size-adjust: auto;
+        
+  }
+
+	#icons-sizing{
+		font-size:25px;
+		color:#169ddd;
+		/*float: left;*/
+		/*margin-left: 30px;*/
+		margin-top: 0px;
+		position: relative;
+    	top: 15px;
+    	margin-left: 15px;
+    	margin-right: 15px;
+	}
+	.text-title{
+		/*margin-left: 12px;*/
+		/*margin-top: 3px;*/
+		font-weight: bold;
+		font-size: 20px;
+
+	}
+	body{
+		font-family: Helvettica;
+
+	}
+	#text-icons{
+		/*float: left;*/
+		font-size: 18.5px;
+		/*margin-top: 0px;*/
+		/*margin-left: 30px;*/
+		color: #169ddd;
+		font-size: 18.5px;
+        position: relative;
+        top: 12px;
+        color: #169ddd;
+	}
+	.form-pri-main-btn{
+            position: relative;
+            background: #1656a2;
+            border-radius: 40px;
+            height: 31px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 30px;
+            padding-right: 30px;
+            border: none;
+            /*left: 900px;*/
+        }
+        .pull-right{
+            text-align: right;
+            margin:12px 0px 12px 0px;
+            margin-left: -15px;
+        }
+        .block{
+        	display: block;
+        }
+        .inline-block{
+        	display: inline-block;
+        	position: relative;
+    		top: 10px;
+            margin-left: 15px;
+        }
+         .form-pri-btn-clone{
+            position: relative;
+            background: #166eb5;
+            border-radius: 40px;
+            height: 26px;
+            width: 80px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 20px;
+            padding-right: 25px;
+            border: none;
+            border-radius:  20px;
+            text-align: center;
+            margin-left: 5%;
+        }
+        .form-pri-btn1-clone{
+            position: relative;
+            background: white;
+            border-radius: 40px;
+            height: 26px;
+            width: 80px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 20px;
+            padding-right: 25px;
+            /*border-color:  #50b4e5;*/
+            border-radius:  20px;
+            text-align: center;
+            color: #50b4e5;
+            font-family: bold;
+            border: 1.3px solid #50b4e5;
+            margin-left: 5%;
+        }
+
+        th,td{
+            background-color: white;
+            border-bottom:none !important;
+            border-right: none !important;
+            border-left:none !important;
+            width:100px;
+
+        }
+        .bottom-border{
+           border-bottom: 2px solid #f3f3f3 !important;
+           
+        }
+        th{
+            background-color: #f9fbfc !important;
+        }
+        td{
+            background-color: white;
+            
+        }
+        .row
+        {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        /* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border: 1.5px solid rgb(123, 124, 124);
+  border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: rgb(0, 209, 56);
+  border: 1.5px rgb(0, 209, 56);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  background-color: rgb(0, 209, 56);
+  /* border: 1.5px rgb(105, 228, 105); */
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 7px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.btn_col
+{
+	padding-top:2%;
+	text-align: right;
+	margin-left:-85px;
+    padding-bottom: 3%;
+}
+.btn-next{
+	background:rgb(0, 209, 56);
+	border:2px solid rgb(0, 209, 56);
+  	border-radius:25px;
+	padding-right:50px;
+	padding-left: 50px;
+  	padding-top:10px;
+	padding-bottom:10px;
+	margin-left: -15px;
+	color:#ffffff; 
+	font-weight: 600;
+    text-size-adjust: auto;
+    font-size: medium;
+			
+}

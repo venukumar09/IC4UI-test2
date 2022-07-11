@@ -1,0 +1,102 @@
+<nav class="sidebar sidebar-offcanvas fixed-top" id="sidebar" style="  transition: 3s;">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center"
+        style="padding-top: 20px;">
+        <a class="navbar-brand brand-logo" href="#" style="position: relative;margin-right: 0;">
+            <!-- <img  alt="logo" src="../../../assets/images/logo.svg" style="width: 96px;"> </a> -->
+            <svg style="width: 65px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="100" height="100" viewBox="0 0 100 100">
+                <defs>
+                    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+                        <stop offset="0" stop-color="#28a8df" />
+                        <stop offset="1" stop-color="#265ea7" />
+                    </radialGradient>
+                </defs>
+                <g id="Group_356" data-name="Group 356" transform="translate(634 341)">
+                    <g id="Group_355" data-name="Group 355">
+                        <g id="Group_354" data-name="Group 354">
+                            <g id="Group_353" data-name="Group 353">
+                                <g id="Group_352" data-name="Group 352">
+                                    <g id="Group_351" data-name="Group 351" transform="translate(-311 -70)">
+                                        <g id="Group_350" data-name="Group 350">
+                                            <g id="Rectangle_1133" data-name="Rectangle 1133"
+                                                transform="translate(-323 -271)" stroke="#fff" stroke-width="4"
+                                                fill="url(#radial-gradient)">
+                                                <rect width="100" height="100" rx="20" stroke="none" />
+                                                <rect x="2" y="2" width="96" height="96" rx="18" fill="none" />
+                                            </g>
+                                            <g id="Group_349" data-name="Group 349" transform="translate(-107 -4.3)">
+                                                <path id="Subtraction_5" data-name="Subtraction 5"
+                                                    d="M21.45,361.26a23.494,23.494,0,0,1-11-2.558,19.206,19.206,0,0,1-7.673-7.15,20.944,20.944,0,0,1,0-20.845,19.215,19.215,0,0,1,7.673-7.15,23.5,23.5,0,0,1,11-2.557,24.261,24.261,0,0,1,10.011,1.98,19.251,19.251,0,0,1,3.957,2.374L28.123,333.6a9.639,9.639,0,0,0-6.013-2.1,8.633,8.633,0,0,0-6.546,2.613,11.171,11.171,0,0,0,0,14.025,8.636,8.636,0,0,0,6.546,2.613h.523c2.269,0,4-.121,5.648-1.693a1.1,1.1,0,0,1,.732-.165c.251,0,.575.018,1.024.043.242.014.517.029.831.044.768.038,2,.089,3.787.089.485,0,.993,0,1.509-.011h3.758a13.448,13.448,0,0,1-3.518,6.626,16.31,16.31,0,0,1-4.943,3.592A24.261,24.261,0,0,1,21.45,361.26Z"
+                                                    transform="translate(-186.405 -558.38)" fill="#fefefe" />
+                                                <path id="Path_390" data-name="Path 390"
+                                                    d="M2.907-42.046,14.943-35.7V-5.943H2.907Z"
+                                                    transform="translate(-204 -191.057)" fill="#fefefe" />
+                                                <path id="Path_387" data-name="Path 387"
+                                                    d="M2.907-35.7H14.943v10.332L2.907-31.839Z"
+                                                    transform="translate(-204 -204)" fill="#fefefe" />
+                                                <path id="Exclusion_2" data-name="Exclusion 2"
+                                                    d="M22.315,349.541h-7.5v-5H0v-6.485L13.824,321h8.491v17.057h4.073v6.485H22.315v5ZM14.59,330.117l-6.436,7.618H14.59v-7.618Z"
+                                                    transform="translate(-154.638 -559.48)" fill="#fefefe" />
+                                                <text id="TM" transform="translate(-143 -197)" fill="#fefefe"
+                                                    font-size="10" font-family="Montserrat-ExtraBold, Montserrat"
+                                                    font-weight="800">
+                                                    <tspan x="0" y="0">TM</tspan>
+                                                </text>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            <label style="font-family: Helvetica Neue,sans-serif; display: block;
+                font-size: 9px !important;position:relative; bottom: 10px; color: white;">A Gathi Product</label>
+        </a>
+    </div>
+    <ul class="nav" style="margin: 13%;margin-top: 2%;">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/catalog'" routerLinkActive="textactive">
+                <img class="menu-icon" src="../../../assets/images/catalog menu.svg"
+                    style="margin-right: 18px;width: 15px;"> 
+                    <span class="menu-title" >Catalog</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/curate'" routerLinkActive="textactive">
+                <img class="menu-icon" src="../../../assets/images/curate.svg" style="margin-right: 18px;width: 15px;">
+                <span class="menu-title">Curate</span> </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/context'" routerLinkActive="textactive"> 
+                <img class="menu-icon"
+                    src="../../../assets/images/context.svg" style="margin-right: 18px;width: 15px;"> <span
+                    class="menu-title" >Context</span> </a>
+        </li>
+        <li class="nav-item nav-category">
+            <a class="nav-link" [routerLink]="'/consume'" routerLinkActive="textactive">
+                <img class="menu-icon" src="../../../assets/images/consume.svg" style="margin-right: 18px;width: 15px;">
+                <span class="menu-title" >Consume</span> </a>
+        </li>
+        <li class="nav-item">
+            <hr style="border: 0.5px solid #aac8e0;width: 100%;">
+            <a class="nav-link" [routerLink]="'/operations'" routerLinkActive="textactive">
+                <img class="menu-icon" src="../../../assets/images/Operations.svg"
+                    style="margin-right: 18px;width: 15px;font-family: Roboto,Helvetica Neue,sans-serif;"> 
+                    <span class="menu-title" >Operations</span> </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="'/admin'" routerLinkActive="textactive"> 
+                <img class="menu-icon" src="../../../assets/images/admin.svg"
+                    style="margin-right: 18px;width: 15px;"> <span class="menu-title" >Admin</span>
+            </a>
+        </li>
+        <li class="nav-item" style="position: absolute; bottom: 30px;">
+            <a class="nav-link" href="javascript:void(0);"> 
+                <span style="font-size: 9px;line-height: 1rem;color: white;font-family: Roboto,Helvetica Neue,sans-serif;">Version
+                    1.0 <br> Copyrights © Gathi Analytics
+                    LLC </span> </a>
+        </li>
+    </ul>
+</nav>

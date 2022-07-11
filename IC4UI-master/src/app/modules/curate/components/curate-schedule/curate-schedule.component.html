@@ -1,0 +1,143 @@
+<div class="right-main">
+    <div class="right-header">
+      <div class="rytHdrBtn rytHdrBtnActive">Configure</div>
+      <div class="rytHdrBtn">Job Status</div>
+      <div class="rytHdrBtn">View Log</div>
+      <div class="rytHdrBtn">Job Log</div>
+    </div>
+    <div class="right-body">
+      <!-- <div class="row innn">
+        <div class="col-sm-4">
+          <label>Subject Area
+          </label>
+          <select class="inpt" id="sel1" name="subjectarea" (selectionChange)="target_subjAreaChng()" [(ngModel)]="target.sub_area_nm">
+                              <option *ngFor="let s of subjectAreas" [value]="s.sub_area_nm" >{{s.sub_area_nm}}</option>
+                          </select>
+        </div>
+        <div class="col-sm-4">
+          <label>Description
+            <textarea name="targetDescription" placeholder="Description"  rows=0
+                  [(ngModel)]="target.obj_desc_txt"></textarea>
+          </label>
+        </div>
+      </div> -->
+      <div class="row innn">
+        <div class="col-sm-4">
+          <label>Job Name
+            <input type="text" class="inpt" [(ngModel)]="job.jobName">
+          </label>
+
+        </div>
+        <div class="col-sm-4">
+          <label>Calender Name
+          </label>
+          <select class="inpt" id="sel1" name="calenderName" (change)="onSelectedCalender()" [(ngModel)]="job.calenderName">
+                              <option *ngFor="let c of calenderNames" [value]="c.clndr_nm">{{c.clndr_nm}}</option>
+                          </select>
+        </div>
+        <div class="col-sm-4">
+          <label>Schedule Name</label>
+          <select class="inpt" id="sel1" name="ScheduleName" (selectionChange)="onSelectedSchedule()" [(ngModel)]="job.scheduleName">
+                              <option *ngFor="let s of filterScheduleNames" [value]="s.sch_nm">{{s.sch_nm}}</option>
+                          </select>
+        </div>
+      </div>
+      <div class="row innn">
+        <div class="col-sm-4">
+          <label>Job Effective Start Date
+          </label>
+          <input type="date" class="inpt" id="jobeffectiveStartdate" name='JobEffectiveStartDate' title="If StartDate = 10th Sept 2018, 10pm and ScheduleInterval = 24hrs (daily job) then 1st ExceutionDate = 11th Sept 2018, 10pm.&#13;If StartDate = 10th Sept 2018, 3 pm and ScheduleInterval = 7 days(weekly job) then 1st ExecutionDate = 17th Sept 2018, 3pm."
+          (ngModelChange)="selectedEffectiveStartDt($event)"
+          value="{{effectiveStartDate | date:'yyyy-MM-dd'}}">
+
+        </div>
+        <div class="col-sm-4">
+          <label>Schedule Effective Start Date
+          </label>
+          <input type="date" class="inpt" id="scheffectivestartdate" name='ScheduleEffectiveStartDate'>
+        </div>
+         <div class="col-sm-4">
+          <label>Schedule Start Time
+          </label>
+          <input type="time" class="inpt" name='ScheduleStartTime' [(ngModel)]="job.scheduleStartTime">
+        </div>
+
+      </div>
+      <div class="row innn container1 top10">
+        Cron Expression
+        <label class="container1 marginleft35 ">Yes
+          <input type="radio" (change)="isCronExpChange($event)" [checked]="job.isCronExpression.trim().toLowerCase() == 'y'" value="Y" name="CronExp">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container1 marginleft35">No
+          <input type="radio"(change)="isCronExpChange($event)" [checked]="job.isCronExpression.trim().toLowerCase() =='n' "  value="N" name="CronExp">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="row innn">
+        <div class="col-sm-4" *ngIf="job.isCronExpression.toLowerCase() === 'n'">
+          <label>Job SLA Start-Time
+          </label>
+          <input type="time" class="inpt" name='JobSLAStart-Time' [(ngModel)]="job.slaStartTime">
+        </div>
+        <div class="col-sm-4" *ngIf="job.isCronExpression.trim().toLowerCase() === 'y'">
+          <label>Cron Expression
+          </label>
+          <input type="text" class="inpt" name='cronexp' [(ngModel)]="job.cronExpression">
+        </div>
+        <div class="col-sm-4">
+          <label>Job SLA End-Time
+          </label>
+          <input type="time" class="inpt" name='JobSLAEnd-Time' [(ngModel)]="job.slaEndTime">
+        </div>
+        <div class="col-sm-4">
+          <label>SLA offset Days
+          </label>
+          <input type="number" class="inpt" name='ScheduleStartTime' [(ngModel)]="job.slaOffsetDays">
+        </div>
+      </div>
+      <div class="row innn" *ngIf="false">
+        <div class="col-sm-4" >
+          <label>Input Object
+          </label>
+          <input type="text" class="inpt" name='Input Object' [(ngModel)]="job.inputObj">
+        </div>
+        <div class="col-sm-4" >
+          <label>Output Object
+          </label>
+          <input type="text" class="inpt" name='Output_Object' [(ngModel)]="job.outputObj">
+        </div>
+
+      </div>
+      <div class="row innn">
+        <div class="col-sm-4">
+          <label>Impact
+          </label>
+          <select class="inpt" id="sel1" name="Impact" [(ngModel)]="job.impact">
+            <option [value]="'low'" >Low</option>
+            <option [value]="'medium'">Medium</option>
+            <option [value]="'high'" >High</option>
+                          </select>
+        </div>
+        <div class="col-sm-4">
+          <label>Support Group
+            <input type="text" class="inpt" name='SupportGroup' [(ngModel)]="job.supportGroup">
+          </label>
+
+        </div>
+        <div class="col-sm-4">
+          <label>Ticketing Type</label>
+            <select class="inpt" id="temp" placeholder="Ticketing Type"
+                      [(ngModel)]="job.ticketing_system_type">
+                      <option [value]="'jeera'" >Jira</option>
+                      <option [value]="'gathi'">Gathi</option>
+                    </select>
+        </div>
+      </div>
+
+    </div>
+    <div class="btn-block">
+            <button (click)="submitInjectionData()">Submit</button>
+            <button (click)="closeSchedule()">Close</button>
+    </div>
+  </div>

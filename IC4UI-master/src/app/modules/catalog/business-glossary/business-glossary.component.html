@@ -1,0 +1,242 @@
+<div class="container-fluid body" *ngIf="isvisible==true">
+
+    <div class="row sub-nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="nav-sub-icons">
+                <svg class="vl dashboard" id="dashboard" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 0 27.68 27.68">
+                    <path id="Path_261" data-name="Path 261"
+                        d="M10.668,0H2.018A2.02,2.02,0,0,0,0,2.018v5.19A2.021,2.021,0,0,0,2.018,9.227h8.65a2.021,2.021,0,0,0,2.018-2.018V2.018A2.021,2.021,0,0,0,10.668,0Zm0,0"
+                        fill="#052e5d" />
+                    <path id="Path_262" data-name="Path 262"
+                        d="M10.668,213.332H2.018A2.02,2.02,0,0,0,0,215.35v12.11a2.02,2.02,0,0,0,2.018,2.018h8.65a2.02,2.02,0,0,0,2.018-2.018V215.35A2.021,2.021,0,0,0,10.668,213.332Zm0,0"
+                        transform="translate(0 -201.799)" fill="#052e5d" />
+                    <path id="Path_263" ata-name="Path 263"
+                        d="M288,341.332h-8.65a2.021,2.021,0,0,0-2.018,2.018v5.19a2.021,2.021,0,0,0,2.018,2.018H288a2.02,2.02,0,0,0,2.018-2.018v-5.19A2.021,2.021,0,0,0,288,341.332Zm0,0"
+                        transform="translate(-262.339 -322.879)" fill="#052e5d" />
+                    <path id="Path_264" data-name="Path 264"
+                        d="M288,0h-8.65a2.021,2.021,0,0,0-2.018,2.018v12.11a2.021,2.021,0,0,0,2.018,2.018H288a2.021,2.021,0,0,0,2.018-2.018V2.018A2.02,2.02,0,0,0,288,0Zm0,0"
+                        transform="translate(-262.339)" fill="#052e5d" />
+                </svg>
+                <div class="vl verlin"></div>
+                <div>
+                    <button class="button1" style="font-weight: normal  !important;"  [routerLink]="'/catalog/connectors'">Connector</button>
+                    <button class="button1" style="font-weight: normal  !important;"  [routerLink]="'/catalog/register'">Register</button>
+                    <button class="button active" style="font-weight: normal  !important;" [routerLink]="'/catalog/glossary'">Business Glossary</button>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+  
+    <!-- <div>
+        <div *ngIf="register.mode  == 'template'">
+            <app-upload-template [selectedLOb_Id]="selectedLOB" [selectedApp_Id]="selectedApp">
+            </app-upload-template>
+        </div>
+        <div *ngIf="register.mode  == 'connector'">
+            <app-connector (getSearchStatusChange)="hide($event)" [childMessage]="sendtoconcomp"></app-connector>
+        </div>
+        <div *ngIf="register.mode  == 'manual'">
+            manual
+        </div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-sm-6">
+           
+        </div>
+
+        <div class="col-sm-6 push-right">
+            <button type="button" data-toggle="modal" data-target="#myModalCategory" style="outline: none;" class="regclone">Add Category</button>
+            <button type="button" data-toggle="modal" data-target="#myModalTerm" style="outline: none;" class="regclone">Add Term</button>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="modal fade" id="myModalCategory">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Category</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!-- <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="data_source">Data Source:</label>
+              <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.dsnName" name="datasource">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="data_source">Data Platform:</label>
+              <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.dataPlatform" name="dataplatform">
+            </div>
+          </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="data_schema">DB Schema:</label>
+                <input type="text" class="form-control" id="data_schema" [(ngModel)]="editabletableDetails.schema" name="dbschema">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dbname">Name:</label>
+                <input type="text" class="form-control" id="dbname"  [(ngModel)]="editabletableDetails.assetName" name="dbname">
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="data_source">Asset Type:</label>
+                  <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.assetType" name="AssetType">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="data_source">Row Count:</label>
+                  <input type="text" class="form-control" id="data_platform"[(ngModel)]="editabletableDetails.size"  name="RowCount">
+                </div>
+              </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="data_source">LOB</label>
+                    <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.lobData" name="LOB">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="data_source">Application:</label>
+                    <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.applicationName"  name="Application">
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="comment">Description:</label>
+                    <textarea class="form-control" rows="5" [(ngModel)]="editabletableDetails.description" id="comment" name="text"></textarea>
+                  </div>
+                </div>
+                </div> -->
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm btn-update" (click)="updateConnection()">Save</button>
+          <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="myModalTerm">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Term</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+              <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="data_source">Data Source:</label>
+                  <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.dsnName" name="datasource">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="data_source">Data Platform:</label>
+                  <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.dataPlatform" name="dataplatform">
+                </div>
+              </div>
+              </div>
+    
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="data_schema">DB Schema:</label>
+                    <input type="text" class="form-control" id="data_schema" [(ngModel)]="editabletableDetails.schema" name="dbschema">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="dbname">Name:</label>
+                    <input type="text" class="form-control" id="dbname"  [(ngModel)]="editabletableDetails.assetName" name="dbname">
+                  </div>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="data_source">Asset Type:</label>
+                      <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.assetType" name="AssetType">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="data_source">Row Count:</label>
+                      <input type="text" class="form-control" id="data_platform"[(ngModel)]="editabletableDetails.size"  name="RowCount">
+                    </div>
+                  </div>
+                  </div>
+    
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="data_source">LOB</label>
+                        <input type="text" class="form-control" id="data_source" [(ngModel)]="editabletableDetails.lobData" name="LOB">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="data_source">Application:</label>
+                        <input type="text" class="form-control" id="data_platform" [(ngModel)]="editabletableDetails.applicationName"  name="Application">
+                      </div>
+                    </div>
+                    </div>
+    
+                    <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="comment">Description:</label>
+                        <textarea class="form-control" rows="5" [(ngModel)]="editabletableDetails.description" id="comment" name="text"></textarea>
+                      </div>
+                    </div>
+                    </div> -->
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success btn-sm btn-update" (click)="updateConnection()">Save</button>
+              <button type="button" class="btn btn-danger btn-sm btn-close" data-dismiss="modal">Cancel</button>
+            </div>
+    
+          </div>
+        </div>
+        </div>
+
+

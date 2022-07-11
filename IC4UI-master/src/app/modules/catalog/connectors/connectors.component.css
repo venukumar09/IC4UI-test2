@@ -1,0 +1,97 @@
+.form-pri-btn{
+    /*top:10px;*/
+    position: relative;
+      background: #1656a2;
+      border-radius: 40px;
+      height: 31px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 30px;
+      padding-right: 30px;
+      border: none;
+      color:white;
+  }
+  .nav-sub-icons{
+    position: relative;
+    left:20px;
+    display: block;
+    top: 0px;
+}
+.vl{
+  display: inline-block;
+}
+.dashboard{
+  position: relative !important;
+  top: 11px !important;
+}
+.active ,.button1:hover{
+  background-image: linear-gradient(150deg,#1656a2 30%,#1696d8 80.71%);
+  outline: none;
+  border: none;
+  color: white;
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 72px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.sub-nav-bar{
+  background: #f8f9fa;
+}
+.button{
+  float:left; 
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  /*border-style: solid;*/
+  color: white;
+}
+.verlin{
+  position: absolute;
+  top: 5px;
+  left: 50px;
+  background: red;
+  border-right: 1px solid #b3afaf;
+  height: 41px;
+}
+.button1{
+  float:left; 
+  border-color: #1a9fdd;
+  padding: 4px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  left: 70px;
+  bottom: 13px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-style: solid;
+  color: #1981b1;
+  background:#f8f9fa
+}

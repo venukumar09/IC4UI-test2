@@ -1,0 +1,58 @@
+
+.conn-main-page{
+  position: relative;
+  /* top: 35px; */
+}
+.conn-list{
+  width: 97%;
+  top: 25px;
+  left:12px;         
+  position: relative;
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 60px;
+  
+}
+.pltfrm-img-snf{
+  height: 56% !important;
+  width: 55% !important;
+  margin-top: 19%;
+  margin-bottom: 19%;
+    }
+
+
+.conn{
+
+  position:inherit;
+  display: inline-block;
+  width: 140px;
+  height: 130px;
+  border: 3px solid #e9eef3;
+  font-weight: 500;
+  color: grey;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+.conn-text{
+  position: relative;
+  top: 15px;
+}
+.conn-active{
+  border: 3px solid #1656a2;
+  color: #4175b3;
+}
+.pltfrm-img{
+  width: 120px;
+    height: 120px;
+}
+.VEConn{
+  text-align: right;
+}
+.source_logos
+{
+  width: 50px;
+  position: relative;
+  height: 50px;
+  top: 28px;
+}

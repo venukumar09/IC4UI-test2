@@ -1,0 +1,197 @@
+<div class="container-fluid body" *ngIf="isvisible==true">
+
+    <div class="row sub-nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="nav-sub-icons">
+                <svg class="vl dashboard" id="dashboard" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 0 27.68 27.68">
+                    <path id="Path_261" data-name="Path 261"
+                        d="M10.668,0H2.018A2.02,2.02,0,0,0,0,2.018v5.19A2.021,2.021,0,0,0,2.018,9.227h8.65a2.021,2.021,0,0,0,2.018-2.018V2.018A2.021,2.021,0,0,0,10.668,0Zm0,0"
+                        fill="#052e5d" />
+                    <path id="Path_262" data-name="Path 262"
+                        d="M10.668,213.332H2.018A2.02,2.02,0,0,0,0,215.35v12.11a2.02,2.02,0,0,0,2.018,2.018h8.65a2.02,2.02,0,0,0,2.018-2.018V215.35A2.021,2.021,0,0,0,10.668,213.332Zm0,0"
+                        transform="translate(0 -201.799)" fill="#052e5d" />
+                    <path id="Path_263" ata-name="Path 263"
+                        d="M288,341.332h-8.65a2.021,2.021,0,0,0-2.018,2.018v5.19a2.021,2.021,0,0,0,2.018,2.018H288a2.02,2.02,0,0,0,2.018-2.018v-5.19A2.021,2.021,0,0,0,288,341.332Zm0,0"
+                        transform="translate(-262.339 -322.879)" fill="#052e5d" />
+                    <path id="Path_264" data-name="Path 264"
+                        d="M288,0h-8.65a2.021,2.021,0,0,0-2.018,2.018v12.11a2.021,2.021,0,0,0,2.018,2.018H288a2.021,2.021,0,0,0,2.018-2.018V2.018A2.02,2.02,0,0,0,288,0Zm0,0"
+                        transform="translate(-262.339)" fill="#052e5d" />
+                </svg>
+                <div class="vl verlin"></div>
+                <div>
+                    <button class="button1" style="font-weight: normal  !important;"  [routerLink]="'/catalog/connectors'">Connector</button>
+                    <button class="button active" style="font-weight: normal  !important;"  [routerLink]="'/catalog/register'">Register</button>
+                    <button class="button1" style="font-weight: normal  !important;" [routerLink]="'/catalog/glossary'" >Business Glossary</button>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    <div *ngIf="isColumns">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5 class="regHeading">New Registration</h5>
+            </div>
+        </div>
+        <div class="row head-registration">
+            <div class="col col-sm-3">
+                <div class="form-group">
+                    <label for="sel1">Select Organisation</label>
+                    <select [disabled]="true" class="form-control" [(ngModel)]="selectedOrg">
+                        <option *ngFor="let org of ( orgs ? orgs : []);let i =index;" value="{{org.org_id}}">
+                            {{org.org_nm}}
+                        </option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+            <div class="col col-sm-3">
+                <div class="form-group">
+                    <label for="sel1">Select LOB</label>
+                    <select class="form-control" [(ngModel)]="selectedLOB" (change)="getApplications()">
+                        <option *ngFor="let lob of lobs" value="{{lob.ln_of_bsn_id}}">
+                            {{lob.ln_of_bsn_nm}}
+                        </option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+            <div class="col col-sm-3">
+                <div class="form-group">
+                    <label for="sel1">Select Application</label>
+                    <select class="form-control" [(ngModel)]="selectedApp" (change)="selectedApplications()">
+                        <option *ngFor="let app of applicatons ;let i =index;" value="{{app.apn_id}}">
+                            {{app.apn_nm}}
+                        </option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+            <div class="col col-sm-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class='radio-block'>
+                    <div class="form-check radio">
+
+                        <label class="container"> Upload template
+                            <input type="radio" checked="checked" name="Registration" value="template"
+                                [checked]="register.mode == 'template'" (change)="onSelectionChange('template')">
+
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-check radio">
+
+                        <label class="container"> Use Connector
+                            <input type="radio" name="Registration" value="connector"
+                                [checked]="register.mode == 'connector'" (change)="onSelectionChange('connector')" />
+
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-check radio">
+
+                        <label class="container manual"> &nbsp;&nbsp;&nbsp;Manual
+                            <input type="radio" name="Registration" value="manual" [checked]="register.mode == 'manual'"
+                                (change)="onSelectionChange('manual')" />
+
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <!-- <div class='radio-block'>
+                <div class="form-check radio">
+
+                    <label class="container"> Upload template
+
+                        <input type="radio" checked="checked" name="Registration" value="template"
+                            [checked]="register.mode == 'template'" (change)="onSelectionChange('template')">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="form-check radio">
+
+                    <label class="container"> Use Connector
+
+                        <input type="radio" name="Registration" value="connector"
+                            [checked]="register.mode == 'connector'" (change)="onSelectionChange('connector')" />
+
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="form-check radio">
+
+                    <label class="container"> Manual
+
+                        <input type="radio" name="Registration" value="manual" [checked]="register.mode == 'manual'"
+                            (change)="onSelectionChange('manual')" />
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div> -->
+            </div>
+
+            <div class="col-sm-3 push-right">
+                <!-- <button type="button" class="regclone">Clone</button> -->
+                <button type="button" data-toggle="modal" (click)="viewSchledJobs()" data-target="#viewSchledJobs" style="outline: none;" class="regclone">View Scheduled Jobs</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div *ngIf="register.mode  == 'template'">
+            <app-upload-template [selectedLOb_Id]="selectedLOB" [selectedApp_Id]="selectedApp">
+            </app-upload-template>
+        </div>
+        <div *ngIf="register.mode  == 'connector'">
+            <app-connector (getSearchStatusChange)="hide($event)" [childMessage]="sendtoconcomp"></app-connector>
+        </div>
+        <div *ngIf="register.mode  == 'manual'">
+            manual
+        </div>
+    </div>
+
+
+</div>
+<div class="modal fade" id="viewSchledJobs">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Connector Scheduled Jobs</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Job Name</th>
+                    <th>Job Type</th>
+                    <th>sch_nm</th>
+                    <th>eff_strt_dt</th>
+                    <th>eff_strt_tm</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let viewSchledJobsdata of viewSchledJobsdata">
+                  <tr>
+                    <td>{{viewSchledJobsdata.job_nm}}</td>
+                    <td>{{viewSchledJobsdata.job_type_cd}}</td>
+                    <td>{{viewSchledJobsdata.sch_nm}}</td>
+                    <td>{{viewSchledJobsdata.job_eff_strt_dt}}</td>
+                    <td>{{viewSchledJobsdata.job_sla_strt_tm}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+
+    </div>
+</div>

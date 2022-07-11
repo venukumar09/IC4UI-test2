@@ -1,0 +1,911 @@
+.curate_maiin{
+  background-color: #f1f1f1;
+  padding: 2.25%;
+  padding-bottom: 0;
+}
+select {
+  background-image: linear-gradient(45deg, transparent 60%, #CCC 75%), linear-gradient(135deg, #CCC 35%, transparent 20%) !important;
+    background-position:
+      calc(100% - 30px) 14px,
+      calc(100% - 20px) 14px,
+      100% 0;
+    background-size:
+      10px 10px,
+      10px 10px;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  select {
+    border-radius: 0px !important;
+
+  }
+
+  * {
+    outline: none !important;
+  }
+  .tree-conatiner{
+    overflow: hidden;
+    overflow-x: auto;
+  }
+  .leftblock {
+    background: #bee3f5;
+    height: 650px;
+    padding-top: 10px;
+    overflow: scroll;
+  }
+
+  .play{
+    width: 50%;
+    height: 50%;
+  }
+  .right-main {
+    width: 100%;
+    border: 2px solid #bee3f5;
+    height: 100%;
+    background: white;
+  }
+
+  .rightblock {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    border-top: 0px;
+    border-left: 10px solid #f4f5f7;
+  }
+
+  .rytHdrBtn {
+    top: 7px;
+    left: 7px;
+    height: 40px;
+    width: 135px;
+    position: relative;
+    display: inline-block;
+    font-weight: 500;
+    padding-top: 7px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .rytHdrBtnActive {
+    background: white;
+  }
+
+  .card-body {
+    padding: 4px 10px;
+    max-height: 210px;
+    overflow-y: auto;
+  }
+
+  .tab{
+    display: none;
+  }
+  .active{
+    display: block;
+  }
+
+  .card-header {
+    padding: 4px;
+    background: white;
+    border-color: white;
+    color: #3d72b2;
+    font-weight: 500;
+  }
+
+  .whiteblockactive {
+    border: 3px solid #3eaee2;
+    margin-bottom: 12px;
+    width: 85%;
+  }
+
+  .fa {
+    color: white;
+    display: inline-block !important;
+    padding: 3px;
+  }
+
+  .fa-pencil-square-o {
+    position: relative;
+    top: 3px;
+  }
+
+  #accordion {
+    margin-top: 10px;
+    border: 1px solid #169ddd;
+    cursor: pointer;
+  }
+
+  .card {
+    border-radius: 1px;
+  }
+
+  .card-link-body {
+    border-top: 2px solid #bee3f5;
+    font-weight: 400;
+    font-size: small;
+    padding: 7px;
+    margin: 0px 7px;
+    padding-left: 25px;
+  }
+
+  .middleblock {
+    background: #ccc;
+    padding: 35px 20px;
+    /*padding-bottom: 0px; */
+    /*padding-right: 70px !important;*/
+  }
+
+  .middleblock {
+    background: #ccc;
+    padding: 35px;
+    padding-bottom: 20px;
+    /*padding-right: 70px !important;*/
+  }
+
+  .whiteblockactive>.whiteblock {
+    margin-bottom: 0px;
+  }
+
+  .right-header {
+    height: 50px;
+    background: #bee3f5;
+    color: #4a7cb6;
+    display: block;
+  }
+
+  .whiteblock {
+    background: white;
+    height: 45px;
+    text-align: center;
+    padding-top: 8px;
+    /*margin-bottom: 12px;*/
+    border: 3px solid #3eaee2;
+    font-weight: 500;
+    font-size: 14px;
+    width: 85%;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .whiteicons {
+    display: inline-block;
+  }
+
+  .whiteblockselected {
+    background: white;
+    height: 45px;
+    text-align: center;
+    padding-top: 8px;
+    /*margin-bottom: 12px;*/
+    border: 3px solid #3eaee2;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .mainwhiteblock:hover {
+    background: #3eaee2;
+    border-radius: 1px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .mainwhiteblock:hover>.whiteicons>.iconsBlock>.fa {
+    display: inline-block !important;
+  }
+
+  .mainwhiteblock>.whiteicons>.iconsBlock>.fa {
+    display: none !important;
+  }
+
+  .mainwhiteblock {
+    /*background: #3eaee2;*/
+    /*border-radius: 1px;*/
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .subnav {
+    background: #f8f9fa;
+    height: 60px;
+    /* display: block; */
+
+  }
+
+  .subnavItems {
+    top: 4px;
+    left: 100px;
+    background: #4472c4;
+    border-radius: 1px;
+    padding: 4px;
+    font-weight: 500;
+    border: 0px;
+    position: relative;
+  }
+
+  .sublogo {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1253a0;
+    top: 9px;
+    left: 10px;
+    position: relative;
+    /* display: inline-block; */
+  }
+
+  .fa-eye {
+    padding-right: 6px;
+  }
+
+  .slctTmpt {
+    display: inline-block;
+  }
+
+  .sub {
+    padding-top: 12px;
+    padding-right: 0px;
+  }
+
+  .btn-next-ply-img {
+    padding: 1px;
+    width: 23px;
+    position: relative;
+    /* bottom: 3px; */
+  }
+
+  .btn-next-ply {
+    background: white;
+    width: 31px;
+    height: 31px;
+    position: relative;
+    top: 3px;
+    border-radius: 73%;
+    border: 2px solid rgb(0, 209, 56);
+    /* border-radius: 100%; */
+    padding: 2px;
+    color: rgb(0, 209, 56);
+    font-weight: 600;
+    margin-left: 10px;
+    outline: none !important;
+  }
+
+  .btn-next-stp {
+    background: white;
+    border: 2px solid rgb(240, 21, 21);
+    border-radius: 25px;
+    padding: 2px;
+    top: 3px;
+    position: relative;
+    width: 31px;
+    height: 31px;
+    color: rgb(240, 21, 21);
+    font-weight: 600;
+    /*text-size-adjust: auto;*/
+    margin-left: 10px;
+    outline: none !important;
+  }
+
+  .btn-next-blk {
+    background: white;
+    border: 2px solid rgb(21, 109, 240);
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: rgb(21, 109, 240);
+    font-weight: 600;
+    text-size-adjust: auto;
+    margin-left: 3px;
+    outline: none !important;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .btn-next-sdl {
+    top: 3px;
+    position: relative;
+    background: rgb(43, 101, 189);
+    border: 2px solid rgb(21, 109, 240);
+    border-radius: 25px;
+    padding-left: 13px;
+    padding-right: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: white;
+    font-weight: 600;
+    /*text-size-adjust: auto;*/
+    margin-left: 3px;
+    outline: none !important;
+  }
+  select{
+    font-size: 13px;
+  }
+  a{
+    font-size: 15px;
+  }
+  .pl {
+    margin-right: 20px;
+  }
+  
+
+  .img {
+    padding-top: .75%;
+    padding-top: .75%;
+    padding-left: 5px;
+    padding-right: 0;
+  }
+
+  .left10 {
+    position: relative;
+    left: 10px;
+  }
+
+  .subnavicons {
+    width: 12px;
+    position: relative;
+    bottom: 1px;
+  }
+  .subnav-icons {
+    color: #169DDD;
+    border: 2px solid #169DDD;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 2px 15px;
+    position: relative;
+    top: 2px;
+    font-size: 13px;
+    margin-left: 5px;
+    cursor: pointer;
+    background: white;
+  }
+
+  .iconsBlock {
+    display: block;
+  }
+
+  .svgJob {
+    width: 17px;
+    position: relative;
+    bottom: 2px;
+  }
+
+  .scheduleimg {
+    width: 13px;
+    position: relative;
+    bottom: 2px;
+  }
+
+  .subnavActivebtn {
+    color: white;
+    background: #1656A2;
+  }
+
+  .sidenavsvg {
+    margin: 0px 5px;
+    position: relative;
+    bottom: 2px;
+  }
+ .flow-svg{
+    margin: 0px 5px;
+    position: relative;
+    bottom: 2px;
+  }
+  .flow-svg path{
+    stroke: none !important;
+  }
+  .selc-service{
+    stroke: blue !important;
+  }
+  
+
+  .sidenavadd {
+    width: 18px;
+    margin: 0px 8px;
+    position: relative;
+    bottom: 1px;
+    float: right;
+  }
+
+  .curateLogo {
+    position: relative;
+    top: 15px;
+    left: 10px;
+    font-size: 20px;
+    color: #1656a2;
+  }
+
+  .mainLogo {
+    margin: 0px 10px 0px 0px;
+    position: relative;
+    bottom: 3px;
+    width: 24px;
+  }
+
+  .mainpage {
+    border-right: 25px solid #f4f5f7;
+    border-left: 25px solid #f4f5f7;
+    border-top: 25px solid #f4f5f7;
+    border-bottom: 10px solid #f4f5f7;
+  }
+
+  .col {
+    margin-right: 10px;
+  }
+
+  .inpt1 {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px dashed #ccc;
+}
+
+  .inpt {
+    width: 100%;
+    margin-top: 10px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+  }
+  .close-btn{
+    float: right;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #4a7cb6;
+  }
+
+  .trash{
+    float: right;
+  }
+
+  .trash svg{
+    margin-top: 15px;
+    height: 17px;
+  }
+
+  .in4 {
+    height: 100%;
+  }
+
+  .checkbox {
+    height: 25px;
+    display: -webkit-inline-box;
+    width: 100%;
+  }
+
+  .add2 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    padding: 2%;
+    padding-right: 11%;
+    padding-left: 11%;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .pb_A {
+    background-color: #F3F3F3;
+    padding: 2%;
+  }
+
+  .add1 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    padding: 4%;
+    padding-right: 11%;
+    padding-left: 11%;
+    margin-left: 10px;
+    height: 100%;
+    font-size: 14px;
+  }
+
+  .add3 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    padding: 6%;
+    padding-left: 12%;
+    padding-right: 12%;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  label {
+
+    display: inline-block;
+    margin-top: 0%;
+    margin-bottom: 0;
+    /* padding-top: 2%; */
+  }
+
+  .in1 {
+    width: 100%;
+    font-size: 14px;
+    height: 100%;
+    padding: 2%;
+  }
+
+  .selet {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  .add4 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    height: 100%;
+    padding-left: 12%;
+    padding-right: 12%;
+    margin-left: -20px;
+    padding: 3%;
+    font-size: 14px;
+  }
+
+  .add5 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    height: 100%;
+    padding-left: 12%;
+    padding-right: 12%;
+    font-size: 14px;
+  }
+
+  .selet1 {
+    padding: 4%;
+    padding-right: 25%;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .acuracy {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .add5 {
+    background-color: #bce8f1;
+    border: 1px solid #bce8f1;
+    padding: 2%;
+    padding-right: 5%;
+    padding-left: 5%;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .has-feedback .form-control {
+    padding-right: 42.5px;
+    padding: 4%;
+  }
+
+  .form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    display: block;
+    width: 70px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+
+  #accordion1 {
+    padding-bottom: 15px;
+  }
+
+  .leftblock1 {
+    background: #d7e0e7;
+    padding-top: 10px;
+    margin-left: 25px;
+  }
+
+  .form-success-btn,
+  .form-success-btn {
+    position: relative;
+    background: #00d138;
+    border-radius: 25px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: 900;
+    color: white;
+    border: none;
+    width: 100%;
+  }
+
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #00d138;
+    border-color: #00d138;
+  }
+
+  .btn:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  .subnav-icons1 {
+    color: white;
+    border-radius: 25px;
+    font-weight: 500;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    font-weight: 900;
+    background: #169DDD;
+    width: 100%;
+  }
+
+  .pane {
+    width: 100%;
+    height: 240px;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: white;
+  }
+
+  .bodyy {
+    background-color: #f1f1f1;
+  }
+
+  .panee {
+    background-color: #f1f1f1;
+    
+    width: 100%;
+  }
+
+  .pane1 {
+    // background-color: white;
+    padding: 10px;
+    height: 380px;
+  }
+
+  .innn {
+    padding: 10px;
+    padding-left: 25px;
+
+  }
+  .icoon{
+    height: 20px;
+    margin-right: 10px;
+  }
+  .nav_icons{
+    margin-top:16px;
+  }
+  .right-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 290px;
+    font-size: 13px;
+  }
+  .maximize .right-body{
+    height: auto;
+  }
+  .maximize .pane{
+    display: none;
+  }
+  .max-icon{
+    float: right;
+  }
+  .max-icon svg{
+    width: 17px;
+    margin:14px;
+    cursor: pointer;
+  }
+  .configure-btn{
+    text-align: center;
+  }
+
+  .configure-btn button{
+    margin: 5px;
+  }
+  .container1 {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+/* Hide the browser's default radio button */
+.container1 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+
+
+/* On mouse-over, add a grey background color */
+.container1:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+
+
+/* When the radio button is checked, add a blue background */
+.container1 input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+
+/* Show the indicator (dot/circle) when checked */
+.container1 input:checked~.checkmark:after {
+    display: block;
+}
+
+
+
+/* Style the indicator (dot/circle) */
+.container1 .checkmark:after {
+    top: 5.4px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.marginleft35 {
+    margin-left: 10px;
+}
+
+.top10 {
+    position: relative;
+}
+.subnav-icons11 {
+    color: white;
+    border: 2px solid #ffd402c4;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 2px 15px;
+    position: relative;
+    top: 2px;
+    font-size: 15px;
+    background: #ffd402c4;
+    width: 80px;
+}
+
+.subnav-icons12 {
+    color: white;
+    border: 2px solid #1c7be0;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 2px 15px;
+    position: relative;
+    top: 2px;
+    font-size: 15px;
+    background: #1c7be0;
+    width: 80px;
+}
+.source-list{
+  list-style: none;
+  position: absolute;
+  z-index: 99999;
+  background: white;
+  border: 1px solid lightblue;
+  width: 89%;
+  font-size: 14px;
+  padding: 10px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.check_faicon {
+  text-align: center;
+  font-size: 16px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.fa-check {
+  color: green;
+}
+
+.fa-times {
+  color: red;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+
+/* On mouse-over, add a grey background color */
+.container2:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+
+
+/* When the radio button is checked, add a blue background */
+.container2 input:checked~.checkmark {
+  background-color: #2196F3;
+}
+
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+
+/* Show the indicator (dot/circle) when checked */
+.container2 input:checked~.checkmark:after {
+  display: block;
+}
+
+
+
+/* Style the indicator (dot/circle) */
+.container2 .checkmark:after {
+  top: 5.4px;
+  left: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.ariflow {
+  display: block;
+}
+.ariflow .right-body{
+  height: auto;
+}

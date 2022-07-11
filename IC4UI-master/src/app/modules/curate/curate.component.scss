@@ -1,0 +1,133 @@
+.curateLogo {
+    position: relative;
+    top: 15px;
+    left: 25px;
+    font-size: 20px;
+    color: #1656a2;
+  }
+
+  .mainLogo {
+    margin: 0px 10px 0px 0px;
+    position: relative;
+    bottom: 3px;
+    width: 24px;
+  }
+  .curate_subnav{
+    background: #f8f9fa;
+    height: 60px;
+  }
+  .conn-main-page {
+    position: relative;
+    top: 10%;
+}
+.conn-main-page .bus-glo-list {
+    display: block;
+    width: 100%;
+    justify-content: center;
+}
+.conn-main-page .bus-glo-list .cll {
+    flex-wrap: inherit;
+}
+
+.conn-main-page .bus-glo-list {
+    display: block;
+    width: 100%;
+    justify-content: center;
+}
+
+.conn-main-page .bus-glo-list .cll .bus-glo-head {
+    cursor: pointer;
+    margin-left: 1%;
+    width: 185px;
+    height: 160px;
+    margin-left: inherit;
+    background: linear-gradient(to bottom right, #1656A2, #1695D6);
+    margin-left: 2.5%;
+    overflow: auto;
+}
+.conn-main-page .bus-glo-list .cll .bus-glo-head .bus-glo-txt {
+    position: relative;
+    color: white;
+    font-size: 1.50vw;
+    top: 53%;
+    width: 100px;
+    left: 20px;
+    line-height: initial;
+}
+#portfolio {
+    bottom: 1.7vw;
+    position: relative;
+    // right: 10%;
+    height: 30%;
+}
+
+#website {
+    bottom: 1.7vw;
+    position: relative;
+    // right: 10%;
+    height: 30%;
+}
+
+#Build_inj {
+    bottom: 1.7vw;
+    position: relative;
+    right: 10%;
+    height: 25%;
+}
+.txt_algn{
+    text-align: justify;
+}
+.conn-main-page .Lobstat {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-weight: 350;
+    line-height: 1.25;
+    margin-left: 30px;
+}
+
+.conn-main-page .Lobstat h4 {
+    font-weight: 470;
+}
+
+.conn-main-page .Lobstat  p, .side_data1 p {
+    font-size: 11px;
+    padding-bottom: 0%;
+    padding-top: 1%;
+}
+.side_data hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1.5px solid rgba(0,0,0,.3);
+}
+
+.side_data1 h5 {
+    font-weight: 400;
+    line-height: 1.2;
+    font-size: 1rem;
+}
+.side_data h3 {
+    font-size: 1.45rem;
+    font-weight: 400;
+}
+
+.side_data {
+    padding-left: 4%;
+    padding-right: 9%;
+    font-weight: 350;
+    line-height: 1.35;
+}
+
+.side_data1 {
+    padding-top: 0%;
+}
+.video-wrapper {
+    padding-top: 2%
+}
+.row .cll {
+    flex-wrap: inherit;
+    /* overflow: scroll; */
+   }
+.row{
+  margin-right:0px;
+}

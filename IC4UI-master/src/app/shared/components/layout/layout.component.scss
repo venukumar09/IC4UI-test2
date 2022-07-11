@@ -1,0 +1,11 @@
+.main-container{
+    margin-left: 15%;
+    transition: left .3s ease;
+}
+
+.sidebar{
+    transition: all 0.2s ease-in-out;
+}
+.sidebar-in{
+    display: none;
+}

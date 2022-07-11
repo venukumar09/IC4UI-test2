@@ -1,0 +1,466 @@
+<div *ngIf="joiner">
+  <!-- Modal body -->
+  <div class="joiner_conf" *ngIf="!showTransformBox">
+    <div class="right-main">
+      <div class="row">
+        <div class="col-md-4" style="margin-right: -15px;">
+          <label class="grid1" style="padding-top: 8px;">
+            Name
+          </label>
+          <label class="grid2">
+            <!-- Name -->
+            <input required maxlength="12" minlength="2" class="search" type="text" placeholder="Joiner Name" [(ngModel)]="joiner.name">
+          </label>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+
+        </div>
+      </div>
+
+      <div class="right-main1">
+        <div class="right-header">
+          <div class="row rowcard">
+            <div class="col-sm-2">
+              <div class="rytHdrBtn rytHdrBtnActive" [ngClass]="{'rytHdrBtnActive': selectedMenu == 'config'}"
+                   (click)="selectedMenu = 'config'">Config Conditions</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="rytHdrBtn" [ngClass]="{'rytHdrBtnActive': selectedMenu == 'map'}"
+                   (click)="selectedMenu = 'map'">Map Target</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="rytHdrBtn" [ngClass]="{'rytHdrBtnActive': selectedMenu == 'filter'}"
+                   (click)="selectedMenu = 'filter'">Filters</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row_body">
+          <div *ngIf="selectedMenu == 'config'">
+
+            <div class="innav">
+              <div class="row">
+                <div class="col-sm-2">
+                  <label>Objects</label>
+                </div>
+                <div class="col-sm-3">
+                  <label>Keys</label>
+                </div>
+              </div>
+              <div *ngFor="let a of joiner_data.sources;let i = index;">
+                <div *ngIf="i > 0" class="row" style="margin-top: 15px;">
+                  <div class="col-sm-2" style="padding-left: 0px;padding-right: 0px;">
+                    <select class="form-control io_join" id="sel1" name="sellist1" [ngModel]="a.data.join_type"
+                            (change)="joinerChange(src[i-1],src[i],$event,i)">
+                      <option>Inner Join</option>
+                      <option>Full Outer Join</option>
+                      <option>Left Outer Join</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label style="padding-top: 10px;">Override Keys</label>
+                  </div>
+                </div>
+                <div class="row" style="margin-top:5px">
+                  <div class="col-sm-2 act">
+                    <label (click)="sourceSelection(a)" class="lbl">{{a.name}}</label>
+                  </div>
+                  <div class="col-sm-5">
+                    <input class="ipt" type="text" [(ngModel)]="a.data.keys" placeholder="{{a.name}} keys">
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="row">
+                      <div class="col-8">
+                        <select class="form-control" id="{{a.name}}" name="{{a.name}}"
+                                [(ngModel)]="selected_attr_for_key">
+                          <option *ngFor="let attr of a?.data?.attributes;let i = index;" [ngValue]="attr">
+                            {{attr.assetName}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
+                        <button type="button" class="btn btnprimary valid" (click)="addKeys(i,selected_attr_for_key)">
+                          ADD Key
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedMenu == 'map'">
+            <!--MAP CONFIG-->
+
+            <div class="row">
+
+              <!-- Source -->
+              <div class="col-sm-3">
+                <div class="right-main1">
+                  <div class="right-header">
+                    <div class="rowcard">
+                      <div class="rytHdrBtn" style="width: 90%;">Object Attributes</div>
+                    </div>
+                  </div>
+                  <!--?.data?.attributes;-->
+                  <div class="row_body1">
+                    <div id="accordion">
+                      <div class="row " *ngFor="let src of joiner_data?.sources;let i = index;">
+                        <!--<div style="padding-left:10px">-->
+                        <div class="card-header" data-toggle="collapse" [attr.data-target]="'#row' + i">
+                          <a class="card-link">
+                            <svg class="sidenavadd" xmlns="http://www.w3.org/2000/svg" width="24.568" height="24.568"
+                                 viewBox="0 0 24.568 24.568">
+                              <g id="Group_549" data-name="Group 549" transform="translate(-269 -321)">
+                                <g id="Rectangle_966" data-name="Rectangle 966" transform="translate(269 321)"
+                                   fill="#fff" stroke="#47b2e3" stroke-width="2">
+                                  <rect width="24.568" height="24.568" stroke="none" />
+                                  <rect x="1" y="1" width="22.568" height="22.568" fill="none" />
+                                </g>
+                                <g id="Group_434" data-name="Group 434" transform="translate(276.371 328.371)">
+                                  <rect id="Rectangle_967" data-name="Rectangle 967" width="2.457" height="9.827"
+                                        transform="translate(3.685)" fill="#47b2e3" />
+                                  <rect id="Rectangle_968" data-name="Rectangle 968" width="2.457" height="9.827"
+                                        transform="translate(9.827 3.685) rotate(90)" fill="#47b2e3" />
+                                </g>
+                              </g>
+                            </svg>
+                            {{src.name}}
+                          </a>
+                        </div>
+                        <!--</div>-->
+                        <div id="row{{i}}" class="collapse card-body card-link-body oar" data-parent="#accordion"
+                             *ngFor="let attr of src?.data?.attributes;let j = index;"
+                             [ngClass]="checkSelSrc(attr)" (click)="selected_src_mapper(attr,src)">
+                          {{attr.assetName}}
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- arrows -->
+              <div class="col-sm-1" style="margin-top: 100px;">
+                <div class="row" style=" margin-left:0.4vw;">
+                  <!-- <button color="primary" (click)="moveAllToRight()">
+                    {{allRightArrow}} -->
+                  <!-- </button> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 46 46" (click)="moveAllToRight()">
+                    <g id="Group_910" data-name="Group 910" transform="translate(-6451 -15849)">
+                      <g id="Ellipse_138" data-name="Ellipse 138" transform="translate(6451 15849)" fill="#fff" stroke="#b1bec7" stroke-width="2">
+                        <circle cx="23" cy="23" r="23" stroke="none"/>
+                        <circle cx="23" cy="23" r="22" fill="none"/>
+                      </g>
+                      <g id="Group_894" data-name="Group 894" transform="translate(5324 14985)">
+                        <g id="keyboard-right-arrow-button" transform="translate(1098.2 879)">
+                          <g id="chevron-right" transform="translate(58.65)">
+                            <path id="Path_353" data-name="Path 353" d="M60.407,0,58.65,1.757l5.773,5.773L58.65,13.3l1.757,1.757,7.529-7.529Z" transform="translate(-58.65)" fill="#1656a2"/>
+                          </g>
+                        </g>
+                        <rect id="Rectangle_544" data-name="Rectangle 544" width="16" height="3" transform="translate(1137 880)" fill="#1656a2"/>
+                        <rect id="Rectangle_545" data-name="Rectangle 545" width="16" height="3" transform="translate(1137 885)" fill="#1656a2"/>
+                        <rect id="Rectangle_546" data-name="Rectangle 546" width="16" height="3" transform="translate(1137 890)" fill="#1656a2"/>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                <div class="row" style="margin-top:10px; margin-left:0.4vw;">
+                  <!-- <button [disabled]="selectedSourceAttr?.length === 0" (click)="moveSelectedLeftToRight()">
+                    {{selectedRigthArrow}}
+                  </button> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 46 46" (click)="moveSelectedLeftToRight()">
+                    <g id="Group_909" data-name="Group 909" transform="translate(-6454 -15787)">
+                      <g id="Group_893" data-name="Group 893" transform="translate(5902 15317)">
+                        <g id="Ellipse_93" data-name="Ellipse 93" transform="translate(552 470)" fill="#fff" stroke="#b1bec7" stroke-width="2">
+                          <circle cx="23" cy="23" r="23" stroke="none"/>
+                          <circle cx="23" cy="23" r="22" fill="none"/>
+                        </g>
+                        <g id="keyboard-right-arrow-button" transform="translate(510.35 482)">
+                          <g id="chevron-right" transform="translate(58.65)">
+                            <path id="Path_353" data-name="Path 353" d="M61.107,0,58.65,2.457l8.073,8.073L58.65,18.6l2.457,2.457L71.636,10.529Z" transform="translate(-58.65)" fill="#1656a2"/>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Target -->
+              <div class="col-sm-8">
+                <div class="right-main1">
+                  <div class="right-header">
+                    <div class="row rowcard">
+                      <div class="col-sm-4 rytHdrBtn">Map Logic</div>
+                      <div class="col-am-2"></div>
+                      <div class="col-sm-6 clsss">
+                        <div style="display:inline-block">
+                          <div class="rytHdrBtn">
+                            <div class="row">
+                              <div class="col-8">
+                                Target Attributes
+                              </div>
+                              <div class="col-2">
+                                <span style="float:right">
+                                  <i class="fa fa-plus" style="font-size: 18px;" (click)="addTarget();"></i>
+                                </span>
+
+                              </div>
+                              <div class="col-2">
+                                <span style="float:right">
+                                  <i class="fa fa-trash" style="font-size: 18px;" (click)="moveAllToLeft();"></i>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <!--<div>
+                            <span style="float:right">
+                              <i class="fa fa-trash" style="font-size: 18px;" (click)="moveAllToLeft();"></i>
+                            </span>
+                            <span style="float:right">
+                              <i class="fa fa-plus" style="font-size: 18px;" (click)="addTarget();"></i>
+                            </span>
+                          </div>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row_body1">
+                    <table class="table">
+                      <tbody class="tbody">
+                        <tr *ngFor="let t of targetAttributes;let i = index;" [ngClass]="checkSelTar(t)">
+                          <td (click)="selected_trg_mapper(t);">
+                            <span style="float:left" [hidden]="t.tfm_rul_txt === undefined || t.tfm_rul_txt === ''">
+                              {{ (t.tfm_rul_txt | slice:0: 30) + (t.tfm_rul_txt?.length > 30 ? '...': '')}}
+                            </span>
+                            <span style="float:right">
+                              <i class="fa fa-pencil" style="font-size: 18px;"
+                                 (click)="selected_trg_mapper_edit(t);"></i>
+                            </span>
+                          </td>
+                          <td>
+                            <input style="float:left;width:90%" [(ngModel)]="t.assetName" value="{{t.assetName}}" />
+                            <span style="float:right">
+                              <i class="fa fa-trash" style="font-size: 18px;" (click)="deleteTargetAttribute(t,i);"></i>
+                            </span>
+
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div *ngIf="selectedMenu == 'filter'">
+            <div class="joiner_filter">
+              <div class="innav">
+                <div class="row RW">
+                  <div class="col-sm-3">
+                    <select class="form-control btnprimary valid" id="sel1" name="sellist1"
+                            [(ngModel)]="selectedObjForFilter" (change)="addFilter($event)">
+                      <option *ngFor="let a of src;let i = index;" [ngValue]="a">{{a.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row rw">
+                  <div class="col-sm-6">
+                    <label>Input Filters</label>
+                  </div>
+                </div>
+                <div class="row rw" *ngFor="let f of joiner_data.filterConditions;let i= index;">
+                  <div class="col-sm-3 act">
+                    <label class="lbl">{{f.name}}</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <input class="ipt" type="text" placeholder="{{f.name}} condition" [(ngModel)]="f.condition">
+                  </div>
+                  <div class="col-sm-1">
+                    <button type="button" class="btn btnprimary valid" (click)="deleteFilter(f)">
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6" style="justify-content: space-evenly;">
+          <button type="button" class="cancel-btn" style="margin-right: 20px;float:right" (click)="cancel()">Cancel</button>
+          <button type="button" class="validate-btn" style="margin-right: 20px;float:right">Validate</button>
+          <button type="button" class="save-btn" style="margin-right: 20px;float:right" (click)="submit()">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+<div *ngIf="showTransformBox">
+
+  <!-- The Modal -->
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header" style="background-color:#0072c6;color: white;">
+      <h4 class="modal-title">Map Logic</h4>
+      <button type="button" class="close" (click)="showTransformBox = false;">&times;</button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+      <div class="right-main">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="inports">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                     aria-controls="home" aria-selected="true">Functions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                     aria-controls="profile" aria-selected="false">Ports</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row">
+                    <input type="text" class="form-control inpt-border"
+                           style="width: 86%;margin-top: 15px;margin-left: 21px;margin-bottom: 10px;" placeholder="Search Function..."
+                           [(ngModel)]="searchTextFun" [ngModelOptions]="{standalone: true}" #filter
+                           (keyup)="filterNodes(searchTextFun, extractTree)">
+                  </div>
+                  <div class="row_body">
+                    <div class="rw1">
+                      <div class="row rw">
+                        <div class="extract-tree">
+                          <tree-root #extractTree [nodes]="treeData" [options]="{}"
+                                     (activate)="treeEvent($event,'active')" (deactivate)="treeEvent($event,'deactivate')">
+                          </tree-root>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="border-top: 2px solid #b5b2b2;margin-right: 0rem;padding:16px;" class="map-desc">
+                    <p style="padding:2px;">
+                      {{selected_tranformation.desc}}
+                    </p>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="row_body">
+                    <div class="row">
+                      <input type="text" class="form-control inpt-border"
+                             style=" width: 100%;margin-top: 15px;margin-bottom: 10px;" placeholder="Search Attribute..."
+                             [(ngModel)]="searchTextPort" [ngModelOptions]="{standalone: true}" #filter
+                             (keyup)="filterPorts()">
+                    </div>
+                    <div class="rw1">
+                      <div class="row rw">
+                        <div class="extract-tree">
+                          <div role="list" dense style="overflow:auto;text-align:left;">
+                            <div>
+                              <p *ngFor="let s of sourceAttributes" class="extract-ports" (click)="selected_port(s)">
+                                <span style="margin: 0;"
+                                      [ngClass]="{ 'highlight-port' : s.id === selected_mapper_trg.id }">
+                                  {{s.assetName}}
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-7 c7">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="lbl">Name</label>
+              </div>
+              <div class="col-sm-4">
+                <label class="lbl">Data Type Length</label>
+              </div>
+              <div class="col-sm-4">
+                <label class="lbl">Select Data Type</label>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="col-sm-4">
+                <!--<input class="inpt" type="text" placeholder="">-->
+                <input name="assetName" placeholder=" Name" [(ngModel)]="selected_mapper_trg.assetName">
+              </div>
+              <div class="col-sm-4">
+                <!--<input class="inpt" type="text" placeholder="">-->
+                <input name="dat_type_len" matInput placeholder=" Data Type Length"
+                       [(ngModel)]="selected_mapper_trg.dataTypeLength">
+              </div>
+              <div class="col-sm-4">
+                <!--<select class="form-control sel" id="sel1" name="sellist1">
+                      <option></option>
+                      <option></option>
+                    </select>-->
+
+                <select class="form-control sel" [(ngModel)]="selected_mapper_trg.dataType">
+                  <option *ngFor="let d of dataTypes" [value]="d.name"> {{d.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <label class="lbl">Transformation</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <!--<textarea class="txbox"> </textarea>-->
+                <textarea class="txbox" #textArea id="textArea" name="finalTransforamtion"
+                          style="height: 200px !important;max-height:210px !important" placeholder="Transformation"
+                          [(ngModel)]="finalTransforamtion"></textarea>
+              </div>
+              <div class="row agg-btn">
+                <div class="col-sm-12">
+                  <div class="btn-map-login">
+                    <button type="button" class="clear" (click)="clearTransformation()">Clear</button>
+                    <button type="button" class="validate" (click)="validateExpression()">Validate</button>
+                    <button type="button" class="save" (click)="saveTransformation()">Done</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <!-- Modal footer -->
+    <!-- <div class="modal-footer btn-map-login">
+      <button type="button" class="clear" (click)="clearTransformation()">Clear</button>
+      <button type="button" class="validate" (click)="validateExpression()">Validate</button>
+      <button type="button" class="save" (click)="saveTransformation()">Done</button>
+    </div> -->
+
+  </div>
+
+</div>
+</div>
